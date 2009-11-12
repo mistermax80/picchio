@@ -1,8 +1,10 @@
 <?php
+
 include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $date_in = $_REQUEST['date_in'];
+
 
 if(isset($_POST['id_client'])){
 	$id_client = $_POST['id_client'];
@@ -28,7 +30,7 @@ if(isset($_POST['id_client'])){
 	}else{
 		//Mostro form di compilazione prenotazione
 		?>
-<form method="post"><input type="hidden" name="id_client"
+<form id="add_booking" name="add_booking" method="post"><input type="hidden" name="id_client"
 	value="<?php echo $id_client;?>" />
 <fieldset>
 <table bordercolor="FFFFFF" border="1px">
@@ -56,8 +58,8 @@ if(isset($_POST['id_client'])){
 	}
 }else{ ?>
 <div align="center">
-<form method="post">
 <fieldset>
+<form id="select_client" name="select_client" method="post">
 <table bordercolor="FFFFFF" border="1px">
 	<tr>
 		<th></th>
@@ -80,7 +82,11 @@ if(isset($_POST['id_client'])){
 	?>
 </table>
 <button value="submit">Invia</button>
-</fieldset>
 </form>
+
+<form id="add_client" name="add_client" action="add_client.php" method="post">
+<button value="submit">Aggiungi Cliente</button>
+</form>
+</fieldset>
 </div>
 	<?php }?>
