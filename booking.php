@@ -28,7 +28,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$date_out = $_POST['date_out'];
 		$note = $_POST['note'];
 		//Salvo i dati della prenotazione
-		insertBooking($id_client,$id_room,$date_in,$date_out,$note);		
+		insertBooking($id_client,$id_room,$date_in,$date_out,$note); 
+		//pikkio qua dovrebbe saltare alla index ma non riesco a farlo funzionare!!!
+		header ("Location: index.php");
 	}else{
 		//Mostro form di compilazione prenotazione
 		?>
