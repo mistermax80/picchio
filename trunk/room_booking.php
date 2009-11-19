@@ -5,9 +5,19 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 
-$booking = $_REQUEST['id'];
-$client = $_REQUEST['id'];
+$booking = $_REQUEST['idb'];
+$client = $_REQUEST['idc'];
 
+    //Visualizza Info Prenotazione
+	$booking = getBooking($booking);
+	echo "<fieldset>";
+	echo "<b>Informazioni prenotazione</b>";
+	echo "<br>Stanza: ".$booking['room'];
+	echo "<br>Data ingresso: ".$booking['date_in'];
+	echo "<br>Data uscita: ".$booking['date_out'];
+	echo "<br>Note: ".$booking['note'];
+	echo "</fieldset>";
+	
 	$client = getClient($client);
 	//Visualizza Info Cliente
 	echo "<fieldset>";
@@ -19,21 +29,10 @@ $client = $_REQUEST['id'];
 	echo "<br>Telefono: ".$client['telephone'];
 	echo "</fieldset>";
 
-;
-	//Visualizza Info Prenotazione
-	$booking = getBooking($booking);
-	echo "<fieldset>";
-	echo "<b>Informazioni prenotazione</b>";
-	echo "<br>Stanza: ".$booking['room'];
-	echo "<br>Data ingresso: ".$booking['date_in'];
-	echo "<br>Data uscita: ".$booking['date_out'];
-	echo "<br>Note: ".$booking['note'];
-	echo "</fieldset>";
-	
 	?>
 
 	<form id="modific_room" name="modific_room" action="modific_room.php" method="post">
-    <input type="hidden" name="room" value="<?php echo $room;?>"/>
+    <input type="hidden" name="room" value="<?php echo $booking['room'];?>"/>
     <button value="submit">Modifica Stanza</button>
     </form>
     
