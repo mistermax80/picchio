@@ -4,6 +4,9 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $date_in = $_REQUEST['date_in'];
+$new_room = $_REQUEST['id_room'];
+
+print $new_room['id'];
 
 if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	if(isset($_POST['id_client'])){
@@ -30,7 +33,6 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		//Salvo i dati della prenotazione
 		insertBooking($id_client,$id_room,$date_in,$date_out,$note); 
 		//pikkio qua dovrebbe saltare alla index ma non riesco a farlo funzionare!!!
-		header ("Location: index.php");
 	}else{
 		//Mostro form di compilazione prenotazione
 		?>
@@ -92,6 +94,12 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 <input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
 <button value="submit">Aggiungi Cliente</button>
 </form>
+
+	
+<form id="home_page" name="home_page" action="index.php" method="post">
+<button value="submit">Home Page</button>
+</form>
 </fieldset>
-</div>
-	<?php }?>
+
+
+<?php }?>
