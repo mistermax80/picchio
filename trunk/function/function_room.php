@@ -12,7 +12,7 @@ function getRooms() {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM client";
+	$query = "SELECT * FROM room";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
