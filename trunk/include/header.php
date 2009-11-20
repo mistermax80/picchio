@@ -1,16 +1,8 @@
-<?php
-?>
-
 <HTML>
 <HEAD>
-<STYLE>
-<!--
-TD {
-	FONT-FAMILY: arial;
-	FONT-SIZE: 20px;
-}
--->
-</STYLE>
-<TITLE>Calendar</TITLE>
+
+<link rel="stylesheet" type="text/css" href="hotel.css">
+
+<TITLE>HOTEL - 2009</TITLE>
 </HEAD>
-<BODY BACKGROUND='images/bg.gif'>
+<BODY>

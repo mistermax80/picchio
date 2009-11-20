@@ -27,9 +27,7 @@
 		<TD><B>Fri</B></TD>
 		<TD><B>Sat</B></TD>
 	</TR>
-	
-	
-	
+		
 	<TR ALIGN='center'>
 		<TD>
 		<table class="cellaCalendario">
