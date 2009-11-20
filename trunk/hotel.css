@@ -21,6 +21,15 @@ th.cellaCalendarioFesta{
 	text-align: center;
 	color: red;
 }
+
+tr.cellaStanzaOccupata{
+	font-weight:bold;
+}
+
+tr.cellaStanza{
+	text-align: left;
+}
+
 td.cellaStanzaOccupata{
 	font-weight:bold;
 	border: 1px solid black;

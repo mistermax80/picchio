@@ -4,8 +4,8 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $date_in = $_REQUEST['date_in'];
+$id_room = $_REQUEST['id_room'];
 
-print $new_room['id'];
 
 if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	if(isset($_POST['id_client'])){
@@ -41,7 +41,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 <table bordercolor="FFFFFF" border="1px">
 	<tr>
 		<td>Camera</td>
-		<td><input type="text" name="id_room" /></td>
+		<td><input type="text" name="id_room" value="<?php echo $id_room;?>"/></td>
 	</tr>
 	<tr>
 		<td>Data Arrivo</td>
@@ -91,6 +91,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 
 <form id="add_client" name="add_client" action="add_client.php" method="post">
 <input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
 <button value="submit">Aggiungi Cliente</button>
 </form>
 
