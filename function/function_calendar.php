@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function isBooking($day,$room) {
+function isBusy($day,$room) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -25,7 +25,7 @@ function isBooking($day,$room) {
 		else 
 			$busy = false;	
 	}
-	return $booking;
+	return $busy;
 }
 
 function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
