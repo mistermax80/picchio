@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function isBusy($day,$room) {
+function getBooking($date,$room) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -12,20 +12,18 @@ function isBusy($day,$room) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT count(*) FROM booking WHERE date_in=".$day."&& room=".$room ;
+	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id WHERE date_in='".$date."' AND room=".$room ;
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
-	mysql_close($link);
+	$booking = array();
 	if ($row = mysql_fetch_assoc($result)) {
-		if ($row['count(*)']>0)
-			$busy = true;
-		else 
-			$busy = false;	
+		$booking = $row;
 	}
-	return $busy;
+	mysql_close($link);
+	return $booking;
 }
 
 function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
@@ -67,20 +65,37 @@ function drawCellRoom($num_room,$link_booking,$date){
 	?>
 	<tr>
 	    	<td class="cellaStanza"><?php echo $num_room;?></td>
+	<?php
+	$booking = getBooking($date,$num_room);
+	if($booking){
+	?>
 	<td 
-		bgcolor="white" 
-		onmouseout="this.bgColor='white';" 
+		align="center"
+		bgcolor="red" 
+		onmouseout="this.bgColor='red';" 
 		onmouseover="this.bgColor='gold';" 
 		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
-		<img alt="" src="images/empty.gif"/>CLIENTE</td>
+		<?php echo $booking['surname'];?></td>
   	</tr>
 	<?php 
+	}else{
+	?>
+	<td 
+		bgcolor="green" 
+		onmouseout="this.bgColor='green';" 
+		onmouseover="this.bgColor='gold';" 
+		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
+		<img alt="" src="images/empty.gif"/></td>
+  	</tr>
+	<?php
+	}
+		
 }
 
-function drawDay($day,$link_booking,$date) {
+function drawDay($day,$link_booking,$date,$today=false) {
 ?>
 <TD>
-<table class="cellaCalendario">
+<?php if($today) echo "<table class=\"cellaCalendarioOggi\">"; else echo "<table class=\"cellaCalendario\">";?>
   <tr>
   	<th></th>
     <th class="cellaCalendario"><?php echo $day;?></th>
