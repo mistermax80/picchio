@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function isBooking($gg, $mm, $aa) {
+function isBooking($day,$room) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -12,13 +12,19 @@ function isBooking($gg, $mm, $aa) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM booking WHERE gg=".$gg && "mm=".$mm && "aa=".$aa ;
+	$query = "SELECT count(*) FROM booking WHERE date_in=".$day."&& room=".$room ;
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
 	mysql_close($link);
+	if ($row = mysql_fetch_assoc($result)) {
+		if ($row['count(*)']>0)
+			$busy = true;
+		else 
+			$busy = false;	
+	}
 	return $booking;
 }
 
@@ -79,7 +85,7 @@ function drawDay($day) {
   </tr>
   <tr>
     <td>4</td>
-    <td class="cellaStanzaOccupata">Lombri</td>
+     <td class="cellaStanzaOccupata">massimo</td>
   </tr>
   <tr>
     <td>5</td>
