@@ -63,7 +63,21 @@ function drawFooterCalendar($link){
 	echo "\n</TABLE><BR><BR><A HREF=\"$link\">Mostra Mese Corrente</A></DIV>";
 }
 
-function drawDay($day) {
+function drawCellRoom($num_room,$link_booking,$date){
+	?>
+	<tr>
+	    	<td class="cellaStanza"><?php echo $num_room;?></td>
+	<td 
+		bgcolor="white" 
+		onmouseout="this.bgColor='white';" 
+		onmouseover="this.bgColor='gold';" 
+		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
+		<img alt="" src="images/empty.gif"/>CLIENTE</td>
+  	</tr>
+	<?php 
+}
+
+function drawDay($day,$link_booking,$date) {
 ?>
 <TD>
 <table class="cellaCalendario">
@@ -71,46 +85,14 @@ function drawDay($day) {
   	<th></th>
     <th class="cellaCalendario"><?php echo $day;?></th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td class="cellaStanzaPrenotata">Gigli</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td class="cellaStanzaOccupata">Picchio</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td class="cellaStanzaLibera"><img alt="" src="images/empty.gif"/></td>
-  </tr>
-  <tr>
-    <td>4</td>
-     <td class="cellaStanzaOccupata">massimo</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td class="cellaStanzaPrenotata">Gigli</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td class="cellaStanzaOccupata">Picchio</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td class="cellaStanzaLibera"><img alt="" src="images/empty.gif"/></td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td class="cellaStanzaOccupata">Lombri</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td class="cellaStanzaOccupata">Lombricozzimiono</td>
-  </tr>
+  
+  <?php 
+  for ($i=1;$i<=9;$i++){
+  	drawCellRoom($i,$link_booking,$date);
+  }
+  ?>
 </table>
 </TD>
 <?php
-
 }
-
 ?>

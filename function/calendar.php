@@ -110,11 +110,11 @@ function  print_calendar($link,$link_booking,$mon,$year)
 			$t = $dates[$row][$col];
 
 			//Se giorno corrente evidenzialo
-			$day = $t."-".$mon."-".$year;
+			$date = $t."-".$mon."-".$year;
 						
 			if (($t == date("j")) && ($mon == date("n")) && ($year == date("Y"))){
 				//echo "\n<TD BGCOLOR='aqua'><a href=\"$link_booking?date_in=$day\">".$t."</a></TD>";
-				drawDay($t);
+				drawDay($t,$link_booking,$date);
 			}else{
 				//Se data fuori dal mese metti uno spazio, altrimenti scrivi il giorno
 				//echo "\n<TD>".(($t == " " )? " " :"<a href=\"$link_booking?date_in=$day\">".$t."</a>")."</TD>";
@@ -122,7 +122,7 @@ function  print_calendar($link,$link_booking,$mon,$year)
 				if($t == " "){
 					echo "<TD></TD>";
 				}else{
-					drawDay($t);
+					drawDay($t,$link_booking,$date);
 				}
 			}
 		}// for -col
