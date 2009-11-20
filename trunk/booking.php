@@ -4,7 +4,6 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $date_in = $_REQUEST['date_in'];
-$new_room = $_REQUEST['id_room'];
 
 print $new_room['id'];
 
