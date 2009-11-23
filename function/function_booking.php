@@ -36,7 +36,11 @@ function getBooking($date,$room) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id WHERE date_in='".$date."' AND room=".$room ;
+	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id 
+				WHERE 
+				date_in<='".$date."' AND 
+				date_out>='".$date."' AND 
+				room=".$room ;
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
