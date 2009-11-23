@@ -1,5 +1,6 @@
 <?php
 include_once 'include/costant.php';
+include_once 'function_booking.php';
 
 /*
 Please keep the following lines if you will use this script. Thanks!
@@ -115,31 +116,6 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 	drawFooterCalendar($link);
 }
 
-function getBooking($date,$room) {
-
-	$link = mysql_connect(DB_ADDRESS,USER,PASS);
-	if (!$link) {
-		die('Could not connect: ' . mysql_error());
-	}
-	$db_selected = mysql_select_db(DB_NAME, $link);
-	if (!$db_selected) {
-		die ('Can\'t use foo : ' . mysql_error());
-	}
-
-	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id WHERE date_in='".$date."' AND room=".$room ;
-	//echo $query;
-	$result = mysql_query($query);
-	if (!$result) {
-		die('Invalid query: ' . mysql_error());
-	}
-	$booking = array();
-	if ($row = mysql_fetch_assoc($result)) {
-		$booking = $row;
-	}
-	mysql_close($link);
-	return $booking;
-}
-
 function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
 	?>
 	
@@ -149,7 +125,7 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 			<TD BGCOLOR='white'>
 	    		<A HREF='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>' STYLE="text-decoration: none"><B>prima</B></A>
 	    	</TD>
-            <TD COLSPAN=5 BGCOLOR='#99CCFF'><B><?php echo date("F",$first_day)." ".$temp_yr;?></B></TD>
+			<TD COLSPAN=5 BGCOLOR='#99CCFF'><B><?php echo date("F",$first_day)." ".$temp_yr;?></B></TD>
             <TD BGCOLOR='white'>
             	<A HREF='<?php echo $link."?month=".$next."&year=".$next_yr;?>' STYLE="text-decoration: none"><B>dopo</B></A> 
             </TD>
