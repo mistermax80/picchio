@@ -9,7 +9,7 @@ $booking = $_REQUEST['idb'];
 $client = $_REQUEST['idc'];
 
     //Visualizza Info Prenotazione
-	$booking = getBooking($booking);
+	$booking = getBooking2($booking);
 	echo "<fieldset>";
 	echo "<b>Informazioni prenotazione</b>";
 	echo "<br>Stanza: ".$booking['room'];
@@ -34,6 +34,11 @@ $client = $_REQUEST['idc'];
 	<form id="modific_room" name="modific_room" action="modific_room.php" method="post">
     <input type="hidden" name="room" value="<?php echo $booking['room'];?>"/>
     <button value="submit">Modifica Stanza</button>
+    </form>
+    
+    <form id="optional" name="optional" action="optional.php" method="post">
+    <input type="hidden" name="booking" value="<?php echo $booking['id'];?>"/>
+    <button value="submit">Servizi Stanza</button>
     </form>
     
     <form id="home_page" name="home_page" action="index.php" method="post">
