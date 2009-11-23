@@ -3,15 +3,15 @@ include_once 'include/costant.php';
 include_once 'function_booking.php';
 
 /*
-Please keep the following lines if you will use this script. Thanks!
----------------------------------------------------------------------------
-CALENDAR SCRIPT
-Developed by : Steven Rebello (stevenrebello@indiatimes.com)
-Developed on : 15 September 2001
-Description : Prints a calendar for specified month and year in HTML
+ Please keep the following lines if you will use this script. Thanks!
+ ---------------------------------------------------------------------------
+ CALENDAR SCRIPT
+ Developed by : Steven Rebello (stevenrebello@indiatimes.com)
+ Developed on : 15 September 2001
+ Description : Prints a calendar for specified month and year in HTML
 
----------------------------------------------------------------------------
-*/
+ ---------------------------------------------------------------------------
+ */
 
 //----------------- This function prints calendar---------------------
 function  drawCalendar($link,$link_booking,$mon,$year)
@@ -72,7 +72,7 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 	drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr);
 
 	$end = ($start_day > 4)? 6:5;
-	
+
 	for ($row=1;$row<=$end;$row++)
 	{
 		for ($col=1;$col<=7;$col++)
@@ -87,7 +87,7 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 
 			//Se giorno corrente evidenzialo
 			$date = $t."-".$mon."-".$year;
-						
+
 			if (($t == date("j")) && ($mon == date("n")) && ($year == date("Y"))){
 				//echo "\n<TD BGCOLOR='aqua'><a href=\"$link_booking?date_in=$day\">".$t."</a></TD>";
 				drawDay($t,$link_booking,$date,true);
@@ -116,35 +116,69 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 	drawFooterCalendar($link);
 }
 
-function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
+function drawSelectHeaderCalendar($link,$m_corr,$y_corr){
+	$months = array("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno",
+				"Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre");
+
 	?>
+	<select id="month" name="month" class="headerCalendar"
+		onchange="window.location.href='<?php echo $link."?month='+this.options[this.selectedIndex].value+'&year=".$y_corr;?>'">
+	<?php
 	
+	$m = 1;
+	foreach($months as $month){
+		if($m == $m_corr){
+			echo "<option value=\"".$m."\" selected=\"selected\">".$month."</option>";
+		}else{
+			echo "<option value=\"".$m."\">".$month."</option>";
+		}
+		$m++;
+	}
+	?>
+	</select>
+	
+	<select id="year" name="year" class="headerCalendar"
+		onchange="window.location.href='<?php echo $link."?year='+this.options[this.selectedIndex].value+'&month=".$m_corr;?>'">
+	<?php
+	//$mon == date("n")
+	for($year=2005;$year<=2030;$year++){
+		if($year == $y_corr){
+			echo "<option value=\"".$year."\" selected=\"selected\">".$year."</option>";
+		}else{
+			echo "<option value=\"".$year."\">".$year."</option>";
+		}
+	}
+	?>
+	</select>
+	<?php
+}
+
+function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
+?>
 	<DIV ALIGN='center'>
 	<TABLE>
-		<TR ALIGN='center'>
-			<TD BGCOLOR='white'>
-	    		<A HREF='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>' STYLE="text-decoration: none"><B>prima</B></A>
-	    	</TD>
-			<TD COLSPAN=5 BGCOLOR='#99CCFF'><B><?php echo date("F",$first_day)." ".$temp_yr;?></B></TD>
-            <TD BGCOLOR='white'>
-            	<A HREF='<?php echo $link."?month=".$next."&year=".$next_yr;?>' STYLE="text-decoration: none"><B>dopo</B></A> 
-            </TD>
-		</TR>
-	
 	<TR ALIGN='center'>
-		<TD><B>Domenica</B></TD>
-		<TD><B>Luned&igrave;</B></TD>
-		<TD><B>Marted&igrave;</B></TD>
-		<TD><B>Mercoled&igrave;</B></TD>
-		<TD><B>Gioved&igrave;</B></TD>
-		<TD><B>Venerd&igrave;</B></TD>
-		<TD><B>Sabato</B></TD></TR>
-	<TR>
-		<TD COLSPAN=7></TD>
+		<TD><A HREF='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>'	STYLE="text-decoration: none"><B>&laquo;</B></A></TD>
+	<!--<TD COLSPAN=5 BGCOLOR='#99CCFF'><B><?php //echo date("F",$first_day)." ".$temp_yr;?></B></TD>-->
+		<TD COLSPAN=5><B><?php drawSelectHeaderCalendar($link,date("m",$first_day),$temp_yr);?></B></TD>
+		<TD><A HREF='<?php echo $link."?month=".$next."&year=".$next_yr;?>' STYLE="text-decoration: none"><B>&raquo;</B></A></TD>
 	</TR>
-	
-	<TR ALIGN='center'>
-	<?php
+
+<TR ALIGN='center'>
+	<TD><B>Domenica</B></TD>
+	<TD><B>Luned&igrave;</B></TD>
+	<TD><B>Marted&igrave;</B></TD>
+	<TD><B>Mercoled&igrave;</B></TD>
+	<TD><B>Gioved&igrave;</B></TD>
+	<TD><B>Venerd&igrave;</B></TD>
+	<TD><B>Sabato</B></TD>
+</TR>
+<TR>
+	<TD COLSPAN=7></TD>
+</TR>
+
+<TR ALIGN='center'>
+<?php
 }
 
 function drawFooterCalendar($link){
@@ -153,51 +187,45 @@ function drawFooterCalendar($link){
 
 function drawCellRoom($num_room,$link_booking,$date){
 	?>
-	<tr>
-	    	<td class="cellaStanza"><?php echo $num_room;?></td>
+<tr>
+	<td class="cellaStanza"><?php echo $num_room;?></td>
 	<?php
 	$booking = getBooking($date,$num_room);
 	if($booking){
-	?>
-	<td 
-		align="center"
-		bgcolor="red" 
-		onmouseout="this.bgColor='red';" 
-		onmouseover="this.bgColor='gold';" 
+		?>
+	<td align="center" bgcolor="red" onmouseout="this.bgColor='red';"
+		onmouseover="this.bgColor='gold';"
 		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
 		<?php echo $booking['surname'];?></td>
-  	</tr>
-	<?php 
+</tr>
+		<?php
 	}else{
-	?>
-	<td 
-		bgcolor="green" 
-		onmouseout="this.bgColor='green';" 
-		onmouseover="this.bgColor='gold';" 
-		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
-		<img alt="" src="images/empty.gif"/></td>
-  	</tr>
-	<?php
+		?>
+<td bgcolor="green" onmouseout="this.bgColor='green';"
+	onmouseover="this.bgColor='gold';"
+	onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
+<img alt="" src="images/empty.gif" /></td>
+</tr>
+		<?php
 	}
-		
+
 }
 
 function drawDay($day,$link_booking,$date,$today=false) {
-?>
-<TD>
-<?php if($today) echo "<table class=\"cellaCalendarioOggi\">"; else echo "<table class=\"cellaCalendario\">";?>
-  <tr>
-  	<th></th>
-    <th class="cellaCalendario"><?php echo $day;?></th>
-  </tr>
-  
-  <?php 
-  for ($i=1;$i<=9;$i++){
-  	drawCellRoom($i,$link_booking,$date);
-  }
-  ?>
+	?>
+<TD><?php if($today) echo "<table class=\"cellaCalendarioOggi\">"; else echo "<table class=\"cellaCalendario\">";?>
+<tr>
+	<th></th>
+	<th class="cellaCalendario"><?php echo $day;?></th>
+</tr>
+
+	<?php
+	for ($i=1;$i<=9;$i++){
+		drawCellRoom($i,$link_booking,$date);
+	}
+	?>
 </table>
 </TD>
-<?php
+	<?php
 }
 ?>

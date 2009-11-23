@@ -55,3 +55,7 @@ td.cellaStanzaPrenotata{
 	background-color:yellow;
 	
 }
+select.headerCalendar{
+	font-size: 16px;
+	font-weight: bold;
+}
