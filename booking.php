@@ -6,7 +6,6 @@ include_once 'function/function_booking.php';
 $date_in = $_REQUEST['date_in'];
 $id_room = $_REQUEST['id_room'];
 
-
 if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	if(isset($_POST['id_client'])){
 		$id_client = $_POST['id_client'];
@@ -35,8 +34,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	}else{
 		//Mostro form di compilazione prenotazione
 		?>
-<form id="add_booking" name="add_booking" method="post"><input type="hidden" name="id_client"
-	value="<?php echo $id_client;?>" />
+<form id="add_booking" name="add_booking" method="post">
+<input type="hidden" name="id_room" value="<?php echo $id_room;?>" />
+<input type="hidden" name="id_client" value="<?php echo $id_client;?>" />
 <fieldset>
 <table bordercolor="FFFFFF" border="1px">
 	<tr>
