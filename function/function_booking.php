@@ -25,8 +25,9 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
 	return true;
 }
 
-function getBooking($date,$room) {
+function getBooking($date_stamp,$room) {
 
+	$date = date("Y-m-d",$date_stamp);
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
 		die('Could not connect: ' . mysql_error());
@@ -35,6 +36,8 @@ function getBooking($date,$room) {
 	if (!$db_selected) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
+	
+	
 
 	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id 
 				WHERE 

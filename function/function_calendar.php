@@ -86,10 +86,9 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 			$t = $dates[$row][$col];
 
 			//Se giorno corrente evidenzialo
-			$date = $t."-".$mon."-".$year;
-
 			if (($t == date("j")) && ($mon == date("n")) && ($year == date("Y"))){
 				//echo "\n<TD BGCOLOR='aqua'><a href=\"$link_booking?date_in=$day\">".$t."</a></TD>";
+				$date = mktime(0,0,0,$mon,$t,$year);
 				drawDay($t,$link_booking,$date,true);
 			}else{
 				//Se data fuori dal mese metti uno spazio, altrimenti scrivi il giorno
@@ -98,6 +97,7 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 				if($t == " "){
 					echo "<TD></TD>";
 				}else{
+					$date = mktime(0,0,0,$mon,$t,$year);
 					drawDay($t,$link_booking,$date);
 				}
 			}
@@ -195,7 +195,7 @@ function drawCellRoom($num_room,$link_booking,$date){
 		?>
 	<td align="center" bgcolor="red" onmouseout="this.bgColor='red';"
 		onmouseover="this.bgColor='gold';"
-		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
+		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date."" ?>'">
 		<?php echo $booking['surname'];?></td>
 </tr>
 		<?php
@@ -203,7 +203,7 @@ function drawCellRoom($num_room,$link_booking,$date){
 		?>
 <td bgcolor="green" onmouseout="this.bgColor='green';"
 	onmouseover="this.bgColor='gold';"
-	onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date ?>'">
+	onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date."" ?>'">
 <img alt="" src="images/empty.gif" /></td>
 </tr>
 		<?php
