@@ -37,11 +37,18 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$date_in = $_POST['date_in'];
 		$date_out = $_POST['date_out'];
 		$note = $_POST['note'];
-		//Salvo i dati della prenotazione
-		insertBooking($id_client,$id_room,$date_in,$date_out,$note);
-		//Ritorno al calendario
-		echo "Inserimento avvenuto con successo";
-		echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+		//Controllo che dicponibilità della stanza nell'intervallo dei giorni
+		if(checkFreeBooking($date_in,$date_out,$id_room)){
+			//Salvo i dati della prenotazione
+			insertBooking($id_client,$id_room,$date_in,$date_out,$note);
+			//Ritorno al calendario
+			echo "Inserimento avvenuto con successo";
+			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+		}else{
+			echo "Stanza Occupata nei giorni richiesti!";
+			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+		}
+		
 	}else if(count($booking)>0){  //Esiste la prenotazione
 		echo "<fieldset>";
 		echo "<b>Informazioni prenotazione</b>";
@@ -51,10 +58,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		echo "<br>Note: ".$booking['note'];
 		echo "</fieldset>";
 		?>
-		<form id="modific_room" name="modific_room" action="modific_room.php" method="post">
-    <input type="hidden" name="room" value="<?php echo $booking['room'];?>"/>
-    <button value="submit">Modifica Stanza</button>
-    </form>
+    <button onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">Modifica Stanza</button>
     
     <form id="optional" name="optional" action="optional.php" method="post">
     <input type="hidden" name="booking" value="<?php echo $booking['id'];?>"/>

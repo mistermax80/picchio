@@ -25,6 +25,35 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
 	return true;
 }
 
+function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "UPDATE booking SET
+				id=".$id.",
+				client=".$id_client.",
+				room=".$id_room.",
+				date_in='".$date_in."',
+				date_out='".$date_out."',
+				note='".$note."'
+				WHERE
+				id = ".$id.";";
+	echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	mysql_close($link);
+	return true;
+}
+
 function getBooking($date_stamp,$room) {
 
 	$date = date("Y-m-d",$date_stamp);
@@ -61,6 +90,43 @@ function getBooking($date_stamp,$room) {
 	return $booking;
 }
 
+function checkFreeBooking($date_in,$date_out,$id_room) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+	
+	$query = "SELECT count(*) as booking
+				FROM booking 
+				WHERE room=4 AND
+				(
+				'".$date_in."'<=date_in AND '".$date_out."'>=date_in
+				OR
+				'".$date_in."'<=date_out AND '".$date_out."'>=date_out
+				OR
+				date_in <= '".$date_in."' AND date_out>='".$date_in."'
+				OR
+				date_in <= '".$date_out."' AND date_out>='".$date_out."'
+				)";
+	
+	echo $query."<br>";
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	$booking = array();
+	if ($row = mysql_fetch_assoc($result)) {
+		$booking = $row;
+	}
+	mysql_close($link);
+	return $booking['booking']==0;
+}
+
 
 function getBookingById($id) {
 
@@ -73,8 +139,8 @@ function getBookingById($id) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM booking WHERE id=".$id;
-	//echo $query;
+	$query = "SELECT * FROM booking WHERE id = ".$id.";";
+	
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

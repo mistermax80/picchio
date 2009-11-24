@@ -1,48 +1,68 @@
 <?php
 
 include_once 'function/function_room.php';
+include_once 'function/function_booking.php';
 
+$id_booking = $_REQUEST['id_booking'];
+$booking = getBookingById($id_booking);
 
-$room = $_POST['room'];
-echo "<fieldset>";
-echo "<div align = center>";
-echo "<br>Cambiare con la stanza :";
+//var_dump($booking);
 
-?>
-
-
-<form id="mofific_room" name="modific_room" action="index.php" method="post">
-<table border=1px>
-<tr>
-	<td>Numero</td>
-	<td>Posti letto</td>
-	
-</tr>
-<?php 
 $rooms = getRooms();
 
-	foreach ($rooms as $c) {
-		$id = $c['id'];
-		if ($c['id'] != $room){
-			$type = $c['type'];
-			$description = $c['surname'];
-			$price = $c['price'];
-			echo "<tr>";
-			echo "<td>".$id."</td>";
-			echo "<td>".$type."</td>";
-			echo "<td>".$description."</td>";
-			echo "<td><input type=\"radio\" name=\"id_room\" value=\"".$id."\"/></td>";
-			echo "</tr>";
+if($_POST['salva']){
+	
+	//var_dump($_POST);
+	//echo "<br><br>";
+	$id=$_POST['id'];
+	$id_client=$_POST['id_client'];
+	$id_room=$_POST['id_room'];
+	$date_in=$_POST['date_in'];
+	$date_out=$_POST['date_out'];
+	$note=$_POST['note'];
+	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note);
+	echo "Prenotazione Correttamente Modificata!";
+}else{
+
+?>
+<form id="mofific_booking" name="mofific_booking" action="" method="post">
+<input type="hidden" id="salva" name="salva" value="true"/>
+<input type="hidden" id="id" name="id" value="<?php echo $booking['id'];?>"/>
+<input type="hidden" id="id_client" name="id_client" value="<?php echo $booking['client'];?>"/>
+<fieldset>
+<table bordercolor="FFFFFF" border="1px">
+	<tr>
+		<td>Camera</td>
+		<td>
+		<select id="id_room" name="id_room">
+		<?php
+		foreach ($rooms as $r) {
+			if($r['id']==$booking['room']){
+				echo "<option value='".$r['id']."' selected='selected'>Stanza: ".$r['id']." - ".$r['type']."</option>";
+			}else{
+				echo "<option value='".$r['id']."' > Stanza: ".$r['id']." - ".$r['type']."</option>";	
+			}
 		}
-	}
-
-	?>
-
+		?>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Data Arrivo</td>
+		<td><input type="text" name="date_in" value="<?php echo substr($booking['date_in'],0,10);?>" /></td>
+	</tr>
+	<tr>
+		<td>Data Uscita</td>
+		<td><input type="text" name="date_out" value="<?php echo substr($booking['date_out'],0,10);?>" /></td>
+	</tr>
+	<tr>
+		<td>Note</td>
+		<td><input type="text" name="note" value="<?php echo $booking['note'];?>" /></td>
+	</tr>
 </table>
-<br>
-<input type="hidden" name="room" value="<?php echo $id_room;?>"/>
-<button  value="submit">Salva modifiche</button>
-</form>
+<button value="submit">Salva</button>
 </fieldset>
-</div>
-
+</form>
+<?php 
+}
+?>
