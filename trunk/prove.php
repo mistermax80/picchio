@@ -1,17 +1,12 @@
 <?php 
 
-$hour=0;
-$min=0;
-$sec=0;
-$day=23;
-$month=11;
-$year=2009;
+include_once 'function/function_booking.php';
 
-$time = mktime($hour,$min,$sec,$month,$day,$year);
 
-echo $time;
-$time2 = 1257289200;
-echo "<br>".date("d-m-Y",$time2);
+//Dal 2 al 4 occupata la 4
+
+
+var_dump(checkFreeBooking("2009-11-5","2009-11-5",4));
 
 
 ?>
