@@ -89,7 +89,7 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 			if (($t == date("j")) && ($mon == date("n")) && ($year == date("Y"))){
 				//echo "\n<TD BGCOLOR='aqua'><a href=\"$link_booking?date_in=$day\">".$t."</a></TD>";
 				$date = mktime(0,0,0,$mon,$t,$year);
-				drawDay($t,$link_booking,$date,true);
+				drawDay($date,$link_booking,true);
 			}else{
 				//Se data fuori dal mese metti uno spazio, altrimenti scrivi il giorno
 				//echo "\n<TD>".(($t == " " )? " " :"<a href=\"$link_booking?date_in=$day\">".$t."</a>")."</TD>";
@@ -98,7 +98,7 @@ function  drawCalendar($link,$link_booking,$mon,$year)
 					echo "<TD></TD>";
 				}else{
 					$date = mktime(0,0,0,$mon,$t,$year);
-					drawDay($t,$link_booking,$date);
+					drawDay($date,$link_booking);
 				}
 			}
 		}// for -col
@@ -185,47 +185,46 @@ function drawFooterCalendar($link){
 	echo "\n</TABLE><BR><BR><A HREF=\"$link\">Mostra Mese Corrente</A></DIV>";
 }
 
-function drawCellRoom($num_room,$link_booking,$date){
+function drawCellRoom($num_room,$link_booking,$date_stamp){
 	?>
-<tr>
-	<td class="cellaStanza"><?php echo $num_room;?></td>
-	<?php
-	$booking = getBooking($date,$num_room);
-	if($booking){
-		?>
-	<td align="center" bgcolor="red" onmouseout="this.bgColor='red';"
-		onmouseover="this.bgColor='gold';"
-		onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date."" ?>'">
-		<?php echo $booking['surname'];?></td>
-</tr>
+	<tr>
+		<td class="cellaStanza"><?php echo $num_room;?></td>
 		<?php
-	}else{
-		?>
-<td bgcolor="green" onmouseout="this.bgColor='green';"
-	onmouseover="this.bgColor='gold';"
-	onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_in=".$date."" ?>'">
-<img alt="" src="images/empty.gif" /></td>
-</tr>
+		$booking = getBooking($date_stamp,$num_room);
+		$id_client = $booking['id_client'];
+		if($booking){
+			?>
+		<td align="center" bgcolor="red" onmouseout="this.bgColor='red';"
+			onmouseover="this.bgColor='gold';"
+			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&id_client=".$id_client; ?>'">
+			<?php echo $booking['surname'];?>
+		</td>
+			<?php
+		}else{
+			?>
+		<td bgcolor="green" onmouseout="this.bgColor='green';"
+			onmouseover="this.bgColor='gold';"
+			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."" ?>'">
+			<img alt="" src="images/empty.gif" />
+		</td>
+	</tr>
 		<?php
 	}
 
 }
 
-function drawDay($day,$link_booking,$date,$today=false) {
+function drawDay($date_stamp, $link_booking, $today=false) {
 	?>
-<TD><?php if($today) echo "<table class=\"cellaCalendarioOggi\">"; else echo "<table class=\"cellaCalendario\">";?>
-<tr>
-	<th></th>
-	<th class="cellaCalendario"><?php echo $day;?></th>
-</tr>
+	<?php if($today) echo "<td><table class=\"cellaCalendarioOggi\">"; else echo "<td><table class=\"cellaCalendario\">";?>
+	<tr>
+		<th></th>
+		<th class="cellaCalendario"><?php echo date("j",$date_stamp);?></th>
+	</tr>
 
 	<?php
 	for ($i=1;$i<=9;$i++){
-		drawCellRoom($i,$link_booking,$date);
+		drawCellRoom($i,$link_booking,$date_stamp);
 	}
-	?>
-</table>
-</TD>
-	<?php
+	echo "</table></td>";
 }
 ?>
