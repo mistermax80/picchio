@@ -16,7 +16,7 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
 				(client,room,date_in,date_out,note) 
 				VALUES 
 				($id_client,$id_room,'$date_in','$date_out','$note')";
-	echo $query;
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
@@ -37,9 +37,12 @@ function getBooking($date_stamp,$room) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 	
-	
-
-	$query = "SELECT * FROM booking AS b JOIN client AS c ON  b.client=c.id 
+	$query = "SELECT 
+					b.*,
+					c.surname as surname,
+					c.id as id_client
+				FROM booking AS b JOIN client AS c 
+				ON  b.client=c.id 
 				WHERE 
 				date_in<='".$date."' AND 
 				date_out>='".$date."' AND 
@@ -53,12 +56,13 @@ function getBooking($date_stamp,$room) {
 	if ($row = mysql_fetch_assoc($result)) {
 		$booking = $row;
 	}
+	//var_dump($booking);
 	mysql_close($link);
 	return $booking;
 }
 
 
-function getBooking2($id) {
+function getBookingById($id) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {

@@ -5,16 +5,16 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 
-$booking = $_REQUEST['idb'];
-$client = $_REQUEST['idc'];
+$booking = 7;//$_REQUEST['idb'];
+$client = 3;//$_REQUEST['idc'];
 
     //Visualizza Info Prenotazione
-	$booking = getBooking2($booking);
+	$booking = getBookingById($booking);
 	echo "<fieldset>";
 	echo "<b>Informazioni prenotazione</b>";
 	echo "<br>Stanza: ".$booking['room'];
-	echo "<br>Data ingresso: ".$booking['date_in'];
-	echo "<br>Data uscita: ".$booking['date_out'];
+	echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
+	echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
 	echo "<br>Note: ".$booking['note'];
 	echo "</fieldset>";
 	
