@@ -22,6 +22,10 @@ $id_booking = $_POST['id'];
 	<?php 
 	
 	echo "<br>Servizio Ristorante";
+	?>
+	No<input type="radio" name="bar" value="No"/>
+    Si <input type="radio" name="bar" value="Si"/>
+	<?php
 	echo "<br>Altro";
 	
 	echo "</fieldset>";
