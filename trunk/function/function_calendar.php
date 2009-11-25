@@ -155,15 +155,25 @@ function drawSelectHeaderCalendar($link,$m_corr,$y_corr){
 
 function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next_yr){
 ?>
-	<DIV ALIGN='center'>
-	<TABLE>
-	<TR ALIGN='center'>
-		<TD><A HREF='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>'	STYLE="text-decoration: none"><B>&laquo;</B></A></TD>
-	<!--<TD COLSPAN=5 BGCOLOR='#99CCFF'><B><?php //echo date("F",$first_day)." ".$temp_yr;?></B></TD>-->
-		<TD COLSPAN=5><B><?php drawSelectHeaderCalendar($link,date("m",$first_day),$temp_yr);?></B></TD>
-		<TD><A HREF='<?php echo $link."?month=".$next."&year=".$next_yr;?>' STYLE="text-decoration: none"><B>&raquo;</B></A></TD>
-	</TR>
+<div align="center">
+	<div class="mese" align="center">
+		<div class="meseNext">
+			<img onclick="window.location.href='<?php echo $link."?month=".$next."&year=".$next_yr;?>';" 
+				src="images/next.png" alt="Mese Successivo" title="Mese Successivo">
+		</div>
 
+		<div class="mesePrev">
+			<img onclick="window.location.href='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>';" 
+				src="images/prev.png"  alt="Mese Precedente" title="Mese Precedente">
+		</div>
+
+		<div  class="meseSelect">
+				<?php drawSelectHeaderCalendar($link,date("m",$first_day),$temp_yr);?>
+		</div>
+	</div>
+</div>
+
+<TABLE align="center">
 <TR ALIGN='center'>
 	<TD><B>Domenica</B></TD>
 	<TD><B>Luned&igrave;</B></TD>
@@ -193,17 +203,19 @@ function drawCellRoom($num_room,$link_booking,$date_stamp){
 		$booking = getBooking($date_stamp,$num_room);
 		$id_client = $booking['id_client'];
 		if($booking){
+			//Stanza Occupata
 			?>
-		<td align="center" bgcolor="red" onmouseout="this.bgColor='red';"
-			onmouseover="this.bgColor='gold';"
+		<td align="left" bgcolor="#ffa09a" onmouseout="this.bgColor='#ffa09a';"
+			onmouseover="this.bgColor='fdff8f';"
 			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&id_client=".$id_client; ?>'">
 			<?php echo $booking['surname'];?>
 		</td>
 			<?php
 		}else{
+			//Stanza Libera
 			?>
-		<td bgcolor="green" onmouseout="this.bgColor='green';"
-			onmouseover="this.bgColor='gold';"
+		<td bgcolor="#b6ffb6" onmouseout="this.bgColor='#b6ffb6';"
+			onmouseover="this.bgColor='fdff8f';"
 			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."" ?>'">
 			<img alt="" src="images/empty.gif" />
 		</td>
