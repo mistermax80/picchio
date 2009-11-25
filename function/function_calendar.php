@@ -173,6 +173,7 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 	</div>
 </div>
 
+<A HREF="<?php echo $link;?>">Mostra Mese Corrente</A>
 <TABLE align="center">
 <TR ALIGN='center'>
 	<TD><B>Domenica</B></TD>
@@ -192,7 +193,7 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 }
 
 function drawFooterCalendar($link){
-	echo "\n</TABLE><BR><BR><A HREF=\"$link\">Mostra Mese Corrente</A></DIV>";
+	echo "</TABLE>";
 }
 
 function drawCellRoom($num_room,$link_booking,$date_stamp){
@@ -205,7 +206,7 @@ function drawCellRoom($num_room,$link_booking,$date_stamp){
 		if($booking){
 			//Stanza Occupata
 			?>
-		<td align="left" bgcolor="#ffa09a" onmouseout="this.bgColor='#ffa09a';"
+		<td width="80%" align="left" bgcolor="#ffa09a" onmouseout="this.bgColor='#ffa09a';"
 			onmouseover="this.bgColor='fdff8f';"
 			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&id_client=".$id_client; ?>'">
 			<?php echo $booking['surname'];?>
@@ -214,7 +215,7 @@ function drawCellRoom($num_room,$link_booking,$date_stamp){
 		}else{
 			//Stanza Libera
 			?>
-		<td bgcolor="#b6ffb6" onmouseout="this.bgColor='#b6ffb6';"
+		<td width="80%"  bgcolor="#b6ffb6" onmouseout="this.bgColor='#b6ffb6';"
 			onmouseover="this.bgColor='fdff8f';"
 			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."" ?>'">
 			<img alt="" src="images/empty.gif" />
