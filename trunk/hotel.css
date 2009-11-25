@@ -33,16 +33,12 @@ body {
 
 table.cellaCalendario{
 	font-size: 9px;
-	border: 1px solid #c0c0c0;	
-	background-color: #c0c0c0;
 	background-image: url(images/background_day.png);
 	width: 100px;
 }
 
 table.cellaCalendarioOggi{
 	font-size: 9;
-	border: 1px solid #59a6f2;	
-	background-color: #59a6f2;
 	background-image: url(images/background_day_today.png);
 	width: 100px;
 }
@@ -59,10 +55,6 @@ th.cellaCalendarioFesta{
 	font-weight:bold;
 	text-align: center;
 	color: red;
-}
-
-tr.cellaStanzaOccupata{
-	font-weight:bold;
 }
 
 tr.cellaStanza{
