@@ -1,12 +1,47 @@
-<?php 
+<?php
+include 'include/pagina_apertura.php';
+?>
+<div id="titoloContenuti"> TITOLO PAGINA </div>
 
-include_once 'function/function_booking.php';
+<div id="prova">
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CONTENUTO
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</div>
 
-
-//Dal 2 al 4 occupata la 4
-
-
-var_dump(checkFreeBooking("2009-11-5","2009-11-5",4));
-
-
+<?php
+include 'include/pagina_chiusura.php';
 ?>
