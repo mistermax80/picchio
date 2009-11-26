@@ -15,6 +15,7 @@ $year = (empty($year)) ? date("Y") : $year;
 
 drawCalendar("index.php","booking.php",$month,$year);
 
+include 'include/menu.php';
 include 'include/footer.php';
 
 ?>

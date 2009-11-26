@@ -12,6 +12,49 @@ body {
 	height: 38px;
 }
 
+.pagina{
+	margin-top: 45px;
+	width: 1000;
+}
+
+/* Impaginazione Menu*/
+
+#menu{
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+	margin-left: 20px;
+	margin-top:30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	background-image: url(images/background_menu_vertical.png);
+	background-repeat: no-repeat;
+}
+
+#item_menu{
+	background-image: url(images/background_item_menu.png);
+	background-repeat: no-repeat;
+	height: 35px;
+	padding-left: 15px;
+	padding-top: 5px;
+	margin-top: 3px;
+}
+
+/* Impaginazione Calendario*/
+
+#calendario{
+	float: right;
+}
+
+#contenuti{
+	float: right;
+	border: 1px dashed blue;
+	margin-right: 300px;
+}
+
+/* Intestazione Calendario */
+
 .mese{
 	width: 300px;	
 	margin-bottom: 10px;
@@ -31,23 +74,32 @@ body {
 	margin-top: 5px;
 }
 
+/* Impaginazione contenuto calendario*/
+
 table.cellaCalendario{
+	padding-right: 3px;
 	font-size: 9px;
 	background-image: url(images/background_day.png);
+	background-repeat: no-repeat;
 	width: 100px;
 }
 
 table.cellaCalendarioOggi{
-	font-size: 9;
+	padding-right: 3px;
+	font-size: 9px;
 	background-image: url(images/background_day_today.png);
+	background-repeat: no-repeat;
 	width: 100px;
+}
+
+td.cellaStanza{
+	width: 90%;
 }
 
 th.cellaCalendario{
 	font-size: 12;
 	font-weight:bold;
 	text-align: center;
-	
 }
 
 th.cellaCalendarioFesta{
@@ -65,3 +117,13 @@ select.headerCalendar{
 	font-size: 16px;
 	font-weight: bold;
 }
+
+#little_calendar table {
+	margin-top: 30px;
+	color: #000000;
+	font-size:11px;
+	text-align:center;
+	width:200px;
+}
+
+
