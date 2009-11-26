@@ -1,6 +1,6 @@
 <?php
+include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
-
 
 if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	//Aggiungi nel db
@@ -73,5 +73,6 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 </form>
 </fieldset>
 </div>
-
-<?php }?>
+<?php }
+include 'include/pagina_chiusura.php';
+?>
