@@ -7,5 +7,5 @@ define("USER_ROOT","root");
 define("PASS_ROOT","admin");
 
 define("USER","root");
-define("PASS","root");
+define("PASS","admin");
 ?>
