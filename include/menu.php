@@ -1,14 +1,14 @@
 <div id="menu">
-	<div id="item_menu">
+	<div id="item_menu" onclick="window.location.href='index.php'">
 		Mese Corrente
 	</div>
-	<div id="item_menu">
+	<div id="item_menu" onclick="window.location.href='client.php'">
 		Clienti
 	</div>
-	<div id="item_menu">
+	<div id="item_menu" onclick="window.location.href='room.php'">
 		Stanze
 	</div>
-	<div id="item_menu">
+	<div id="item_menu" onclick="window.location.href='option.php'">
 		Opzioni Stampa
 	</div>
 	
