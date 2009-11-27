@@ -1,5 +1,6 @@
 <?php
 
+include 'include/pagina_apertura.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
 
@@ -7,6 +8,8 @@ $id_booking = $_REQUEST['id_booking'];
 $booking = getBookingById($id_booking);
 
 //var_dump($booking);
+
+?><div id="titoloContenuti">MODIFICA PRENOTAZIONE</div><?php 
 
 $rooms = getRooms();
 
@@ -22,6 +25,7 @@ if($_POST['salva']){
 	$note=$_POST['note'];
 	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note);
 	echo "Prenotazione Correttamente Modificata!";
+	include 'include/pagina_chiusura.php';
 }else{
 
 ?>
@@ -29,8 +33,13 @@ if($_POST['salva']){
 <input type="hidden" id="salva" name="salva" value="true"/>
 <input type="hidden" id="id" name="id" value="<?php echo $booking['id'];?>"/>
 <input type="hidden" id="id_client" name="id_client" value="<?php echo $booking['client'];?>"/>
-<fieldset>
-<table bordercolor="FFFFFF" border="1px">
+<table align="center" bordercolor="FFFFFF">
+	<tr>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+	</tr>
 	<tr>
 		<td>Camera</td>
 		<td>
@@ -59,10 +68,14 @@ if($_POST['salva']){
 		<td>Note</td>
 		<td><input type="text" name="note" value="<?php echo $booking['note'];?>" /></td>
 	</tr>
+	<tr>
+		<td></td>
+		<td><button value="submit">Salva</button></td>
+	</tr>
 </table>
-<button value="submit">Salva</button>
-</fieldset>
+
 </form>
 <?php 
+include 'include/pagina_chiusura.php';
 }
 ?>

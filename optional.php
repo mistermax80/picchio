@@ -1,15 +1,17 @@
 <?php
 
+include 'include/pagina_apertura.php';
 include_once 'function/function_booking.php';
 
+
+?><div id="titoloContenuti">OPTIONAL STANZA</div><?php 
 
 $id_booking = $_POST['id'];
 
 
 
     //Visualizza Info Prenotazione
-	$booking = getBooking2($booking);
-	echo "<fieldset>";
+	$booking = getBookingById($booking);
 	echo "<b>Informazioni prenotazione</b>";
 	echo "<br>Stanza: ".$booking['room'];
 	echo "<br>Data ingresso: ".$booking['date_in'];
@@ -27,10 +29,8 @@ $id_booking = $_POST['id'];
     Si <input type="radio" name="bar" value="Si"/>
 	<?php
 	echo "<br>Altro";
-	
-	echo "</fieldset>";
 
-
+	include 'include/pagina_chiusura.php';
 
 
 
