@@ -77,4 +77,39 @@ function addClient($name,$surname,$type_document,$number_document,$date_birth,$c
 	mysql_close($link);
 	return $id_client;
 }
+
+
+function updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "UPDATE client SET
+				id=".$id.",
+				name=".$name.",
+				surname=".$surname.",
+				type_document='".$type_document."',
+				number_document='".$number_document."',
+				date_birth='".$date_birth."',
+				city_birth='".$city_birth."',
+				address='".$address."'
+				city='".$city."',
+				telephone='".$telephone."',
+				email='".$email."'
+				WHERE
+				id = ".$id.";";
+	echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	mysql_close($link);
+	return true;
+}
 ?>
