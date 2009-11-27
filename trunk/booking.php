@@ -1,9 +1,8 @@
-<form id="home_page" name="home_page" action="index.php" method="post">
-<button value="submit">Home Page</button>
-</form>
+
 
 <?php
 
+include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
@@ -12,6 +11,9 @@ $date_stamp_in = $_REQUEST['date_stamp_in'];
 $id_room = $_REQUEST['id_room'];
 $id_client = $_REQUEST['id_client'];
 
+?><div id="titoloContenuti">PRENOTAZIONE</div>
+
+<?php 
 $booking = getBooking($date_stamp_in,$id_room);
 
 //Se il cliente è settato allora mostra info cliente e procedi con la form della stanza
@@ -22,7 +24,6 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$id_client = $_REQUEST['id_client'];
 	}
 	//Visualizza Info Cliente
-	echo "<fieldset>";
 	$client = getClient($id_client);
 	echo "<b>Informazioni Cliente</b>";
 	echo "<br>Nome: ".$client['name'];
@@ -30,7 +31,6 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	echo "<br>Indirizzo: ".$client['address'];
 	echo "<br>Citt&agrave;: ".$client['city'];
 	echo "<br>Telefono: ".$client['telephone'];
-	echo "</fieldset>";
 	//Mostra form di prenotazione
 	if(isset($_POST['id_room'])){
 		$id_room = $_POST['id_room'];
@@ -44,35 +44,38 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			//Ritorno al calendario
 			echo "Inserimento avvenuto con successo";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+			include 'include/pagina_chiusura.php';
 		}else{
 			echo "Stanza Occupata nei giorni richiesti!";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+			include 'include/pagina_chiusura.php';
 		}
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
-		echo "<fieldset>";
+		echo "<br><br><br>";
 		echo "<b>Informazioni prenotazione</b>";
 		echo "<br>Stanza: ".$booking['room'];
 		echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
 		echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
 		echo "<br>Note: ".$booking['note'];
-		echo "</fieldset>";
-		?>
+		?>	
+	<br><br><br>	
     <button onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">Modifica Stanza</button>
-    
+    <br><br>
     <form id="optional" name="optional" action="optional.php" method="post">
     <input type="hidden" name="booking" value="<?php echo $booking['id'];?>"/>
     <button value="submit">Servizi Stanza</button>
     </form>
+    <?php include 'include/pagina_chiusura.php';?>
     <?php 
 	}else{
 		//Mostro form di compilazione prenotazione della stanza
 		?>
+		<br><br><br>
 		<form id="add_booking" name="add_booking" method="post">
 		<input type="hidden" name="id_room" value="<?php echo $id_room;?>" />
 		<input type="hidden" name="id_client" value="<?php echo $id_client;?>" />
-		<fieldset>
-		<table bordercolor="FFFFFF" border="1px">
+		<table align="center" aalbordercolor="FFFFFF" >
 			<tr>
 				<td>Camera</td>
 				<td><input type="text" name="id_room" value="<?php echo $id_room;?>"/></td>
@@ -89,20 +92,22 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				<td>Note</td>
 				<td><input type="text" name="note" /></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td><button value="submit">Salva</button></td>
+			</tr>
 		</table>
-		<button value="submit">Salva</button>
-		</fieldset>
 		</form>
 				<?php
+				include 'include/pagina_chiusura.php';
 			}
 		}else{ ?>
-		<fieldset>
 		<form id="select_client" name="select_client" method="post">
-		<table bordercolor="FFFFFF" border="1px">
+		<table align="center" bordercolor="FFFFFF">
 			<tr>
 				<th></th>
-				<th>Nome</th>
-				<th>Cognome</th>
+				<td><b>Nome</b></td>
+				<td><b>Cognome</b></td>
 			</tr>
 			<?php
 			$clients = getClients();
@@ -118,21 +123,27 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				echo "</tr>";
 			}
 			?>
-		</table>
-		<button id="picchio" value="submit">Invia</button>
-		</form>
-		
-		<form id="add_client" name="add_client" action="add_client.php" method="post">
-		<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
-		<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
-		<button value="submit">Aggiungi Cliente</button>
-		</form>
-		
+			<tr>
+				<td></td>
+				<td><br><button id="picchio" value="submit">Invia</button></td>
+			</tr>
 			
-		<form id="home_page" name="home_page" action="index.php" method="post">
-		<button value="submit">Home Page</button>
-		</form>
-		</fieldset>
+			<tr>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td></td>
+			</tr>
+			</table>
+			</form>
+			<form id="add_client" name="add_client" action="add_client.php" method="post">
+				<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+				<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
+				<button id="add_client" value="submit">Aggiungi Cliente</button>
+				</form>
 		
-
-<?php }?>
+		
+<?php 
+		include 'include/pagina_chiusura.php';
+		}?>
