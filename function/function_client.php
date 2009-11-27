@@ -92,13 +92,13 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$date_b
 
 	$query = "UPDATE client SET
 				id=".$id.",
-				name=".$name.",
-				surname=".$surname.",
+				name='".$name."',
+				surname='".$surname."',
 				type_document='".$type_document."',
 				number_document='".$number_document."',
 				date_birth='".$date_birth."',
 				city_birth='".$city_birth."',
-				address='".$address."'
+				address='".$address."',
 				city='".$city."',
 				telephone='".$telephone."',
 				email='".$email."'

@@ -6,7 +6,7 @@ include_once 'function/function_client.php';
 ?><div id="titoloContenuti">GESTIONE CLIENTI</div> 
 
 
-<form id="modific_client" name="modific_client" action="modific_client.php" method="request" >
+<form id="modific_client" name="modific_client" action="modific_client.php" method="post" >
 <table align="center" bordercolor="FFFFFF">
 			<tr>
 				<th></th>

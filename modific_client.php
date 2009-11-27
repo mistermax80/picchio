@@ -10,7 +10,6 @@ include_once 'function/function_client.php';
 <?php 
 if($_POST['salva']){
 	
-	var_dump($_POST);
 	//Aggiorna nel db
 	$id = $_POST['id'];
 	$name = $_POST['name'];
@@ -24,12 +23,11 @@ if($_POST['salva']){
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
 	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
-	echo "Informazioni Cliente Correttamente Modificati!";
-	include 'include/pagina_chiusura.php';
+	header ('Location: http://localhost/progetti-php/hotel/index.php');
 
 
 }else{
-$id_client = $_REQUEST['id'];
+$id_client = $_POST['id'];
 
 
 
