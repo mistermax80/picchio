@@ -3,12 +3,52 @@
 include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
 
-?><div id="titoloContenuti">GESTIONE CLIENTI</div> 
+?>
+
+<div id="titoloContenuti">GESTIONE CLIENTI</div> 
+<?php if (!($_POST['client'])){?>
+
+
+QUA SI PUò METTERE ANCHE UNA RICERCA AVANZATA..CMQ POI LA VEDIAMO!!!
+<br><br><br>
+
+
+<form id="mofidic_client" name="mofidic_client" action="modific_client.php" method="post">
+		<input type="hidden" id="client" name="client" value="true"/>
+<table align="center" bordercolor="FFFFFF">
+			<tr>
+				<th></th>
+				<td><b>Nome</b></td>
+				<td><b>Cognome</b></td>
+			</tr>
+			<?php
+			$clients = getClients();
+		
+			foreach ($clients as $c) {
+				$id = $c['id'];
+				$name = $c['name'];
+				$surname = $c['surname'];
+				echo "<tr>";
+				echo "<td><input type=\"radio\" name=\"id\" value=\"".$id."\"/></td>";
+				echo "<td>".$name."</td>";
+				echo "<td>".$surname."</td>";
+				echo "</tr>";
+			}
+			?>
+			<tr>
+			
+				<td></td>
+				<td></td>
+				<td><br>
+				<button value="submit">Modifica informazioni cliente</button></td>
+			</table>
+			</form>
+		
 
 
 
 <?php 
-if($_POST['salva']){
+}if($_POST['salva']){
 	
 	//Aggiorna nel db
 	$id = $_POST['id'];
@@ -23,12 +63,12 @@ if($_POST['salva']){
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
 	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
-	header ('Location: http://localhost/progetti-php/hotel/index.php');
+	//header ('Location: http://localhost/progetti-php/hotel/index.php');
 
 
-}else{
-$id_client = $_POST['id'];
-
+}else if($_POST['client']){
+	
+	$id_client = $_POST['id']; 
 
 
 	$client = getClient($id_client);
@@ -52,6 +92,7 @@ $id_client = $_POST['id'];
 	?>
 <form id="mofidic_client" name="mofidic_client" action="" method="post">
 		<input type="hidden" id="salva" name="salva" value="true"/>
+		<input type="hidden" id="client" name="client" value="false"/>
 		<table align="center">
 			<tr>
 				<td></td>
