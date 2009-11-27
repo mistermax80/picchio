@@ -45,7 +45,16 @@ body {
 
 #calendario{
 	float: right;
-	height: 900px;
+}
+
+#calendario_tabella_intestazione{
+	width: 750px;
+	text-align: left;
+}
+
+#calendario_tabella_giorni{
+	float: right;
+	height: 450px;
 	width: 750px;
 	overflow: auto;
 }
@@ -54,7 +63,7 @@ body {
 	width: 650px;
 	float: right;
 	margin-right: 50px;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 #titoloContenuti{
 	color: white;

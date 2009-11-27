@@ -177,26 +177,30 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 <!-- Apertura div pagina -->
 <div class="pagina">
 	<div id="calendario">
-	<table align="center">
-	<TR ALIGN='center'>
-		<TD><B>Domenica</B></TD>
-		<TD><B>Luned&igrave;</B></TD>
-		<TD><B>Marted&igrave;</B></TD>
-		<TD><B>Mercoled&igrave;</B></TD>
-		<TD><B>Gioved&igrave;</B></TD>
-		<TD><B>Venerd&igrave;</B></TD>
-		<TD><B>Sabato</B></TD>
-	</TR>
-	<TR>
-		<TD COLSPAN=7></TD>
-	</TR>
-	
-	<TR ALIGN='center'>
+	<div id="calendario_tabella_intestazione">
+		<table align="center" style="width: 750px;">
+		<TR ALIGN='center'>
+			<TD><B>Domenica</B></TD>
+			<TD><B>Luned&igrave;</B></TD>
+			<TD><B>Marted&igrave;</B></TD>
+			<TD><B>Mercoled&igrave;</B></TD>
+			<TD><B>Gioved&igrave;</B></TD>
+			<TD><B>Venerd&igrave;</B></TD>
+			<TD><B>Sabato</B></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=7></TD>
+		</TR>
+		</table>
+	</div>
+	<div id="calendario_tabella_giorni">
+		<table align="center" >
+		<TR ALIGN='center'>
 <?php
 }
 
 function drawFooterCalendar($link){
-	echo "</table></div>";
+	echo "</table></div></div>";
 }
 
 function drawCellRoom($num_room,$link_booking,$date_stamp){
