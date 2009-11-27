@@ -2,7 +2,7 @@
 	<div id="item_menu" onclick="window.location.href='index.php'">
 		Mese Corrente
 	</div>
-	<div id="item_menu" onclick="window.location.href='client.php'">
+	<div id="item_menu" onclick="window.location.href='clienti.php'">
 		Clienti
 	</div>
 	<div id="item_menu" onclick="window.location.href='room.php'">
