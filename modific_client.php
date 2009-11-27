@@ -10,6 +10,7 @@ include_once 'function/function_client.php';
 <?php 
 if($_POST['salva']){
 	
+	var_dump($_POST);
 	//Aggiorna nel db
 	$id = $_POST['id'];
 	$name = $_POST['name'];
@@ -22,11 +23,13 @@ if($_POST['salva']){
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	$id_client = updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	echo "Informazioni Cliente Correttamente Modificati!";
 	include 'include/pagina_chiusura.php';
+
+
 }else{
-$id_client = $_POST['id'];
+$id_client = $_REQUEST['id'];
 
 
 
@@ -34,28 +37,27 @@ $id_client = $_POST['id'];
 	//Aggiungi nel db
 	$id = $client['id'];
 	$name = $client['name'];
-	$surname = $cleint['surname'];
-	$type_document = $cleint['type_document'];
-	$number_document = $cleint['number_document'];
-	$date_birth = $cleint['date_birth'];
-	$city_birth = $cleint['city_birth'];
-	$address = $cleint['address'];
-	$city = $cleint['city'];
-	$telephone = $cleint['telephone'];
-	$email = $cleint['email'];
+	$surname = $client['surname'];
+	$type_document = $client['type_document'];
+	$number_document = $client['number_document'];
+	$date_birth = $client['date_birth'];
+	$city_birth = $client['city_birth'];
+	$address = $client['address'];
+	$city = $client['city'];
+	$telephone = $client['telephone'];
+	$email = $client['email'];
 	
 	
 	
 	
 	//copia
 	?>
-<form id="add_client" name="add_client" action="" method="post">
+<form id="mofidic_client" name="mofidic_client" action="" method="post">
 		<input type="hidden" id="salva" name="salva" value="true"/>
-		<input type="hidden" name="operation" value="save" />
 		<table align="center">
 			<tr>
 				<td></td>
-				<td><?php $client['id'];?></td>
+				<td><input type="text" name="id" value="<?php echo $client['id'];?>"/></td>
 			</tr>
 			<tr>
 				<td>Nome</td>

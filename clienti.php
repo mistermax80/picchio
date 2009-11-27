@@ -6,9 +6,7 @@ include_once 'function/function_client.php';
 ?><div id="titoloContenuti">GESTIONE CLIENTI</div> 
 
 
-<form id="modific_client" name="modific_client" action="modific_client.php" method="post" >
-<input type="hidden" id="modific_client" name="id" value="<?php echo $client['id'];?>"/>
-
+<form id="modific_client" name="modific_client" action="modific_client.php" method="request" >
 <table align="center" bordercolor="FFFFFF">
 			<tr>
 				<th></th>
@@ -34,7 +32,7 @@ include_once 'function/function_client.php';
 				<td></td>
 				<td></td>
 				<td><br>
-				<button id="picchio" value="submit">Modifica informazioni cliente</button></td>
+				<button value="submit">Modifica informazioni cliente</button></td>
 			</table>
 			</form>
 			
