@@ -61,11 +61,8 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		?>	
 	<br><br><br>	
     <button onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">Modifica Stanza</button>
-    <br><br>
-    <form id="optional" name="optional" action="optional.php" method="post">
-    <input type="hidden" name="booking" value="<?php echo $booking['id'];?>"/>
-    <button value="submit">Servizi Stanza</button>
-    </form>
+    <br><br><br>
+    <button onclick="window.location.href='option_booking.php?id_booking=<?php echo $booking['id'];?>'">Servizi Stanza</button>
     <?php include 'include/pagina_chiusura.php';?>
     <?php 
 	}else{
