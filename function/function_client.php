@@ -104,7 +104,7 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$date_b
 				email='".$email."'
 				WHERE
 				id = ".$id.";";
-	echo $query;
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
