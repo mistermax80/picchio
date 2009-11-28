@@ -91,14 +91,10 @@ QUA SI PUò METTERE ANCHE UNA RICERCA AVANZATA..CMQ POI LA VEDIAMO!!!
 	//copia
 	?>
 <form id="mofidic_client" name="mofidic_client" action="" method="post">
+		<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 		<input type="hidden" id="salva" name="salva" value="true"/>
 		<input type="hidden" id="client" name="client" value="false"/>
 		<table align="center">
-			<tr>
-				<td></td>
-				<td><input type="text" name="id" value="<?php echo $client['id'];?>"/></td>
-			</tr>
-			<tr>
 				<td>Nome</td>
 				<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
 			</tr>
