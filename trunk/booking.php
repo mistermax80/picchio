@@ -1,15 +1,15 @@
-
-
 <?php
 
 include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
+include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
 
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $id_room = $_REQUEST['id_room'];
 $id_client = $_REQUEST['id_client'];
+$rooms = getRooms();
 
 ?><div id="titoloContenuti">PRENOTAZIONE</div>
 
@@ -72,10 +72,23 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<form id="add_booking" name="add_booking" method="post">
 		<input type="hidden" name="id_room" value="<?php echo $id_room;?>" />
 		<input type="hidden" name="id_client" value="<?php echo $id_client;?>" />
-		<table align="center" aalbordercolor="FFFFFF" >
+		<table align="center" aalbordercolor="FFFFFF">
 			<tr>
 				<td>Camera</td>
-				<td><input type="text" name="id_room" value="<?php echo $id_room;?>"/></td>
+				<td>
+					<input type="text" name="id_room" value="<?php echo "".$id_room;?>"/>
+					<select id="room" name="room">
+					<?php 
+						foreach ($rooms as $r) {
+							if($r['id']==$id_room){
+								echo "<option value='".$r['id']."' selected='selected'>Stanza: ".$r['id']." - ".$r['type']."</option>";
+							}else{
+								echo "<option value='".$r['id']."' > Stanza: ".$r['id']." - ".$r['type']."</option>";	
+							}
+						}
+					?>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>Data Arrivo</td>

@@ -69,7 +69,7 @@ function updateRoom($id,$type,$description,$price){
 				id=".$id.",
 				type='".$type."',
 				description='".$description."',
-				price='".$price."',
+				price='".$price."'
 				WHERE
 				id = ".$id.";";
 	echo $query;
@@ -80,5 +80,6 @@ function updateRoom($id,$type,$description,$price){
 	mysql_close($link);
 	return true;
 }
+
 
 ?>
