@@ -160,12 +160,12 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 	<div class="mese" align="center">
 		<div class="meseNext">
 			<img onclick="window.location.href='<?php echo $link."?month=".$next."&year=".$next_yr;?>';" 
-				src="images/next.png" alt="Mese Successivo" title="Mese Successivo">
+				src="images/next.png" alt="Mese Successivo" title="Mese Successivo"  style="cursor: pointer;">
 		</div>
 
 		<div class="mesePrev">
 			<img onclick="window.location.href='<?php echo $link."?month=".$prev."&year=".$prev_yr;?>';" 
-				src="images/prev.png"  alt="Mese Precedente" title="Mese Precedente">
+				src="images/prev.png"  alt="Mese Precedente" title="Mese Precedente" style="cursor: pointer;">
 		</div>
 
 		<div  class="meseSelect">
