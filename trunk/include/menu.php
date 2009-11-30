@@ -9,7 +9,7 @@
 		Stanze
 	</div>
 	<div id="item_menu" onclick="window.location.href='option.php'">
-		Opzioni Stampa
+		Invio Certificati
 	</div>
 	
 					<div id="little_calendar">
