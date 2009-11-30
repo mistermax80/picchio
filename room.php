@@ -4,6 +4,7 @@ include_once 'function/function_room.php';
 $rooms = getRooms();
 
 if(!($_POST['modific'])&&(!($_POST['salva']))){
+	
 ?>
 
 <div id="titoloContenuti">DISPOSIZIONE STANZE</div>
@@ -23,8 +24,10 @@ if(!($_POST['modific'])&&(!($_POST['salva']))){
 		<td>Camera</td>
 		<td>
 		<select id="room" name="room">
+		<option value= "Selezionare la stanza">Selezionare la stanza</option>
 		<?php 
 		foreach ($rooms as $r) {
+				
 				echo "<option value='".$r['id']."' > Stanza: ".$r['id']." - ".$r['type']."</option>";	
 			}
 		?>
@@ -81,11 +84,10 @@ if($_POST['modific']&&(!($_POST['salva']))){
 	</form>
 	<?php 
 }
- 
 	if($_POST['salva']){	
 	//Aggiorna nel db
 	$id = $_POST['id'];
-	$type = $_POST['$type'];
+	$type = $_POST['type'];
 	$description = $_POST['description'];
 	$price = $_POST['price'];
 	updateRoom($id,$type,$description,$price);
