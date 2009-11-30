@@ -39,6 +39,7 @@ body {
 	padding-left: 15px;
 	padding-top: 5px;
 	margin-top: 3px;
+	cursor: pointer;
 }
 
 /* Impaginazione Calendario*/
@@ -105,6 +106,7 @@ table.cellaCalendario{
 	background-image: url(images/background_day.png);
 	background-repeat: no-repeat;
 	width: 100px;
+	cursor: pointer;
 }
 
 table.cellaCalendarioOggi{
@@ -113,6 +115,7 @@ table.cellaCalendarioOggi{
 	background-image: url(images/background_day_today.png);
 	background-repeat: no-repeat;
 	width: 100px;
+	cursor: pointer;
 }
 
 td.cellaStanza{
