@@ -1,42 +1,21 @@
-<?php 
-include_once 'function/function_client.php';
-$clients = getClients();
-?>
+<link type="text/css" href="include_js/jquery-ui-1.7.2.custom/css/ui-darkness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-ui-1.7.2.custom.min.js"></script>
 
-<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
-<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
-<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
-<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
-<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>    
- 
-<table width="710px">
-    <tr>
-        <td>
-            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
-        </td>
-    </tr>
-</table>
-    
-<script>
-	mygrid = new dhtmlXGridObject('gridbox');
-	mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-	mygrid.setHeader("Nome,Cognome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email");
-	mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70");
-	mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right");
-	mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
-	mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str");
-	mygrid.init();
-	mygrid.setSkin("dhx_black");
-
-<?php
-	foreach ($clients as $c) {
-		$str = "mygrid.addRow(".$c['id'].", [\"".$c['name']."\", \"".$c['surname']."\", \"".
-								$c['type_document']."\", \"".$c['number_document']."\", \"".
-								$c['date_birth']."\", \"".$c['city_birth']."\", \"".
-								$c['address']."\", \"".$c['city']."\", \"".
-								$c['telephone']."\", \"".$c['email']."\"]);";
-		echo $str;
-	}
-?>
+<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker({dateFormat: 'dd-mm-yy'}); 
+	});
 </script>
 
+<div class="demo">
+
+<p>Date: <input id="datepicker" type="text"></p>
+
+</div><!-- End demo -->
+
+<div style="display: none;" class="demo-description">
+
+<p>The datepicker is tied to a standard form input field.  Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay.  Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close. If a date is chosen, feedback is shown as the input's value.</p>
+
+</div><!-- End demo-description -->
