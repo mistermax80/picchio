@@ -29,6 +29,17 @@ if($_POST['salva']){
 }else{
 
 ?>
+
+		<link type="text/css" href="include_js/jquery-ui-1.7.2.custom/css/ui-darkness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-ui-1.7.2.custom.min.js"></script>
+	
+		<script type="text/javascript">
+			$(function() {
+				$("#date_out").datepicker({dateFormat: 'yy-mm-dd'}); 
+			});
+		</script>
+		
 <form id="mofific_booking" name="mofific_booking" action="" method="post">
 <input type="hidden" id="salva" name="salva" value="true"/>
 <input type="hidden" id="id" name="id" value="<?php echo $booking['id'];?>"/>
@@ -58,11 +69,12 @@ if($_POST['salva']){
 	</tr>
 	<tr>
 		<td>Data Arrivo</td>
-		<td><input type="text" name="date_in" value="<?php echo substr($booking['date_in'],0,10);?>" /></td>
+		<td><?php echo substr($booking['date_in'],0,10);?>
+		<!--<input type="text" name="date_in" value="<?php echo substr($booking['date_in'],0,10);?>" />--></td>
 	</tr>
 	<tr>
 		<td>Data Uscita</td>
-		<td><input type="text" name="date_out" value="<?php echo substr($booking['date_out'],0,10);?>" /></td>
+		<td><input type="text" id="date_out" name="date_out" autocomplete="off" value="<?php echo substr($booking['date_out'],0,10);?>" /></td>
 	</tr>
 	<tr>
 		<td>Note</td>
