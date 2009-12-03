@@ -74,7 +74,7 @@ function getBooking($date_stamp,$room) {
 				ON  b.client=c.id 
 				WHERE 
 				date_in<='".$date."' AND 
-				date_out>='".$date."' AND 
+				date_out>'".$date."' AND 
 				room=".$room ;
 	//echo $query;
 	$result = mysql_query($query);
@@ -103,18 +103,18 @@ function checkFreeBooking($date_in,$date_out,$id_room) {
 	
 	$query = "SELECT count(*) as booking
 				FROM booking 
-				WHERE room=4 AND
+				WHERE room=".$id_room." AND
 				(
 				'".$date_in."'<=date_in AND '".$date_out."'>=date_in
 				OR
-				'".$date_in."'<=date_out AND '".$date_out."'>=date_out
+				'".$date_in."'<date_out AND '".$date_out."'>=date_out
 				OR
-				date_in <= '".$date_in."' AND date_out>='".$date_in."'
+				date_in <= '".$date_in."' AND date_out>'".$date_in."'
 				OR
 				date_in <= '".$date_out."' AND date_out>='".$date_out."'
 				)";
 	
-	echo $query."<br>";
+	echo "<br>".$query."<br>";
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

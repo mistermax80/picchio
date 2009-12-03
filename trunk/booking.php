@@ -37,7 +37,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$date_in = $_POST['date_in'];
 		$date_out = $_POST['date_out'];
 		$note = $_POST['note'];
-		//Controllo che dicponibilità della stanza nell'intervallo dei giorni
+		//Controllo che disponibilità della stanza nell'intervallo dei giorni
 		if(checkFreeBooking($date_in,$date_out,$id_room)){
 			//Salvo i dati della prenotazione
 			insertBooking($id_client,$id_room,$date_in,$date_out,$note);
@@ -72,10 +72,11 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<link type="text/css" href="include_js/jquery-ui-1.7.2.custom/css/ui-darkness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
 		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-ui-1.7.2.custom.min.js"></script>
+		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom/development-bundle/ui/i18n/ui.datepicker-it.js"></script>
 	
 		<script type="text/javascript">
 			$(function() {
-				$("#date_in").datepicker({dateFormat: 'yy-mm-dd'});
+				$("#datepicker").datepicker($.datepicker.regional['it']);
 				$("#date_out").datepicker({dateFormat: 'yy-mm-dd'}); 
 			});
 		</script>
@@ -93,11 +94,14 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			</tr>
 			<tr>
 				<td>Data Arrivo</td>
-				<td><input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/></td>
+				<td>
+					<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>
+					<!--<input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/>-->
+				</td>
 			</tr>
 			<tr>
 				<td>Data Uscita</td>
-				<td><input type="text" id="date_out" name="date_out" /></td>
+				<td><input type="text" id="date_out" name="date_out" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Note</td>
