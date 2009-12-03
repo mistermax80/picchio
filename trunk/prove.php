@@ -1,22 +1,16 @@
 <?php
-// create handle for new PDF document
-$pdf = pdf_new();
 
-// open a file
-pdf_open_file($pdf, "philosophy.pdf");
+fopen("prova.pdf","w+");
 
-// start a new page (A4)
-pdf_begin_page($pdf, 595, 842);
+define('FPDF_FONTPATH','include/pdf/font/');
+require('include/pdf/fpdf.php');
 
-// get and use a font object
-$arial = pdf_findfont($pdf, "Arial", "host", 1); pdf_setfont($pdf, $arial, 10);
-
-// print text
-pdf_show_xy($pdf, "There are more things in heaven and earth, Horatio,", 50, 750); pdf_show_xy($pdf, "than are dreamt of in your philosophy", 50, 730);
-
-// end page
-pdf_end_page($pdf);
-
-// close and save file
-pdf_close($pdf);
+$pdf=new FPDF();
+$pdf->Open();
+$pdf->AddPage();
+$pdf->SetFont('Helvetica','B',16);
+$pdf->Cell(40,10,'La Villa Hotel');
+$pdf->Cell(40,50,'Modulo Prenotazione Albergo');
+$pdf->Cell(40,60,'------------------------------------');
+$pdf->Output("prova.pdf");
 ?>
