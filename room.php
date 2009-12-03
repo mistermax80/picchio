@@ -27,22 +27,22 @@ include_once 'function/function_room.php';
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Numero,Tipo,Descrizione,Prezzo");
-		mygrid.setInitWidths("100,200,200,100");
-		mygrid.setColAlign("right,right,right,right");
-		mygrid.setColTypes("ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str");
+		mygrid.setHeader("Numero,Tipo,Descrizione,Prezzo,Modifica");
+		mygrid.setInitWidths("50,200,200,100,100");
+		mygrid.setColAlign("right,right,right,right,right");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black");
 
 		<?php 
 				$rooms = getRooms();
 				foreach ($rooms as $r) {
-					$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
-					$str = "mygrid.addRow(".$r['id'].", [\"".$r['type']."\", \"".$r['description']."\", \"".
+					$button_modify = '<button onclick=\"window.location.href=\'room.php?id_room='.$r['id'].'\'\">Modifica</button>';
+					$str = "mygrid.addRow(".$r['id'].", [\"<b>".$r['id']."</b>\", \"".$r['type']."\", \"".$r['description']."\", \"".
 											$r['price']."\", \"".
 											$button_modify."\"]);";
-					//echo $str;
+					echo $str;
 				}
 				?>
 
