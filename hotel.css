@@ -70,10 +70,10 @@ body {
 #titoloContenuti{
 	color: white;
 	text-align: right;
-	font-size: 16px;
+	font-size: 22px;
 	font-style: italic;
 	font-weight: bold;
-	padding-right: 30px;
+	padding-right: 60px;
 	padding-top: 15px;
 	margin-bottom: 20px;
 }

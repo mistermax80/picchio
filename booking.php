@@ -69,34 +69,35 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		//Mostro form di compilazione prenotazione della stanza
 		?>
 		<br><br><br>
+		<link type="text/css" href="include_js/jquery-ui-1.7.2.custom/css/ui-darkness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-ui-1.7.2.custom.min.js"></script>
+	
+		<script type="text/javascript">
+			$(function() {
+				$("#date_in").datepicker({dateFormat: 'yy-mm-dd'});
+				$("#date_out").datepicker({dateFormat: 'yy-mm-dd'}); 
+			});
+		</script>
+
 		<form id="add_booking" name="add_booking" method="post">
 		<input type="hidden" name="id_room" value="<?php echo $id_room;?>" />
 		<input type="hidden" name="id_client" value="<?php echo $id_client;?>" />
-		<table align="center" aalbordercolor="FFFFFF">
+		<table align="center" bordercolor="FFFFFF">
 			<tr>
 				<td>Camera</td>
 				<td>
-					<input type="text" name="id_room" value="<?php echo "".$id_room;?>"/>
-					<select id="room" name="room">
-					<?php 
-						foreach ($rooms as $r) {
-							if($r['id']==$id_room){
-								echo "<option value='".$r['id']."' selected='selected'>Stanza: ".$r['id']." - ".$r['type']."</option>";
-							}else{
-								echo "<option value='".$r['id']."' > Stanza: ".$r['id']." - ".$r['type']."</option>";	
-							}
-						}
-					?>
-					</select>
+					<?php echo "".$id_room;?>
+					<!--<input type="text" name="id_room" value="<?php echo "".$id_room;?>"/>-->
 				</td>
 			</tr>
 			<tr>
 				<td>Data Arrivo</td>
-				<td><input type="text" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/></td>
+				<td><input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/></td>
 			</tr>
 			<tr>
 				<td>Data Uscita</td>
-				<td><input type="text" name="date_out" /></td>
+				<td><input type="text" id="date_out" name="date_out" /></td>
 			</tr>
 			<tr>
 				<td>Note</td>
@@ -112,45 +113,55 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				include 'include/pagina_chiusura.php';
 			}
 		}else{ ?>
-		<form id="select_client" name="select_client" method="post">
-		<table align="center" bordercolor="FFFFFF">
-			<tr>
-				<th></th>
-				<td><b>Nome</b></td>
-				<td><b>Cognome</b></td>
-			</tr>
+				<form id="search_client" name="search_client" method="post">
+					<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+					<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
+					<input id="text_search" name="text_search" type="text" value=""/>
+					<input id="search" name="search" type="submit" value="Cerca"></input>
+				</form>
 			<?php
-			$clients = getClients();
-		
-			foreach ($clients as $c) {
-				$id = $c['id'];
-				$name = $c['name'];
-				$surname = $c['surname'];
-				echo "<tr>";
-				echo "<td><input type=\"radio\" name=\"id_client\" value=\"".$id."\"/></td>";
-				echo "<td>".$name."</td>";
-				echo "<td>".$surname."</td>";
-				echo "</tr>";
-			}
-			?>
-			<tr>
-				<td></td>
-				<td><br><button id="picchio" value="submit">Invia</button></td>
-			</tr>
-			
-			<tr>
-				<td></td>
-			</tr>
-			
-			<tr>
-				<td></td>
-			</tr>
-			</table>
-			</form>
-			<form id="add_client" name="add_client" action="add_client.php" method="post">
-				<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
-				<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
-				<button id="add_client" value="submit">Aggiungi Cliente</button>
+			if(isset($_POST['search']) && $_POST['search']!="" ){
+			?>	
+				<form id="select_client" name="select_client" method="post">
+				<table border="1px;">
+					<tr>
+						<th></th>
+						<th>Nome</th>
+						<th>Cognome</th>
+						<th>Documento</th>
+						<th>Data Nascita</th>
+					</tr>
+				<?php
+				$text_search = $_POST['text_search'];
+				$clients = searchClients($text_search);
+				
+				foreach ($clients as $c) {
+					$id = $c['id'];
+					$name = $c['name'];
+					$surname = $c['surname'];
+					$number_document = $c['number_document'];
+					$date_birth = $c['date_birth'];
+					echo "<tr>";
+					echo "<td><input type=\"radio\" name=\"id_client\" value=\"".$id."\"/></td>";
+					echo "<td>".$name."</td>";
+					echo "<td>".$surname."</td>";
+					echo "<td>".$number_document."</td>";
+					echo "<td>".$date_birth."</td>";
+					echo "</tr>";
+				}
+				?>
+				<tr>
+					<td></td>
+					<td><button id="picchio" value="submit">Invia</button></td>
+				</tr>
+				</table>
+				</form>
+				<?php }?>
+				<form id="add_client" name="add_client" action="add_client.php" method="post">
+					<input type="hidden" name="return_page" value="booking"/>
+					<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+					<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
+					<button id="add_client" value="submit">Aggiungi Cliente</button>
 				</form>
 		
 		

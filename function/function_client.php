@@ -28,6 +28,32 @@ function getClients() {
 	return $clients;
 }
 
+function searchClients($text_search) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT * FROM client WHERE name LIKE '%".$text_search."%' OR surname LIKE '%".$text_search."%'";
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: '.$query . mysql_error());
+	}
+	
+	$clients = array();
+		
+	while ($row = mysql_fetch_assoc($result)) {
+		$clients[] = $row;
+	}
+	mysql_close($link);
+	return $clients;
+}
+
 function getClient($id) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
@@ -104,6 +130,28 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$date_b
 				email='".$email."'
 				WHERE
 				id = ".$id.";";
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	mysql_close($link);
+	return true;
+}
+
+function deleteClient($id) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "DELETE FROM client WHERE id=".$id;
+	
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {

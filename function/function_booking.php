@@ -79,7 +79,7 @@ function getBooking($date_stamp,$room) {
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
-		die('Invalid query: ' . mysql_error());
+		die('Invalid query: '.$query." ".mysql_error());
 	}
 	$booking = array();
 	if ($row = mysql_fetch_assoc($result)) {
