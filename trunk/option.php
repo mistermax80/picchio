@@ -3,54 +3,47 @@
 include 'include/pagina_apertura.php';
 include_once 'function/function_booking.php';
 include_once 'function/function_client.php';
+include_once 'function/function_report.php';
 
-
-
-if(!($_POST)){
 ?>
-<div id="titoloContenuti">SELEZIONARE LA PRENOTAZIONE DA INVIARE</div>
-<form id="select_booking" name="select_booking" method="post">
-<input type="hidden" id="stamp" name="stamp" value="true"/>
-<table align="center" bordercolor="FFFFFF">
-			<tr>
-				<td><b>Cognome</b></td>
-				<td></td>
-				<td><b>Data ingresso</b></td>
-				<td></td>
-				<td><b>Data uscita</b></td>
-			</tr>
-<?php
-$bookings=getBookings();
-foreach ($bookings as $c) {
-				
-				$id_client = $c['client'];
 
-				$client = getClient($id_client);
-				$surname_client=$client['surname'];
-				echo "<tr>";
-				echo "<td><br>".$surname_client."</td>";
-				echo "<td></td>";
-				echo "<td><br>".substr($c['date_in'],0,10)."</td>";
-				echo "<td></td>";
-				echo "<td><br>".substr($c['date_out'],0,10)."</td>";
-				echo "<td><input type=\"radio\" name=\"id\" value=\"".$id."\"/></td>";
-				echo "</tr>";
-			}
-?>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><br><button id="picchio" value="submit">Stampa</button></td>
-			</table>
-			</form>
-<?php 
-}
-else{
-	?><div id="titoloContenuti">INVIO IN CORSO</div><?php 
-	echo "sarebbe meglio inviare il fax alla questura invece di stampare i cedolini";
-}
+<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
+	
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox" style="width:80%;height:250px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Cliente,Data,spedizione,Invia");
+		mygrid.setInitWidths("120,120,120,120,120");
+		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black"); 
+	
+	<?php 
+		$reports = getReports();
+		foreach ($reports as $r) {
+			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Invia</button>';
+			$str = "mygrid.addRow(".$r['id'].", [\"".$r['path']."\", \"".
+									$r['date']."\", \"".$r['send']."\", \"".
+									$button_modify."\"]);";
+			echo $str;
+		}
+	?></script><?php 
+			$reports = getReports();
+			
 include 'include/pagina_chiusura.php';
+
 ?>
