@@ -38,12 +38,13 @@ include_once 'function/function_report.php';
 		</form>
 <?php 
 	}else{
-		$booking = $_POST['id_booking'];
-				$id_client=getBookingById($booking);
+		$id_booking = $_POST['id_booking'];
+				$id_client=getBookingById($id_booking);
 				$idd_client = $id_client['client'];
 				$client=getClient($idd_client);
 				$surname=$client['surname'];
-		$path = $surname;
+		$booking = $surname;
+		$path = "....da inserire pikkio...";
 		insertReport($booking,$path);
 		echo "<b>Report generato con successot</b>";
 		echo "<a href=\"index.php\">Ritorna</a>";
