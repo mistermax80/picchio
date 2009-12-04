@@ -25,6 +25,56 @@ function insertReport($id,$path){
 	return true;
 }
 	
+function getReports() {
 
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT * FROM report";
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	
+	$bookings = array();
+		
+	while ($row = mysql_fetch_assoc($result)) {
+		$bookings[] = $row;
+	}
+	mysql_close($link);
+	return $bookings;
+}
+
+function getReport($id) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT * FROM report WHERE id = ".$id.";";
+	
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+		
+	if ($row = mysql_fetch_assoc($result)) {
+		$report = $row;
+	}
+	mysql_close($link);
+	return $report;
+}
 
 ?>
