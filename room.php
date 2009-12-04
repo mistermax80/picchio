@@ -3,7 +3,25 @@ include 'include/pagina_apertura.php';
 include_once 'function/function_room.php';
 
 
-//if(!($_POST['modific'])&&(!($_POST['salva']))){
+if(isset($_POST['save']) && $_POST['save']!=""){	
+	//Aggiorna nel db
+	$id = $_POST['id'];
+	$type = $_POST['type'];
+	$description = $_POST['description'];
+	$price = $_POST['price'];
+	updateRoom($id,$type,$description,$price);
+	echo "Salvataggio avvenuto con successo.";
+	echo "<a href=\"room.php\">Ritorna</a>";	
+
+}else if(isset($_POST['delete']) && $_POST['delete']!=""){
+	$id = $_POST['id'];
+	deleteRoom($id);
+	echo "Cliente eliminato con successo.";
+	echo "<a href=\"modific_client.php\">Ritorna</a>";
+}
+
+
+else if(!(isset($_REQUEST['id_room']))){
 	
 ?>
 
@@ -19,7 +37,7 @@ include_once 'function/function_room.php';
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:82%;height:250px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -28,8 +46,8 @@ include_once 'function/function_room.php';
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Numero,Tipo,Descrizione,Prezzo,Modifica");
-		mygrid.setInitWidths("50,200,200,100,100");
-		mygrid.setColAlign("right,right,right,right,right");
+		mygrid.setInitWidths("50,200,200,100,102");
+		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
 		mygrid.init();
@@ -54,50 +72,54 @@ include_once 'function/function_room.php';
 
 	
 <?php
-//}
+}
+	else {
 
-if($_POST['modific']&&(!($_POST['salva']))){
-	$room=getRoom($room);
+	$id_room=$_REQUEST['id_room'];
+	$room=getRoom($id_room);
 	?>
 	<div id="titoloContenuti">MODIFICA DISPOSIZIONE STANZE</div>
+	
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare stanza?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
+	
 	<form id="mofidic_room" name="mofidic_room" action="" method="post">
 		<input type="hidden" id="salva" name="salva" value="true"/>
 		<input type="hidden" id="id" name="id" value="<?php echo $room['id'];?>"/>
 		<table align="center">
 			<tr>
+				<td>Camera</td>
+				<td><?php echo $room['id'];?>
+				<!-- <input type="text" name="type" value=""/></td> -->
+			</tr>
+			<tr>
 				<td>Tipo</td>
-				<td><input type="text" name="type" value="<?php echo $room['type'];?>"/></td>
+				<td><input type="text" name="type" autocomplete="off" value="<?php echo $room['type'];?>"/></td>
 			</tr>
 			<tr>
 				<td>Descrizione</td>
-				<td><input type="text" name="description" value="<?php echo $room['description'];?>"/></td>
+				<td><input type="text" name="description" autocomplete="off" value="<?php echo $room['description'];?>"/></td>
 			</tr>
 			<tr>
 				<td>Prezzo</td>
-				<td><input type="text" name="price" value="<?php echo $room['price'];?>"/></td>
+				<td><input type="text" name="price" autocomplete="off" value="<?php echo $room['price'];?>"/></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button value="submit">Salva</button></td>
-			</tr>
+					<td><input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
+					<td><input id="save" name="save" type="submit" value="Salva"/></td>
+				</tr>
 		</table>
 	</form>
 	<?php 
 }
-	if($_POST['salva']){	
-	//Aggiorna nel db
-	$id = $_POST['id'];
-	$type = $_POST['type'];
-	$description = $_POST['description'];
-	$price = $_POST['price'];
-	updateRoom($id,$type,$description,$price);
-	//header ('Location: http://localhost/progetti-php/hotel/index.php');	
-}
-
 
 include 'include/pagina_chiusura.php';
 ?>

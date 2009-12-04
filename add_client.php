@@ -37,43 +37,43 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 		<table align="center">
 			<tr>
 				<td>Nome</td>
-				<td><input type="text" name="name" /></td>
+				<td><input type="text" name="name" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Cognome</td>
-				<td><input type="text" name="surname" /></td>
+				<td><input type="text" name="surname" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Tipo Documento</td>
-				<td><input type="text" name="type_document" /></td>
+				<td><input type="text" name="type_document" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Num. Documento</td>
-				<td><input type="text" name="number_document" /></td>
+				<td><input type="text" name="number_document" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Data Nascita</td>
-				<td><input type="text" name="date_birth" /></td>
+				<td><input type="text" name="date_birth" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Luogo Nascita</td>
-				<td><input type="text" name="city_birth" /></td>
+				<td><input type="text" name="city_birth" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Indirizzo</td>
-				<td><input type="text" name="address" /></td>
+				<td><input type="text" name="address" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Citt&agrave;</td>
-				<td><input type="text" name="city" /></td>
+				<td><input type="text" name="city" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Telefono</td>
-				<td><input type="text" name="telephone" /></td>
+				<td><input type="text" name="telephone" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td><input type="text" name="email" /></td>
+				<td><input type="text" name="email" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td></td>
