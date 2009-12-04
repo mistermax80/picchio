@@ -16,10 +16,10 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 }else if(isset($_POST['delete']) && $_POST['delete']!=""){
 	$id = $_POST['id'];
 	deleteRoom($id);
-	echo "Cliente eliminato con successo.";
-	echo "<a href=\"modific_client.php\">Ritorna</a>";
-}
+	echo "Stanza eliminata con successo.";
+	echo "<a href=\"room.php\">Ritorna</a>";
 
+}
 
 else if(!(isset($_REQUEST['id_room']))){
 	
@@ -37,7 +37,7 @@ else if(!(isset($_REQUEST['id_room']))){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:82%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:90%;height:250px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -65,9 +65,8 @@ else if(!(isset($_REQUEST['id_room']))){
 				?>
 
 	</script>
-	<form id="add_room" name="add_room" action="room.php" method="post">
-					<input type="hidden" name="return_page" value="client"/>
-					<button id="add_client" value="submit">Aggiungi Stanza</button>
+		<form id="add_room" name="add_room" action="add_room.php">
+				<button id="add_room" value="submit">Aggiungi Stanza</button>
 	</form>
 
 	
@@ -98,11 +97,18 @@ else if(!(isset($_REQUEST['id_room']))){
 			<tr>
 				<td>Camera</td>
 				<td><?php echo $room['id'];?>
-				<!-- <input type="text" name="type" value=""/></td> -->
 			</tr>
 			<tr>
 				<td>Tipo</td>
-				<td><input type="text" name="type" autocomplete="off" value="<?php echo $room['type'];?>"/></td>
+				<td>
+				<select name="type">
+				<option><?php echo $room['type'];?></option>
+   				<option value= "singola">Singola</option>
+   				<option value= "doppia">Doppia</option>
+			   	<option value= "matrimoniale">Matrimoniale</option>
+   				<option value= "tripla">Tripla</option>
+   				<option value= "quadrupla">Quadrupla</option>
+				</select>	
 			</tr>
 			<tr>
 				<td>Descrizione</td>
