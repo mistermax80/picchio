@@ -5,8 +5,10 @@ include_once 'function/function_booking.php';
 include_once 'function/function_client.php';
 include_once 'function/function_report.php';
 
-?>
 
+if(!(isset($_REQUEST['id_report']))){
+?>
+<div id="titoloContenuti">NOTIFICHE CLIENTI</div> 
 <link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
@@ -43,6 +45,16 @@ include_once 'function/function_report.php';
 			echo $str;
 		}
 	?></script><?php 
+	
+}else{
+	?><div id="titoloContenuti">ELIMINAZIONE NOTIFICA CLIENTE</div>
+	<?php 
+	$id = $_REQUEST['id_report'];
+	deleteReport($id);
+	echo "Report eliminato con successo.";
+	echo "<a href=\"option.php\">Ritorna</a>";
+	
+}	
 include 'include/pagina_chiusura.php';
 
 ?>
