@@ -65,8 +65,23 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
     <button onclick="window.location.href='option_booking.php?id_booking=<?php echo $booking['id'];?>'">Servizi Stanza</button>
     <br><br><br>
     <button onclick="window.location.href='report.php?id_booking=<?php echo $booking['id'];?>'">Crea notificato</button>
+    <br><br><br>
+    <script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare prenotazione?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
+    <form id="delete" name="delete" action="delete_booking.php" method="post">
+    <input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina Prenotazione"/>
+    <input type="hidden" name="id_booking" value="<?php echo $booking['id'];?>"/>
+    </form>
     <?php include 'include/pagina_chiusura.php';?>
-    <?php 
+    <?php		
 	}else{
 		//Mostro form di compilazione prenotazione della stanza
 		?>
@@ -97,8 +112,8 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<tr>
 				<td>Data Arrivo</td>
 				<td>
-					<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>
-					<!--<input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/>-->
+					<?php //echo date(format_date,$_REQUEST['date_stamp_in']);?>
+					<input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/>
 				</td>
 			</tr>
 			<tr>
@@ -107,7 +122,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			</tr>
 			<tr>
 				<td>Note</td>
-				<td><input type="text" name="note" /></td>
+				<td><input type="text" name="note" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -117,7 +132,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		</form>
 				<?php
 				include 'include/pagina_chiusura.php';
-			}
+	}
 		}else{ ?>
 				<form id="search_client" name="search_client" method="post">
 					<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
