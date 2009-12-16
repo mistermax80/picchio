@@ -15,15 +15,16 @@ $rooms = getRooms();
 
 if($_POST['salva']){
 	
-	//var_dump($_POST);
+	var_dump($_POST);
 	//echo "<br><br>";
 	$id=$_POST['id'];
 	$id_client=$_POST['id_client'];
 	$id_room=$_POST['id_room'];
 	$date_in=$_POST['date_in'];
 	$date_out=$_POST['date_out'];
+	$number_client=$_POST['number_client'];
 	$note=$_POST['note'];
-	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note);
+	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note);
 	echo "Prenotazione Correttamente Modificata!";
 	include 'include/pagina_chiusura.php';
 }else{
@@ -78,7 +79,7 @@ if($_POST['salva']){
 	</tr>
 	<tr>
 		<td>Numero clienti</td>
-		<td><input type="text" name="number_client" value="<?php echo $booking['number_client'];?>" /></td>
+		<td><input type="text" name="number_client" autocomplete="off" value="<?php echo $booking['number_client'];?>" /></td>
 	</tr>
 	<tr>
 		<td>Note</td>

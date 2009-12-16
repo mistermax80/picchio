@@ -46,11 +46,11 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			//Ritorno al calendario
 			echo "Inserimento avvenuto con successo";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			include 'include/pagina_chiusura.php';
+			include 'include/pagina_chiusura_booking.php';
 		}else{
 			echo "Stanza Occupata nei giorni richiesti!";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			include 'include/pagina_chiusura.php';
+			include 'include/pagina_chiusura_booking.php';
 		}
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
@@ -62,28 +62,8 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		echo "<br>Numero clienti: ".$booking['number_client'];
 		echo "<br>Note: ".$booking['note'];
 		?>	
-	<br><br><br>	
-    <button onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">Modifica Prenotazione</button>
-    <br><br><br>
-    <button onclick="window.location.href='option_booking.php?id_booking=<?php echo $booking['id'];?>'">Servizi Stanza</button>
-    <br><br><br>
-    <button onclick="window.location.href='report.php?id_booking=<?php echo $booking['id'];?>'">Crea notificato</button>
-    <br><br><br>
-    <script LANGUAGE="JavaScript">
-		function confirmSubmit()
-		{
-			var agree=confirm("Eliminare prenotazione?");
-			if (agree)
-				return true ;
-			else
-				return false ;
-		}
-	</script>
-    <form id="delete" name="delete" action="delete_booking.php" method="post">
-    <input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina Prenotazione"/>
-    <input type="hidden" name="id_booking" value="<?php echo $booking['id'];?>"/>
-    </form>
-    <?php include 'include/pagina_chiusura.php';?>
+	
+    <?php include 'include/pagina_chiusura_booking.php';?>
     <?php		
 	}else{
 		//Mostro form di compilazione prenotazione della stanza

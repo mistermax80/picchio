@@ -42,7 +42,7 @@ function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client
 				room=".$id_room.",
 				date_in='".$date_in."',
 				date_out='".$date_out."',
-				number_client='.$numberclient.',
+				number_client='".$number_client."',
 				note='".$note."'
 				WHERE
 				id = ".$id.";";
