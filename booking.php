@@ -31,16 +31,18 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	echo "<br>Indirizzo: ".$client['address'];
 	echo "<br>Citt&agrave;: ".$client['city'];
 	echo "<br>Telefono: ".$client['telephone'];
+	echo "<br>";
 	//Mostra form di prenotazione
 	if(isset($_POST['id_room'])){
 		$id_room = $_POST['id_room'];
 		$date_in = $_POST['date_in'];
 		$date_out = $_POST['date_out'];
+		$number_client = $_POST['number_client'];
 		$note = $_POST['note'];
 		//Controllo che disponibilità della stanza nell'intervallo dei giorni
 		if(checkFreeBooking($date_in,$date_out,$id_room)){
 			//Salvo i dati della prenotazione
-			insertBooking($id_client,$id_room,$date_in,$date_out,$note);
+			insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
 			//Ritorno al calendario
 			echo "Inserimento avvenuto con successo";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
@@ -57,6 +59,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		echo "<br>Stanza: ".$booking['room'];
 		echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
 		echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
+		echo "<br>Numero clienti: ".$booking['number_client'];
 		echo "<br>Note: ".$booking['note'];
 		?>	
 	<br><br><br>	
@@ -119,6 +122,10 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<tr>
 				<td>Data Uscita</td>
 				<td><input type="text" id="date_out" name="date_out" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Numero clienti</td>
+				<td><input type="text" id="number_client" name="number_client" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Note</td>

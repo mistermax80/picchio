@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
+function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -13,9 +13,9 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
 	}
 
 	$query = "INSERT INTO booking 
-				(client,room,date_in,date_out,note) 
+				(client,room,date_in,date_out,number_client,note) 
 				VALUES 
-				($id_client,$id_room,'$date_in','$date_out','$note')";
+				($id_client,$id_room,'$date_in','$date_out',$number_client,'$note')";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
@@ -25,7 +25,7 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$note) {
 	return true;
 }
 
-function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note) {
+function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -42,6 +42,7 @@ function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$note) {
 				room=".$id_room.",
 				date_in='".$date_in."',
 				date_out='".$date_out."',
+				number_client='.$numberclient.',
 				note='".$note."'
 				WHERE
 				id = ".$id.";";
@@ -114,7 +115,7 @@ function checkFreeBooking($date_in,$date_out,$id_room) {
 				date_in <= '".$date_out."' AND date_out>='".$date_out."'
 				)";
 	
-	echo "<br>".$query."<br>";
+	//echo "<br>".$query."<br>";
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

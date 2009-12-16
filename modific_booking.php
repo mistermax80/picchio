@@ -36,6 +36,7 @@ if($_POST['salva']){
 	
 		<script type="text/javascript">
 			$(function() {
+				$("#date_in").datepicker({dateFormat: 'yy-mm-dd'}); 
 				$("#date_out").datepicker({dateFormat: 'yy-mm-dd'}); 
 			});
 		</script>
@@ -69,12 +70,15 @@ if($_POST['salva']){
 	</tr>
 	<tr>
 		<td>Data Arrivo</td>
-		<td><?php echo substr($booking['date_in'],0,10);?>
-		<!--<input type="text" name="date_in" value="<?php echo substr($booking['date_in'],0,10);?>" />--></td>
+		<td><input type="text" id="date_in" name="date_in" autocomplete="off" value="<?php echo substr($booking['date_in'],0,10);?>" /></td>
 	</tr>
 	<tr>
 		<td>Data Uscita</td>
 		<td><input type="text" id="date_out" name="date_out" autocomplete="off" value="<?php echo substr($booking['date_out'],0,10);?>" /></td>
+	</tr>
+	<tr>
+		<td>Numero clienti</td>
+		<td><input type="text" name="number_client" value="<?php echo $booking['number_client'];?>" /></td>
 	</tr>
 	<tr>
 		<td>Note</td>
