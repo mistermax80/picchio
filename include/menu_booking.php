@@ -2,7 +2,7 @@
 	<div id="item_menu" onclick="window.location.href='index.php'">
 		Mese Corrente
 	</div>
-	<div id="item_menu" onclick="window.location.href='add_client.php'">
+	<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $booking['id'];?>'">
 		Aggiungi Clienti
 	</div>
 	<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">
