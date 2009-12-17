@@ -5,8 +5,8 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $id = $_REQUEST['id_booking'];
-var_dump($id);
-if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset($_POST['operation']) && $_POST['operation']=='save'))){
+if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')
+								&& (!(isset($_POST['operation']) && $_POST['operation']=='save'))){
 ?>
 	<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
@@ -26,7 +26,7 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica,Elimina");
+		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Aggiungi,Modifica");
 		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,80,80");
 		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right,right,right");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
@@ -38,30 +38,30 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset
 		$clients = getClients();
 		foreach ($clients as $c) {
 			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
-			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
+			$button_add = '<button onclick=\"window.location.href=\'add_visitor.php?id_report='.$id_booking['id_booking'].'\'\">Aggiungi</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
 									$c['type_document']."\", \"".$c['number_document']."\", \"".
 									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
 									$c['address']."\", \"".$c['city']."\", \"".
 									$c['telephone']."\", \"".$c['email']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$button_add."\",\"".$button_modify."\"]);";
 			echo $str;
 		}
 		$visitors = getVisitors();
 		foreach ($visitors as $v) {
-			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
-			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
+			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$v['id'].'\'\">Modifica</button>';
+			$button_add = '<button onclick=\"window.location.href=\'add_visitor.php?id ='.$v['id'].'\'\">Aggiungi</button>';	
 			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
 									$v['type_document']."\", \"".$v['number_document']."\", \"".
 									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
 									$v['address']."\", \"".$v['city']."\", \"".
 									$v['telephone']."\", \"".$v['email']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$button_add."\",\"".$button_modify."\"]);";
 			echo $str;		
 		}
 	?>
 	</script>
-	<?php var_dump($id);?>
+	<br><br>
 	<form id="add_visitor" name="add_visitor" action="add_visitor.php" method="post">
 					<input type="hidden" name="return_page" value="visitor"/>
 					<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
@@ -69,10 +69,8 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset
 	</form>
 
 <?php
-}else if(isset($_POST['operation']) && $_POST['operation']=='save'){
+}else if((isset($_POST['operation']) && $_POST['operation']=='save')){
 		//Aggiungi nel db
-		echo "post 2";
-		var_dump($_POST);
 		$id_booking = $_POST['id_booking'];
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
@@ -95,10 +93,6 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset
 
 	?>
 <div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
-	<?php 
-	echo "post 1";
-	var_dump($_POST);
-	?>
 	<form id="add_visitor" name="add_visitor" method="post">
 		<input type="hidden" name="operation" value="save" />
 		<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
@@ -155,5 +149,5 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset
 	</form>
 
 <?php }
-include 'include/pagina_chiusura.php';
+include 'include/pagina_chiusura_booking.php';
 ?>

@@ -1,6 +1,7 @@
 <?php
 include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
+include_once 'function/function_visitor.php';
 ?>
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
@@ -70,6 +71,18 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 									$c['telephone']."\", \"".$c['email']."\", \"".
 									$button_modify."\"]);";
 			echo $str;
+		}	
+		
+		$visitors = getVisitors();
+		foreach ($visitors as $v) {
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$v['id'].'\'\">Modifica</button>';	
+			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
+									$v['type_document']."\", \"".$v['number_document']."\", \"".
+									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
+									$v['address']."\", \"".$v['city']."\", \"".
+									$v['telephone']."\", \"".$v['email']."\", \"".
+									$button_modify."\"]);";
+			echo $str;
 		}
 	?>
 	</script>
@@ -81,6 +94,9 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	<?php 
 	}else{
 		
+	if ($_REQUEST['id_client']){
+		
+
 		$id_client = $_REQUEST['id_client']; 
 		$client = getClient($id_client);
 		//Aggiungi nel db
@@ -163,6 +179,88 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			</table>
 		</form>	
 	<?php
+	}else if ($_REQUEST['id_visitor']){
+		$id_visitor = $_REQUEST['id_visitor']; 
+		$visitor = getVisitor($id_visitor);
+		//Aggiungi nel db
+		$id = $visitor['id'];
+		$name = $visitor['name'];
+		$surname = $//copiaclient['surname'];
+		$type_document = $visitor['type_document'];
+		$number_document = $visitor['number_document'];
+		$date_birth = $visitor['date_birth'];
+		$city_birth = $visitor['city_birth'];
+		$address = $visitor['address'];
+		$city = $visitor['city'];
+		$telephone = $visitor['telephone'];
+		$email = $visitor['email'];
+		?>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare cliente?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
+	
+	
+	<form id="mofidic_client" name="mofidic_client" action="" method="post">
+			<input type="hidden" id="id" name="id" value="<?php echo $visitor['id'];?>"/>
+			<table align="center">
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" value="<?php echo $visitor['name'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Cognome</td>
+					<td><input type="text" name="surname" value="<?php echo $visitor['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Tipo Documento</td>
+					<td><input type="text" name="type_document" value="<?php echo $visitor['type_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Num. Documento</td>
+					<td><input type="text" name="number_document" value="<?php echo $visitor['number_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Data Nascita</td>
+					<td><input type="text" name="date_birth" value="<?php echo $visitor['date_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Luogo Nascita</td>
+					<td><input type="text" name="city_birth" value="<?php echo $visitor['city_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Indirizzo</td>
+					<td><input type="text" name="address" value="<?php echo $visitor['address'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Citt&agrave;</td>
+					<td><input type="text" name="city" value="<?php echo $visitor['city'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Telefono</td>
+					<td><input type="text" name="telephone" value="<?php echo $visitor['telephone'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" name="email" value="<?php echo $visitor['email'];?>"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
+					<td><input id="save" name="save" type="submit" value="Salva"/></td>
+				</tr>
+			</table>
+		</form>	
+	<?php	}
 	}
 }
 include 'include/pagina_chiusura.php';
