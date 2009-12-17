@@ -1,6 +1,6 @@
 <div id="menu">
 	<div id="item_menu" onclick="window.location.href='index.php'">
-		Mese Corrente
+		Home Page
 	</div>
 	<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $booking['id'];?>'">
 		Aggiungi Visitatore
