@@ -3,7 +3,7 @@
 		Mese Corrente
 	</div>
 	<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $booking['id'];?>'">
-		Aggiungi Clienti
+		Aggiungi Visitatore
 	</div>
 	<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $booking['id'];?>'">
 		Modifica Prenotazione
