@@ -1,44 +1,108 @@
 <?php
 include 'include/pagina_apertura.php';
 include_once 'function/function_visitor.php';
-$id_booking = $_REQUEST['id_booking'];
-var_dump($_REQUEST);
-if(isset($_POST['operation']) && $_POST['operation']=='save'){
-	//Aggiungi nel db
+include_once 'function/function_client.php';
+include_once 'function/function_booking.php';
+
+$id = $_REQUEST['id_booking'];
+var_dump($id);
+if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')&& (!(isset($_POST['operation']) && $_POST['operation']=='save'))){
+?>
+	<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
+	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
 	
-	$name = $_POST['name'];
-	$surname = $_POST['surname'];
-	$type_document = $_POST['type_document'];
-	$number_document = $_POST['number_document'];
-	$date_birth = $_POST['date_birth'];
-	$city_birth = $_POST['city_birth'];
-	$address = $_POST['address'];
-	$city = $_POST['city'];
-	$telephone = $_POST['telephone'];
-	$email = $_POST['email'];
-	$id_visitor = addVisitor($id_booking,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox" style="width:110%;height:250px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica,Elimina");
+		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,80,80");
+		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right,right,right");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black");
 	
-	echo "Visitatore aggiunto con successo.";
-	if(isset($_POST['return_page']) && $_POST['return_page']=="booking"){
-		echo "<a href=\"booking.php?id_visitor=".$id_client."&date_in=".$_POST['date_in']."&id_room=".$_POST['id_room']."\">Ritorna</a>";
-	}else if(isset($_POST['return_page']) && $_POST['return_page']=="visitor"){
-		echo "<a href=\"modific_client.php\">Ritorna</a>";
-	}else{
-		echo "<a href=\"index.php\">Ritorna</a>";
+	<?php
+		$clients = getClients();
+		foreach ($clients as $c) {
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
+			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
+			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
+									$c['type_document']."\", \"".$c['number_document']."\", \"".
+									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
+									$c['address']."\", \"".$c['city']."\", \"".
+									$c['telephone']."\", \"".$c['email']."\", \"".
+									$button_modify."\",\"".$button_delete."\"]);";
+			echo $str;
+		}
+		$visitors = getVisitors();
+		foreach ($visitors as $v) {
+			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
+			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
+			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
+									$v['type_document']."\", \"".$v['number_document']."\", \"".
+									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
+									$v['address']."\", \"".$v['city']."\", \"".
+									$v['telephone']."\", \"".$v['email']."\", \"".
+									$button_modify."\",\"".$button_delete."\"]);";
+			echo $str;		
+		}
+	?>
+	</script>
+	<?php var_dump($id);?>
+	<form id="add_visitor" name="add_visitor" action="add_visitor.php" method="post">
+					<input type="hidden" name="return_page" value="visitor"/>
+					<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
+					<button id="add_visitor" value="submit">Aggiungi Visitatore</button>
+	</form>
+
+<?php
+}else if(isset($_POST['operation']) && $_POST['operation']=='save'){
+		//Aggiungi nel db
+		echo "post 2";
+		var_dump($_POST);
+		$id_booking = $_POST['id_booking'];
+		$name = $_POST['name'];
+		$surname = $_POST['surname'];
+		$type_document = $_POST['type_document'];
+		$number_document = $_POST['number_document'];
+		$date_birth = $_POST['date_birth'];
+		$city_birth = $_POST['city_birth'];
+		$address = $_POST['address'];
+		$city = $_POST['city'];
+		$telephone = $_POST['telephone'];
+		$email = $_POST['email'];
+		$id_visitor = addVisitor($id_booking,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
+		if($id_visitor==""){
+			echo "Visitatore aggiunto con successo.";
+			echo "<a href=\"index.php\">Ritorna</a>";
+			}else{
+				echo "<a href=\"add_visitor.php\">ERRORE</a>";
 	}
 }else{
 
 	?>
 <div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
-
-	<form id="add_client" name="add_client" method="post">
+	<?php 
+	echo "post 1";
+	var_dump($_POST);
+	?>
+	<form id="add_visitor" name="add_visitor" method="post">
 		<input type="hidden" name="operation" value="save" />
-		<input type="hidden" name="return_page" value="<?php echo $_POST['return_page']?>"/>
+		<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
 		<table align="center">
-			<tr>
-				<td>Prenotazione</td>
-				<td><input type="hidden" name="id_booking" autocomplete="off" value="<?php $_REQUEST['id_booking'];?>"/></td>
-			</tr>
 			<tr>
 				<td>Nome</td>
 				<td><input type="text" name="name" autocomplete="off"/></td>
@@ -89,7 +153,6 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			</tr>
 		</table>
 	</form>
-
 
 <?php }
 include 'include/pagina_chiusura.php';

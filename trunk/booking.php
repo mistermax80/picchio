@@ -2,6 +2,7 @@
 
 include 'include/pagina_apertura.php';
 include_once 'function/function_client.php';
+include_once 'function/function_visitor.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
@@ -23,15 +24,63 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	}else if(isset($_REQUEST['id_client'])){
 		$id_client = $_REQUEST['id_client'];
 	}
-	//Visualizza Info Cliente
+	//Visualizza Info Cliente e visitatore
 	$client = getClient($id_client);
-	echo "<b>Informazioni Cliente</b>";
-	echo "<br>Nome: ".$client['name'];
-	echo "<br>Cognome: ".$client['surname'];
-	echo "<br>Indirizzo: ".$client['address'];
-	echo "<br>Citt&agrave;: ".$client['city'];
-	echo "<br>Telefono: ".$client['telephone'];
-	echo "<br>";
+	?>
+	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
+	
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox" style="width:110%;height:250px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica,Elimina");
+		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,80,80");
+		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right,right,right");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black"); 
+	
+	<?php 
+		$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
+		$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
+		$str = "mygrid.addRow(".$client['id'].", [\"".$client['name']."\",\"".$client['surname']."\", \"".
+									$client['type_document']."\", \"".$client['number_document']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birt']."\", \"".
+									$client['address']."\", \"".$client['city']."\", \"".
+									$client['telephone']."\", \"".$client['email']."\", \"".
+									$button_modify."\",\"".$button_delete."\"]);";
+															
+			echo $str;						
+									
+		if(count($booking)>0)  //Esiste la prenotazione
+			$id_booking = $booking['id'];
+		$visitors = getVisitor($id_booking);
+		foreach ($visitors as $v) {
+			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
+			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
+			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
+									$v['type_document']."\", \"".$v['number_document']."\", \"".
+									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
+									$v['address']."\", \"".$v['city']."\", \"".
+									$v['telephone']."\", \"".$v['email']."\", \"".
+									$button_modify."\",\"".$button_delete."\"]);";
+			echo $str;	
+		
+		}
+	?></script><?php 
+	
 	//Mostra form di prenotazione
 	if(isset($_POST['id_room'])){
 		$id_room = $_POST['id_room'];

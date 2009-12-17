@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function getClients() {
+function getVisitors() {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -12,23 +12,23 @@ function getClients() {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM client";
+	$query = "SELECT * FROM visitor";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
 	
-	$clients = array();
+	$visitors = array();
 		
 	while ($row = mysql_fetch_assoc($result)) {
-		$clients[] = $row;
+		$visitors[] = $row;
 	}
 	mysql_close($link);
-	return $clients;
+	return $visitors;
 }
 
-function searchClients($text_search) {
+function searchVisitors($text_search) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -39,22 +39,22 @@ function searchClients($text_search) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM client WHERE name LIKE '%".$text_search."%' OR surname LIKE '%".$text_search."%'";
+	$query = "SELECT * FROM visitor WHERE name LIKE '%".$text_search."%' OR surname LIKE '%".$text_search."%'";
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: '.$query . mysql_error());
 	}
 	
-	$clients = array();
+	$visitors = array();
 		
 	while ($row = mysql_fetch_assoc($result)) {
-		$clients[] = $row;
+		$visitors[] = $row;
 	}
 	mysql_close($link);
-	return $clients;
+	return $visitors;
 }
 
-function getClient($id) {
+function getVisitor($id_booking) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -65,21 +65,22 @@ function getClient($id) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM client WHERE id=".$id;
+	$query = "SELECT * FROM visitor WHERE id_booking=".$id_booking;
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
+	$visitors = array();
 		
-	if ($row = mysql_fetch_assoc($result)) {
-		$client = $row;
+	while ($row = mysql_fetch_assoc($result)) {
+		$visitors[] = $row;
 	}
 	mysql_close($link);
-	return $client;
+	return $visitors;
 }
 
-function addVisitor($_id_booking,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+function addVisitor($id_booking,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -90,10 +91,10 @@ function addVisitor($_id_booking,$name,$surname,$type_document,$number_document,
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "INSERT INTO client 
+	$query = "INSERT INTO visitor 
 				(id_booking,name,surname,type_document,number_document,date_birth,city_birth,address,city,telephone,email)
 				VALUES
-				('$id_booking','$name','$surname','$type_document','$number_document','$date_birth','$city_birth','$address','$city','$telephone','$email')";
+				($id_booking,'$name','$surname','$type_document','$number_document','$date_birth','$city_birth','$address','$city','$telephone','$email')";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
@@ -105,7 +106,7 @@ function addVisitor($_id_booking,$name,$surname,$type_document,$number_document,
 }
 
 
-function updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+function updateVisitor($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -116,7 +117,7 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$date_b
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "UPDATE client SET
+	$query = "UPDATE visitor SET
 				id=".$id.",
 				name='".$name."',
 				surname='".$surname."',
@@ -139,7 +140,7 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$date_b
 	return true;
 }
 
-function deleteClient($id) {
+function deleteVisitor($id) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -150,7 +151,7 @@ function deleteClient($id) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "DELETE FROM client WHERE id=".$id;
+	$query = "DELETE FROM visitor WHERE id=".$id;
 	
 	//echo $query;
 	$result = mysql_query($query);
