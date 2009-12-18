@@ -53,7 +53,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		mygrid.setSkin("dhx_black"); 
 	
 	<?php 
-		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\'\">Modifica</button>';
+		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
+									& id_room='.$id_room.'\
+									& date_stamp_in='.$date_stamp_in.'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -65,11 +67,15 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 									
 		if(count($booking)>0)  //Esiste la prenotazione
 			$id_booking = $booking['id'];
+			$client_booking = $booking['client'];
 		$visitors = getVisitor($id_booking);
 			foreach ($visitors as $v) {
 				$id_client = $v['id_client'];
 				$client = getClient($id_client);
 				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$client['id'].'\
+									& id_client='.$client_booking.'\
+									& id_room='.$id_room.'\
+									& date_stamp_in='.$date_stamp_in.'\
 									& id='.$v['id'].'\'\">Modifica</button>';
 				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".

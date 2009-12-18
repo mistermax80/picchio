@@ -5,6 +5,11 @@ include_once 'function/function_visitor.php';
 ?>
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
+$date_stamp_in = $_REQUEST['date_stamp_in'];
+$id_room = $_REQUEST['id_room'];
+$id_client = $_REQUEST['id_visitor'];
+$client_booking = $_REQUEST['id_client'];
+
 if(isset($_POST['save']) && $_POST['save']!=""){
 	
 	//Aggiorna nel db
@@ -26,7 +31,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!=""){
 	
-	//elimina dal db
+	//elimina dal db il cliente
 	$id = $_POST['id'];
 	deleteClient($id);
 	echo "Cliente eliminato con successo.";
@@ -34,12 +39,19 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 }else if(isset($_POST['delete_visitor']) && $_POST['delete_visitor']!=""){
 	
-	//elimina dal db
+	//elimina dal db il visitatore
 	$id = $_POST['id'];
 	deleteVisitor($id_visitor);
-	echo "Cliente eliminato con successo.";
-	echo "<a href=\"modific_client.php\">Ritorna</a>";
-	
+	echo "Visitatore eliminato con successo.";
+	?>
+	<!--  <form id="delete_visitor" name="delete_visitor" action="booking.php" method="request">
+			<input type="hidden" id="id_room" name="id_room" value="<?php echo $id_room;?>"/>
+			<input type="hidden" id="date_stamp_in" name="date_stamp_in" value="<?php echo $date_stamp_in ;?>"/>
+			<input type="hidden" id="id_client" name="id_client" value="<?php echo $client_booking;?>"/>
+			<button id="booking" value="submit">Torna a prenotazione</button>-->
+	<?php 
+	//echo "<a href=\"modific_client.php\">Ritorna</a>";
+	//dovremmo tornare a booking.php ma servono id_room , date_stamp_in e id_client*/
 	
 }else{
 	if (!($_REQUEST['id_client']) && (!($_REQUEST['id_visitor']))){?>
@@ -81,18 +93,6 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 									$button_modify."\"]);";
 			echo $str;
 		}	
-		
-		$visitors = getVisitors();
-		foreach ($visitors as $v) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$v['id'].'\'\">Modifica</button>';	
-			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
-									$v['type_document']."\", \"".$v['number_document']."\", \"".
-									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
-									$v['address']."\", \"".$v['city']."\", \"".
-									$v['telephone']."\", \"".$v['email']."\", \"".
-									$button_modify."\"]);";
-			echo $str;
-		}
 	?>
 	</script>
 	<form id="add_client" name="add_client" action="add_client.php" method="post">
@@ -209,7 +209,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	<script LANGUAGE="JavaScript">
 		function confirmSubmit()
 		{
-			var agree=confirm("Eliminare cliente?");
+			var agree=confirm("Eliminare visitatore?");
 			if (agree)
 				return true ;
 			else
@@ -220,7 +220,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
-			<input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id'];?>"/>
+			<input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id'];;?>"/>
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
