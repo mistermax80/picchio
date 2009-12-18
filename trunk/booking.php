@@ -56,7 +56,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
-									$client['date_birth']."\", \"".$client['city_birt']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_modify."\"]);";
@@ -66,21 +66,20 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		if(count($booking)>0)  //Esiste la prenotazione
 			$id_booking = $booking['id'];
 		$visitors = getVisitor($id_booking);
-		foreach ($visitors as $v) {
-			$id_client = $v['id_client'];
-			$client = getClient($id_client);
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\'\">Modifica</button>';
-			$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
+			foreach ($visitors as $v) {
+				$id_client = $v['id_client'];
+				$client = getClient($id_client);
+				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$client['id'].'\
+									& id='.$v['id'].'\'\">Modifica</button>';
+				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
-									$client['date_birth']."\", \"".$client['city_birt']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_modify."\"]);";
-			echo $str;	
-		
+				echo $str;	
 		}
 	?></script><?php 
-	
 	//Mostra form di prenotazione
 	if(isset($_POST['id_room'])){
 		$id_room = $_POST['id_room'];
