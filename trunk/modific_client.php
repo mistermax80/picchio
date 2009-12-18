@@ -6,7 +6,7 @@ include_once 'function/function_visitor.php';
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
 
-if(isset($_POST['save']) && $_POST['save']!=""){
+if(isset($_POST['save']) && $_POST['save']!="" && $_POST['client']){
 	
 	//Aggiorna nel db
 	$id = $_POST['id'];
@@ -25,15 +25,45 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	echo "Cliente aggiornato con successo.";
 	echo "<a href=\"modific_client.php\">Ritorna</a>";
 	
-}else if(isset($_POST['delete']) && $_POST['delete']!=""){
+}else if(isset($_POST['delete']) && $_POST['delete']!="" && $_POST['client']){
 	
 	//elimina dal db
 	$id = $_POST['id'];
 	deleteClient($id);
 	echo "Cliente eliminato con successo.";
 	echo "<a href=\"modific_client.php\">Ritorna</a>";
+	
+}else if(isset($_POST['save']) && $_POST['save']!="" && $_POST['visitor']){
+	
+	//Aggiorna nel db
+	$id = $_POST['id'];
+	$id_booking = $_POST['id_booking'];
+	$name = $_POST['name'];
+	$surname = $_POST['surname'];
+	$type_document = $_POST['type_document'];
+	$number_document = $_POST['number_document'];
+	$date_birth = $_POST['date_birth'];
+	$city_birth = $_POST['city_birth'];
+	$address = $_POST['address'];
+	$city = $_POST['city'];
+	$telephone = $_POST['telephone'];
+	$email = $_POST['email'];
+	updateVisitor($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	//header ('Location: http://localhost/progetti-php/hotel/index.php');
+	echo "Cliente aggiornato con successo.";
+	echo "<a href=\"modific_client.php\">Ritorna</a>";
+	
+}else if(isset($_POST['delete']) && $_POST['delete']!="" && $_POST['visitor']){
+	
+	//elimina dal db
+	$id = $_POST['id'];
+	deleteVisitor($id);
+	echo "Cliente eliminato con successo.";
+	echo "<a href=\"modific_client.php\">Ritorna</a>";
+	
+	
 }else{
-	if (!($_REQUEST['id_client'])){?>
+	if (!($_REQUEST['id_client']) && (!($_REQUEST['id_visitor']))){?>
 	
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
@@ -92,9 +122,8 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	</form>
 	
 	<?php 
-	}else{
+	}else if($_REQUEST['id_client']){
 		
-	if ($_REQUEST['id_client']){
 		
 
 		$id_client = $_REQUEST['id_client']; 
@@ -126,6 +155,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 	
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
+			<input type="hidden" id="client" name="client" value="client"/>
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
@@ -179,9 +209,10 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			</table>
 		</form>	
 	<?php
-	}else if ($_REQUEST['id_visitor']){
+	}else{
+		
 		$id_visitor = $_REQUEST['id_visitor']; 
-		$visitor = getVisitor($id_visitor);
+		$visitor = getVisitorById($id_visitor);
 		//Aggiungi nel db
 		$id = $visitor['id'];
 		$name = $visitor['name'];
@@ -208,6 +239,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 	
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
+			<input type="hidden" id="visitor" name="visitor" value="visitor"/>
 			<input type="hidden" id="id" name="id" value="<?php echo $visitor['id'];?>"/>
 			<table align="center">
 				<tr>
@@ -262,6 +294,6 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		</form>	
 	<?php	}
 	}
-}
+
 include 'include/pagina_chiusura.php';
 ?>

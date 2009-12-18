@@ -28,32 +28,6 @@ function getVisitors() {
 	return $visitors;
 }
 
-function searchVisitors($text_search) {
-
-	$link = mysql_connect(DB_ADDRESS,USER,PASS);
-	if (!$link) {
-		die('Could not connect: ' . mysql_error());
-	}
-	$db_selected = mysql_select_db(DB_NAME, $link);
-	if (!$db_selected) {
-		die ('Can\'t use foo : ' . mysql_error());
-	}
-
-	$query = "SELECT * FROM visitor WHERE name LIKE '%".$text_search."%' OR surname LIKE '%".$text_search."%'";
-	$result = mysql_query($query);
-	if (!$result) {
-		die('Invalid query: '.$query . mysql_error());
-	}
-	
-	$visitors = array();
-		
-	while ($row = mysql_fetch_assoc($result)) {
-		$visitors[] = $row;
-	}
-	mysql_close($link);
-	return $visitors;
-}
-
 function getVisitor($id_booking) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
@@ -160,5 +134,30 @@ function deleteVisitor($id) {
 	}
 	mysql_close($link);
 	return true;
+}
+
+function getVisitorById($id) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT * FROM visitor WHERE id = ".$id.";";
+	
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+		
+	if ($row = mysql_fetch_assoc($result)) {
+		$visitor = $row;
+	}
+	mysql_close($link);
+	return $visitor;
 }
 ?>
