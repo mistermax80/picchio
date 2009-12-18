@@ -67,7 +67,7 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		$id_visitor = addVisitor($id_booking,$id_client);
 		if($id_visitor==""){
 			echo "Visitatore aggiunto con successo.";
-			echo "<a href=\"booking.php?\">Ritorna</a>";
+			echo "<a href=\"index.php\">Ritorna</a>";
 			}else{
 				echo "<a href=\"add_visitor.php\">ERRORE</a>";
 	}
