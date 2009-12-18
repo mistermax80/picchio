@@ -12,7 +12,7 @@ $id_room = $_REQUEST['id_room'];
 $id_client = $_REQUEST['id_client'];
 $rooms = getRooms();
 
-?><div id="titoloContenuti">PRENOTAZIONE</div>
+?><div id="titoloContenuti">INFORMAZIONI SULLA PRENOTAZIONE</div><br><br><br>
 
 <?php 
 $booking = getBooking($date_stamp_in,$id_room);
@@ -36,7 +36,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:110%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -44,23 +44,22 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica,Elimina");
-		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,80,80");
-		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right,right,right");
-		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
+		mygrid.setInitWidths("70,70,70,60,70,70,70,70,70,50,50,80");
+		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black"); 
 	
 	<?php 
-		$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
-		$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
-		$str = "mygrid.addRow(".$client['id'].", [\"".$client['name']."\",\"".$client['surname']."\", \"".
+		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\'\">Modifica</button>';
+		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birt']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$button_modify."\"]);";
 															
 			echo $str;						
 									
@@ -68,14 +67,13 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			$id_booking = $booking['id'];
 		$visitors = getVisitor($id_booking);
 		foreach ($visitors as $v) {
-			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Modifica</button>';
-			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';	
-			$str = "mygrid.addRow(".$v['id'].", [\"".$v['name']."\",\"".$v['surname']."\", \"".
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$v['id'].'\'\">Modifica</button>';
+			$str = "mygrid.addRow(".$v['id'].", [\"".Ospite."\",\"".$v['name']."\",\"".$v['surname']."\", \"".
 									$v['type_document']."\", \"".$v['number_document']."\", \"".
 									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
 									$v['address']."\", \"".$v['city']."\", \"".
 									$v['telephone']."\", \"".$v['email']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$button_modify."\"]);";
 			echo $str;	
 		
 		}

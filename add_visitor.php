@@ -5,6 +5,7 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 $id = $_REQUEST['id_booking'];
+$booking=getBookingById($id);
 if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')
 								&& (!(isset($_POST['operation']) && $_POST['operation']=='save'))){
 ?>
@@ -28,7 +29,7 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Aggiungi,Modifica");
 		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,80,80");
-		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right,right,right");
+		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str,str");
 		mygrid.init();
@@ -149,5 +150,5 @@ if(!(isset($_POST['return_page'])&& $_POST['return_page']=='visitor')
 	</form>
 
 <?php }
-include 'include/pagina_chiusura_booking.php';
+include 'include/pagina_chiusura_is_booking.php';
 ?>
