@@ -67,12 +67,14 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			$id_booking = $booking['id'];
 		$visitors = getVisitor($id_booking);
 		foreach ($visitors as $v) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$v['id'].'\'\">Modifica</button>';
-			$str = "mygrid.addRow(".$v['id'].", [\"".Ospite."\",\"".$v['name']."\",\"".$v['surname']."\", \"".
-									$v['type_document']."\", \"".$v['number_document']."\", \"".
-									$v['date_birth']."\", \"".$v['city_birt']."\", \"".
-									$v['address']."\", \"".$v['city']."\", \"".
-									$v['telephone']."\", \"".$v['email']."\", \"".
+			$id_client = $v['id_client'];
+			$client = getClient($id_client);
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\'\">Modifica</button>';
+			$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
+									$client['type_document']."\", \"".$client['number_document']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birt']."\", \"".
+									$client['address']."\", \"".$client['city']."\", \"".
+									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_modify."\"]);";
 			echo $str;	
 		
