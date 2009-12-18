@@ -7,8 +7,8 @@ include_once 'function/function_visitor.php';
 <?php
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $id_room = $_REQUEST['id_room'];
-$id_client = $_REQUEST['id_visitor'];
-$client_booking = $_REQUEST['id_client'];
+$id_client = $_REQUEST['id_client'];
+$client_booking = $_REQUEST['client_booking'];
 
 if(isset($_POST['save']) && $_POST['save']!=""){
 	
@@ -25,24 +25,30 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
 	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
-	//header ('Location: http://localhost/progetti-php/hotel/index.php');
 	echo "Cliente aggiornato con successo.";
 	echo "<a href=\"modific_client.php\">Ritorna</a>";
 	
-}else if(isset($_POST['delete']) && $_POST['delete']!=""){
+	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$date_stamp_in."&id_room=".$id_room."\">Ritorna a booking</a>";
 	
+	
+}else if(isset($_POST['delete']) && $_POST['delete']!=""){
+	//echo "elimino cliente prenotazione o cliente normale";
 	//elimina dal db il cliente
 	$id = $_POST['id'];
 	deleteClient($id);
-	echo "Cliente eliminato con successo.";
-	echo "<a href=\"modific_client.php\">Ritorna</a>";
+	//echo "Cliente eliminato con successo.";
+	//ritona a modif client con lista client se parto da index-->clienti
+	echo "<a href=\"modific_client.php\">Ritorna modific_client</a>";
+	
+	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$_REQUEST['date_stamp_in']."&id_room=".$_REQUEST['id_room']."\">Ritorna a booking</a>";
 	
 }else if(isset($_POST['delete_visitor']) && $_POST['delete_visitor']!=""){
-	
+	//echo "elimino visitatore";
 	//elimina dal db il visitatore
-	$id = $_POST['id'];
+	$id = $_POST['id_visitor'];
 	deleteVisitor($id_visitor);
 	echo "Visitatore eliminato con successo.";
+	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$_REQUEST['date_stamp_in']."&id_room=".$_REQUEST['id_room']."\">Ritorna a booking</a>";
 	?>
 	<!--  <form id="delete_visitor" name="delete_visitor" action="booking.php" method="request">
 			<input type="hidden" id="id_room" name="id_room" value="<?php echo $id_room;?>"/>
@@ -54,7 +60,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	//dovremmo tornare a booking.php ma servono id_room , date_stamp_in e id_client*/
 	
 }else{
-	if (!($_REQUEST['id_client']) && (!($_REQUEST['id_visitor']))){?>
+	if (!($_REQUEST['client_booking']) && (!($_REQUEST['id_client']))){?>
 	
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
@@ -84,7 +90,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	<?php
 		$clients = getClients();
 		foreach ($clients as $c) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$c['id'].'\'\">Modifica</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
 									$c['type_document']."\", \"".$c['number_document']."\", \"".
 									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
@@ -100,12 +106,100 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 					<button id="add_client" value="submit">Aggiungi Cliente</button>
 	</form>
 	
-	<?php 
+	<?php
 	}else if($_REQUEST['id_client']){
 		
+		//echo "modifico visitatore";
 		
-
 		$id_client = $_REQUEST['id_client']; 
+		$client = getClient($id_client);
+		//Aggiungi nel db
+		$id = $client['id'];
+		$name = $client['name'];
+		$surname = $//copiaclient['surname'];
+		$type_document = $client['type_document'];
+		$number_document = $client['number_document'];
+		$date_birth = $client['date_birth'];
+		$city_birth = $client['city_birth'];
+		$address = $client['address'];
+		$city = $client['city'];
+		$telephone = $client['telephone'];
+		$email = $client['email'];
+		
+		?>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare visitatore?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
+	
+	
+	<form id="mofidic_client" name="mofidic_client" action="" method="post">
+			<input type="hidden" id="client" name="client" value="client"/>
+			<input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id_visitor'];;?>"/>
+			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
+			<table align="center">
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Cognome</td>
+					<td><input type="text" name="surname" autocomplete="off" value="<?php echo $client['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Tipo Documento</td>
+					<td><input type="text" name="type_document" autocomplete="off" value="<?php echo $client['type_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Num. Documento</td>
+					<td><input type="text" name="number_document" autocomplete="off" value="<?php echo $client['number_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Data Nascita</td>
+					<td><input type="text" name="date_birth" autocomplete="off" value="<?php echo $client['date_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Luogo Nascita</td>
+					<td><input type="text" name="city_birth" autocomplete="off" value="<?php echo $client['city_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Indirizzo</td>
+					<td><input type="text" name="address" autocomplete="off" value="<?php echo $client['address'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Citt&agrave;</td>
+					<td><input type="text" name="city" autocomplete="off" value="<?php echo $client['city'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Telefono</td>
+					<td><input type="text" name="telephone" autocomplete="off" value="<?php echo $client['telephone'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" name="email" autocomplete="off" value="<?php echo $client['email'];?>"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input id="delete_visitor" name="delete_visitor" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
+					<td><input id="save" name="save" type="submit" value="Salva"/></td>
+				</tr>
+			</table>
+		</form>		
+	<?php  
+	}else if($_REQUEST['client_booking']){
+		
+		//echo "modifico cliente prenotazione";
+
+		$id_client = $_REQUEST['client_booking']; 
 		$client = getClient($id_client);
 		//Aggiungi nel db
 		$id = $client['id'];
@@ -188,92 +282,6 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			</table>
 		</form>		
 	<?php
-	}else if($_REQUEST['id_visitor']){
-		
-		$id_client = $_REQUEST['id_visitor']; 
-		$client = getClient($id_client);
-		//Aggiungi nel db
-		$id = $client['id'];
-		$name = $client['name'];
-		$surname = $//copiaclient['surname'];
-		$type_document = $client['type_document'];
-		$number_document = $client['number_document'];
-		$date_birth = $client['date_birth'];
-		$city_birth = $client['city_birth'];
-		$address = $client['address'];
-		$city = $client['city'];
-		$telephone = $client['telephone'];
-		$email = $client['email'];
-		
-		?>
-	<script LANGUAGE="JavaScript">
-		function confirmSubmit()
-		{
-			var agree=confirm("Eliminare visitatore?");
-			if (agree)
-				return true ;
-			else
-				return false ;
-		}
-	</script>
-	
-	
-	<form id="mofidic_client" name="mofidic_client" action="" method="post">
-			<input type="hidden" id="client" name="client" value="client"/>
-			<input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id'];;?>"/>
-			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
-			<table align="center">
-				<tr>
-					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Cognome</td>
-					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Tipo Documento</td>
-					<td><input type="text" name="type_document" value="<?php echo $client['type_document'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Num. Documento</td>
-					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Data Nascita</td>
-					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Luogo Nascita</td>
-					<td><input type="text" name="city_birth" value="<?php echo $client['city_birth'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Indirizzo</td>
-					<td><input type="text" name="address" value="<?php echo $client['address'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Citt&agrave;</td>
-					<td><input type="text" name="city" value="<?php echo $client['city'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Telefono</td>
-					<td><input type="text" name="telephone" value="<?php echo $client['telephone'];?>"/></td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td><input type="text" name="email" value="<?php echo $client['email'];?>"/></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><input id="delete_visitor" name="delete_visitor" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
-					<td><input id="save" name="save" type="submit" value="Salva"/></td>
-				</tr>
-			</table>
-		</form>		
-	<?php 
 	}
 	}
 

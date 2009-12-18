@@ -7,6 +7,7 @@ include_once 'function/function_booking.php';
 $id = $_REQUEST['id_booking'];
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $booking=getBookingById($id);
+$room=$booking['room'];
 if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 ?>
 	<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
@@ -40,7 +41,7 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		foreach ($clients as $c) {
 			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
 			$button_add = '<button onclick=\"window.location.href=\'add_visitor.php?id_client='.$c['id'].'\
-									& id_booking='.$id.'\'\">Aggiungi</button>';
+									& date_stamp_in='.$date_stamp_in.'\ & id_booking='.$id.'\'\">Aggiungi</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
 									$c['type_document']."\", \"".$c['number_document']."\", \"".
 									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
@@ -67,7 +68,8 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		$id_visitor = addVisitor($id_booking,$id_client);
 		if($id_visitor==""){
 			echo "Visitatore aggiunto con successo.";
-			echo "<a href=\"index.php\">Ritorna</a>";
+			echo "<a href=\"booking.php?id_client=".$id_client."&date_stamp_in=".$date_stamp_in.
+							"&id_room=".$room."\">Ritorna a booking</a>";
 			}else{
 				echo "<a href=\"add_visitor.php\">ERRORE</a>";
 	}

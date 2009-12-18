@@ -41,5 +41,5 @@ include_once 'include/costant_generic.php';
 			echo "<a href=\"index.php\">Ritorna</a>";
 		
 }
-include 'include/pagina_chiusura.php';
+include 'include/pagina_chiusura_is_booking.php';
 ?>
