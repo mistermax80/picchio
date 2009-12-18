@@ -17,7 +17,7 @@ $rooms = getRooms();
 <?php 
 $booking = getBooking($date_stamp_in,$id_room);
 
-//Se il cliente ├и settato allora mostra info cliente e procedi con la form della stanza
+//Se il cliente ши settato allora mostra info cliente e procedi con la form della stanza
 if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	if(isset($_POST['id_client'])){
 		$id_client = $_POST['id_client'];
@@ -53,7 +53,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		mygrid.setSkin("dhx_black"); 
 	
 	<?php 
-		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
+		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
 									& id_room='.$id_room.'\
 									& date_stamp_in='.$date_stamp_in.'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
@@ -63,20 +63,21 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_modify."\"]);";
 															
-			echo $str;						
-									
-		if(count($booking)>0)  //Esiste la prenotazione
+		echo $str;						
+
+		//Esiste la prenotazione	
+		if(count($booking)!=0){  
 			$id_booking = $booking['id'];
 			$client_booking = $booking['client'];
 		$visitors = getVisitor($id_booking);
 			foreach ($visitors as $v) {
 				$id_client = $v['id_client'];
 				$client = getClient($id_client);
-				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_visitor='.$client['id'].'\
-									& id_client='.$client_booking.'\
+				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
+									& client_booking='.$client_booking.'\
 									& id_room='.$id_room.'\
 									& date_stamp_in='.$date_stamp_in.'\
-									& id='.$v['id'].'\'\">Modifica</button>';
+									& id_visitor='.$v['id'].'\'\">Modifica</button>';
 				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -84,6 +85,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_modify."\"]);";
 				echo $str;	
+			}
 		}
 	?></script><?php 
 	//Mostra form di prenotazione
@@ -185,6 +187,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			if(isset($_POST['search']) && $_POST['search']!="" ){
 			?>	
 				<form id="select_client" name="select_client" method="post">
+				<input id="client" name="client" type="hidden" value="client"></input>
 				<table border="1px;">
 					<tr>
 						<th></th>

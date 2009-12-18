@@ -1,6 +1,6 @@
 <div id="menu">
 	<div id="item_menu" onclick="window.location.href='booking.php?id_room=<?php echo $booking['room'];?>
-									&date_stamp_in=<?php echo $date_stamp_in;?>&id_client=<?php echo $booking['client'];?>'">
+									&date_stamp_in=<?php echo $booking['date_in'];?>&id_client=<?php echo $booking['client'];?>'">
 		Torna a prenotazione
 	</div>
 	<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $booking['id'];?>&date_stamp_in=<?php echo $date_stamp_in;?>'">

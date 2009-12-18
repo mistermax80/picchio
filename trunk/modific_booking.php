@@ -15,7 +15,6 @@ $rooms = getRooms();
 
 if($_POST['salva']){
 	
-	var_dump($_POST);
 	//echo "<br><br>";
 	$id=$_POST['id'];
 	$id_client=$_POST['id_client'];
@@ -26,7 +25,7 @@ if($_POST['salva']){
 	$note=$_POST['note'];
 	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note);
 	echo "Prenotazione Correttamente Modificata!";
-	include 'include/pagina_chiusura.php';
+	include 'include/pagina_chiusura_is_booking.php';
 }else{
 
 ?>
@@ -93,6 +92,6 @@ if($_POST['salva']){
 
 </form>
 <?php 
-include 'include/pagina_chiusura.php';
+include 'include/pagina_chiusura_is_booking.php';
 }
 ?>
