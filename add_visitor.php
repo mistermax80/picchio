@@ -60,8 +60,8 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 
 <?php
 }if((isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
+
 		//Aggiungi nel db
-		var_dump($_REQUEST);
 		$id_booking = $_REQUEST['id_booking'];
 		$id_client = $_REQUEST['id_client'];
 		$id_visitor = addVisitor($id_booking,$id_client);
