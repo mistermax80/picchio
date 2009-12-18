@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generato il: 17 Dic, 2009 at 01:54 AM
+-- Generato il: 18 Dic, 2009 at 01:37 PM
 -- Versione MySQL: 5.0.51
 -- Versione PHP: 5.2.6
 
@@ -76,14 +76,16 @@ CREATE TABLE `client` (
   `telephone` varchar(32) character set utf8 collate utf8_bin default NULL,
   `email` varchar(32) character set utf8 collate utf8_bin default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
 
 -- 
 -- Dump dei dati per la tabella `client`
 -- 
 
-INSERT INTO `client` VALUES (1, 'Stefano', 'Montori', 0x706174656e7465, 0x6d6f6f696677696b6a6668776b, 0x32332d342d31393834, 0x427261636369616e6f, 0x6c6172676f20732073746566616e6f, 0x416e6775696c6c61726120532e, 0x30393939383838, 0x6f6975686965406b716a7766642e6974);
+INSERT INTO `client` VALUES (1, 'Stefano', 'Montori', 0x706174656e7465, 0x6166667277666a7568, 0x31322d33342d353637, 0x627261636369616e6f, 0x73616e746f2073746566616e6f, 0x616e6775696c6c617261, 0x303938363635343632, 0x6466776566406c696265726f);
 INSERT INTO `client` VALUES (16, 'Massimo', 'Picchio', 0x6d6d, 0x6f6b6a756e6b6c, 0x6a, 0x6e6b, 0x6a6e, 0x6b6a, 0x6e6b, 0x6a6e);
+INSERT INTO `client` VALUES (17, 'visitatore', 'visitatore', '', '', '', '', 0x726f6d6120657572, '', '', '');
+INSERT INTO `client` VALUES (18, 'visitatore2', 'visitatore2', '', '', '', '', '', 0x616e6775696c6c617261, '', '');
 
 -- --------------------------------------------------------
 
@@ -165,27 +167,12 @@ INSERT INTO `room` VALUES (9, 0x6d617472696d6f6e69616c65, '', 0x3735);
 CREATE TABLE `visitor` (
   `id` int(11) NOT NULL auto_increment,
   `id_booking` int(11) NOT NULL,
-  `name` varchar(32) collate utf8_bin default NULL,
-  `surname` varchar(32) collate utf8_bin NOT NULL,
-  `type_document` varchar(32) collate utf8_bin default NULL,
-  `number_document` varchar(32) collate utf8_bin default NULL,
-  `date_birth` varchar(32) collate utf8_bin default NULL,
-  `city_birth` varchar(32) collate utf8_bin default NULL,
-  `address` varchar(32) collate utf8_bin default NULL,
-  `city` varchar(32) collate utf8_bin default NULL,
-  `telephone` varchar(32) collate utf8_bin default NULL,
-  `email` varchar(32) collate utf8_bin default NULL,
+  `id_client` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
 -- 
 -- Dump dei dati per la tabella `visitor`
 -- 
 
-INSERT INTO `visitor` VALUES (1, 31, 0x6d6f697261, 0x6269616e6368696e69, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (2, 31, 0x7065727567696e69, 0x66696f72656c6c61, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (3, 31, 0x7065727567696e69, 0x66696f72656c6c61, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (4, 31, 0x61736465, 0x6173736464, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (5, 31, 0x6c6b7568, 0x61647766657766, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (6, 24, 0x6c6964696120, 0x7065737472696e, '', '', '', '', '', '', '', '');
-INSERT INTO `visitor` VALUES (7, 31, 0x6c69646961, 0x7065737472696e, '', '', '', '', '', '', '', '');
+INSERT INTO `visitor` VALUES (8, 31, 17);

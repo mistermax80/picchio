@@ -54,7 +54,7 @@ function getVisitor($id_booking) {
 	return $visitors;
 }
 
-function addVisitor($id_booking,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+function addVisitor($id_booking,$id_client) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -66,9 +66,9 @@ function addVisitor($id_booking,$name,$surname,$type_document,$number_document,$
 	}
 
 	$query = "INSERT INTO visitor 
-				(id_booking,name,surname,type_document,number_document,date_birth,city_birth,address,city,telephone,email)
+				(id_booking,id_client)
 				VALUES
-				($id_booking,'$name','$surname','$type_document','$number_document','$date_birth','$city_birth','$address','$city','$telephone','$email')";
+				($id_booking,$id_client)";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
@@ -135,6 +135,7 @@ function deleteVisitor($id) {
 	mysql_close($link);
 	return true;
 }
+
 
 function getVisitorById($id) {
 

@@ -31,6 +31,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 
 	<form id="add_client" name="add_client" method="post">
 		<input type="hidden" name="operation" value="save" />
+		<input type="hidden" name="id_booking" value="<?php echo $_POST['id_booking']?>"/>
 		<input type="hidden" name="date_in" value="<?php echo $_POST['date_in']?>"/>
 		<input type="hidden" name="id_room" value="<?php echo $_POST['id_room']?>"/>
 		<input type="hidden" name="return_page" value="<?php echo $_POST['return_page']?>"/>
