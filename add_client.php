@@ -1,6 +1,8 @@
 <?php
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_client.php';
+
+drawOpenPage();
 
 if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	//Aggiungi nel db
@@ -89,5 +91,5 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 
 
 <?php }
-include 'include/pagina_chiusura.php';
+drawClosePage();
 ?>

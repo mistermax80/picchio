@@ -49,5 +49,5 @@ include_once 'function/function_report.php';
 		echo "<b>Report generato con successot</b>";
 		echo "<a href=\"index.php\">Ritorna</a>";
 	}
-include 'include/pagina_chiusura.php';
+include 'include/pagina_chiusura_is_booking.php';
 ?>

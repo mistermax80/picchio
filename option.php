@@ -27,7 +27,7 @@ if(!(isset($_REQUEST['id_report']))){
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cliente,Path,Data,spedizione,Invia,Elimina");
-		mygrid.setInitWidths("100,100,100,100,100,100,100");
+		mygrid.setInitWidths("100,100,130,100,100,100,100");
 		mygrid.setColAlign("left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str,str,str");

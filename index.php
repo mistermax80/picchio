@@ -1,8 +1,6 @@
 <?php
-include 'include/header.php';
-
+include_once 'include/header.php';
 include_once 'function/function_calendar.php';
-
 
 $month = $_REQUEST['month'];
 $year = $_REQUEST['year'];
@@ -15,7 +13,6 @@ $year = (empty($year)) ? date("Y") : $year;
 
 drawCalendar("index.php","booking.php",$month,$year);
 
-include 'include/menu.php';
-include 'include/footer.php';
-
+include_once 'include/menu.php';
+include_once 'include/footer.php';
 ?>

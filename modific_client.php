@@ -116,7 +116,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		//Aggiungi nel db
 		$id = $client['id'];
 		$name = $client['name'];
-		$surname = $//copiaclient['surname'];
+		$surname = $client['surname'];
 		$type_document = $client['type_document'];
 		$number_document = $client['number_document'];
 		$date_birth = $client['date_birth'];
@@ -204,7 +204,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		//Aggiungi nel db
 		$id = $client['id'];
 		$name = $client['name'];
-		$surname = $//copiaclient['surname'];
+		$surname = $client['surname'];
 		$type_document = $client['type_document'];
 		$number_document = $client['number_document'];
 		$date_birth = $client['date_birth'];
