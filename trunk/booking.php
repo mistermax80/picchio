@@ -1,11 +1,13 @@
 <?php
 
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_client.php';
 include_once 'function/function_visitor.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
+
+drawOpenPage();
 
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $id_room = $_REQUEST['id_room'];
@@ -55,7 +57,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	<?php 
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
 									& id_room='.$id_room.'\
-									& date_stamp_in='.$date_stamp_in.'\">Modifica</button>';
+									& date_stamp_in='.$date_stamp_in.'\'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -102,11 +104,11 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			//Ritorno al calendario
 			echo "Inserimento avvenuto con successo";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			include 'include/pagina_chiusura_booking.php';
+			drawClosePage("booking",$id_booking);
 		}else{
 			echo "Stanza Occupata nei giorni richiesti!";
 			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			include 'include/pagina_chiusura_booking.php';
+			drawClosePage("booking",$id_booking);
 		}
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
@@ -119,7 +121,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		echo "<br>Note: ".$booking['note'];
 		?>	
 	
-    <?php include 'include/pagina_chiusura_booking.php';?>
+    <?php drawClosePage("booking",$id_booking);?>
     <?php		
 	}else{
 		//Mostro form di compilazione prenotazione della stanza
@@ -174,7 +176,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		</table>
 		</form>
 				<?php
-				include 'include/pagina_chiusura.php';
+				drawClosePage();
 	}
 		}else{ ?>
 				<form id="search_client" name="search_client" method="post">
@@ -231,5 +233,5 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		
 		
 <?php 
-		include 'include/pagina_chiusura.php';
+		drawClosePage();
 		}?>
