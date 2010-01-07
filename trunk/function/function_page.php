@@ -19,7 +19,7 @@ function drawClosePage($type=NULL,$id=NULL) {
 	<!-- Chiusura div contenuti -->
 	<div id="menu">
 	<?php
-	if($type=="booking"){
+	if($type=="id_booking"){
 		include_once 'function/function_booking.php';
 		include_once 'function/function_date.php';
 		$booking = getBookingById($id);

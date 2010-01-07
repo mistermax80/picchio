@@ -1,8 +1,10 @@
 <?php
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_visitor.php';
 include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
+
+drawOpenPage();
 
 $id = $_REQUEST['id_booking'];
 $date_stamp_in = $_REQUEST['date_stamp_in'];
@@ -78,5 +80,5 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 
 
 <?php }
-include 'include/pagina_chiusura_is_booking.php';
+drawClosePage();
 ?>

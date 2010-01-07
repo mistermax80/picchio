@@ -1,7 +1,10 @@
 <?php
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_client.php';
 include_once 'function/function_visitor.php';
+
+drawOpenPage();
+
 ?>
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
@@ -285,5 +288,5 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	}
 	}
 
-include 'include/pagina_chiusura.php';
+drawClosePage();
 ?>

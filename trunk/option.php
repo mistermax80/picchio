@@ -1,10 +1,11 @@
 <?php
 
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_booking.php';
 include_once 'function/function_client.php';
 include_once 'function/function_report.php';
 
+drawOpenPage();
 
 if(!(isset($_REQUEST['id_report']))){
 ?>
@@ -55,6 +56,6 @@ if(!(isset($_REQUEST['id_report']))){
 	echo "<a href=\"option.php\">Ritorna</a>";
 	
 }	
-include 'include/pagina_chiusura.php';
+drawClosePage();
 
 ?>

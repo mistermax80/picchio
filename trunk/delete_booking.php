@@ -1,7 +1,9 @@
 <?php
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
+
+drawOpenPage();
 
 ?><div id="titoloContenuti">ELIMINA PRENOTAZIONE</div><?php 
 
@@ -41,5 +43,5 @@ include_once 'include/costant_generic.php';
 			echo "<a href=\"index.php\">Ritorna</a>";
 		
 }
-include 'include/pagina_chiusura_is_booking.php';
+drawClosePage();
 ?>
