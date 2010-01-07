@@ -5,12 +5,12 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 drawOpenPage();
-
+/*
 $id = $_REQUEST['id_booking'];
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $booking=getBookingById($id);
 $room=$booking['room'];
-
+*/
 
 ?>
 		<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
@@ -52,7 +52,8 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		$text_search = $_POST['text_search'];
 		$clients = searchClients($text_search);
 		foreach ($clients as $c) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\
+									& id_booking='.$id.'\'\">Modifica</button>';
 			$button_add = '<button onclick=\"window.location.href=\'add_visitor.php?id_client='.$c['id'].'\
 									& id_booking='.$id.'\'\">Aggiungi</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
