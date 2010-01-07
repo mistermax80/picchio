@@ -38,7 +38,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:200px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:110%;height:200px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -46,18 +46,17 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
-		mygrid.setInitWidths("70,70,70,60,70,70,70,70,70,50,50,80");
-		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica,Elimina");
+		mygrid.setInitWidths("70,70,70,60,70,70,70,70,70,50,50,80,80");
+		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black"); 
 	
 	<?php 
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
-									& id_room='.$id_room.'\
-									& date_stamp_in='.$date_stamp_in.'\'\">Modifica</button>';
+									& id_booking='.$booking['id'].'\'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -76,16 +75,16 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				$id_client = $v['id_client'];
 				$client = getClient($id_client);
 				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
-									& client_booking='.$client_booking.'\
-									& id_room='.$id_room.'\
-									& date_stamp_in='.$date_stamp_in.'\
-									& id_visitor='.$v['id'].'\'\">Modifica</button>';
+									& id_booking='.$booking['id'].'\'\">Modifica</button>';
+				$button_delete = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
+									& id_booking='.$booking['id'].'\'\">Elimina</button>';
+				
 				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
-									$button_modify."\"]);";
+									$button_modify."\",\"".$button_delete."\"]);";
 				echo $str;	
 			}
 		}
@@ -118,7 +117,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:100%;height:60px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:110%;height:60px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>

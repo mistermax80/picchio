@@ -27,89 +27,25 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	$email = $_POST['email'];
 	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	echo "Cliente aggiornato con successo.";
-	echo "<a href=\"modific_client.php\">Ritorna</a>";
-	
 	drawClosePage("id_booking",$id_booking['id']);
-	//echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$date_stamp_in."&id_room=".$id_room."\">Ritorna a booking</a>";
+	
 	
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!=""){
-	//echo "elimino cliente prenotazione o cliente normale";
 	//elimina dal db il cliente
 	$id = $_POST['id'];
 	deleteClient($id);
-	//echo "Cliente eliminato con successo.";
-	//ritona a modif client con lista client se parto da index-->clienti
-	echo "<a href=\"modific_client.php\">Ritorna modific_client</a>";
-	
-	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$_REQUEST['date_stamp_in']."&id_room=".$_REQUEST['id_room']."\">Ritorna a booking</a>";
+	echo "Cliente eliminato con successo.";
+	drawClosePage("id_booking",$id_booking['id']);
 	
 }else if(isset($_POST['delete_visitor']) && $_POST['delete_visitor']!=""){
-	//echo "elimino visitatore";
 	//elimina dal db il visitatore
 	$id = $_POST['id_visitor'];
 	deleteVisitor($id_visitor);
 	echo "Visitatore eliminato con successo.";
-	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$_REQUEST['date_stamp_in']."&id_room=".$_REQUEST['id_room']."\">Ritorna a booking</a>";
-	?>
-	<!--  <form id="delete_visitor" name="delete_visitor" action="booking.php" method="request">
-			<input type="hidden" id="id_room" name="id_room" value="<?php echo $id_room;?>"/>
-			<input type="hidden" id="date_stamp_in" name="date_stamp_in" value="<?php echo $date_stamp_in ;?>"/>
-			<input type="hidden" id="id_client" name="id_client" value="<?php echo $client_booking;?>"/>
-			<button id="booking" value="submit">Torna a prenotazione</button>-->
-	<?php 
-	//echo "<a href=\"modific_client.php\">Ritorna</a>";
-	//dovremmo tornare a booking.php ma servono id_room , date_stamp_in e id_client*/
+	drawClosePage("id_booking",$id_booking['id']);
 	
-}else{
-	if (!($_REQUEST['client_booking']) && (!($_REQUEST['id_client']))){?>
-	
-	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
-	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
-	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
-	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
-	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
-	
-		<table width="805px">
-		    <tr>
-		        <td>
-		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
-		        </td>
-		    </tr>
-		</table>
-	   
-	<script>
-		mygrid = new dhtmlXGridObject('gridbox');
-		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
-		mygrid.setInitWidths("70,70,70,70,70,70,70,70,80,80,80");
-		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right");
-		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str");
-		mygrid.init();
-		mygrid.setSkin("dhx_black");
-	
-	<?php
-		$clients = getClients();
-		foreach ($clients as $c) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$c['id'].'\'\">Modifica</button>';
-			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
-									$c['type_document']."\", \"".$c['number_document']."\", \"".
-									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
-									$c['address']."\", \"".$c['city']."\", \"".
-									$c['telephone']."\", \"".$c['email']."\", \"".
-									$button_modify."\"]);";
-			echo $str;
-		}	
-	?>
-	</script>
-	<form id="add_client" name="add_client" action="add_client.php" method="post">
-					<input type="hidden" name="return_page" value="client"/>
-					<button id="add_client" value="submit">Aggiungi Cliente</button>
-	</form>
-	
-	<?php
-	}else if($_REQUEST['id_client']){
+}else if($_REQUEST['id_client']){
 		
 		//echo "modifico visitatore";
 		
@@ -196,8 +132,8 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				</tr>
 			</table>
 		</form>		
-	<?php  
-	}else if($_REQUEST['client_booking']){
+	<?php drawClosePage("id_booking",$id_booking); 
+}else if($_REQUEST['client_booking']){
 		
 		//echo "modifico cliente prenotazione";
 
@@ -283,9 +219,56 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				</tr>
 			</table>
 		</form>		
-	<?php
-	}
-	}
+	<?php 
 
-drawClosePage();
-?>
+
+drawClosePage("id_booking",$id_booking);
+
+
+}else{
+	?>
+	
+	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
+	
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
+		mygrid.setInitWidths("70,70,70,70,70,70,70,70,80,80,80");
+		mygrid.setColAlign("right,right,right,right,right,right,right,right,right,right,right");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black");
+	
+	<?php
+		$clients = getClients();
+		foreach ($clients as $c) {
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$c['id'].'\'\">Modifica</button>';
+			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
+									$c['type_document']."\", \"".$c['number_document']."\", \"".
+									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
+									$c['address']."\", \"".$c['city']."\", \"".
+									$c['telephone']."\", \"".$c['email']."\", \"".
+									$button_modify."\"]);";
+			echo $str;
+		}	
+	?>
+	</script>
+	<form id="add_client" name="add_client" action="add_client.php" method="post">
+					<input type="hidden" name="return_page" value="client"/>
+					<button id="add_client" value="submit">Aggiungi Cliente</button>
+	</form>
+	<?php  drawClosePage(); }?>
