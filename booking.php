@@ -38,7 +38,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:150px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:100%;height:200px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -126,7 +126,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Stanza,CheckIn,CheckOut,Numero Clienti,Note");
+		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
 		mygrid.setInitWidths("90,150,150,100,310");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
@@ -140,15 +140,11 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 									$booking['note']."\", \"".$booking['city_birth']."\", \"".
 									$booking['address']."\", \"".
 									$button_modify."\"]);";
-			echo $str;	
-		/*echo "<br>Stanza: ".$booking['room'];
-		echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
-		echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
-		echo "<br>Numero clienti: ".$booking['number_client'];
-		echo "<br>Note: ".$booking['note'];*/
-		?>	
+			echo $str;
+			?>
 	</script>
-    <?php drawClosePage("booking",$id_booking);?>
+    <?php
+    	drawClosePage("id_booking",$booking['id']);?>
     <?php		
 	}else{
 		//Mostro form di compilazione prenotazione della stanza

@@ -8,10 +8,8 @@ drawOpenPage();
 ?>
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
-$date_stamp_in = $_REQUEST['date_stamp_in'];
-$id_room = $_REQUEST['id_room'];
-$id_client = $_REQUEST['id_client'];
-$client_booking = $_REQUEST['client_booking'];
+
+$id_booking = $_REQUEST['id_booking'];
 
 if(isset($_POST['save']) && $_POST['save']!=""){
 	
@@ -31,7 +29,8 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	echo "Cliente aggiornato con successo.";
 	echo "<a href=\"modific_client.php\">Ritorna</a>";
 	
-	echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$date_stamp_in."&id_room=".$id_room."\">Ritorna a booking</a>";
+	drawClosePage("id_booking",$id_booking['id']);
+	//echo "<a href=\"booking.php?id_client=".$client_booking."&date_stamp_in=".$date_stamp_in."&id_room=".$id_room."\">Ritorna a booking</a>";
 	
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!=""){

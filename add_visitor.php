@@ -10,9 +10,19 @@ $id = $_REQUEST['id_booking'];
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $booking=getBookingById($id);
 $room=$booking['room'];
+
+
+?>
+		<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
+		<form id="search_client" name="search_client" method="post">
+		<input id="text_search" name="text_search" type="text" value=""/>
+		<input id="search" name="search" type="submit" value="Cerca"/>
+		</form>
+
+<?php 
+if(isset($_POST['search']) && $_POST['search']!="" ){
 if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 ?>
-	<div id="titoloContenuti">AGGIUNGI  NUOVO VISITATORE</div>
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
@@ -39,11 +49,12 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		mygrid.setSkin("dhx_black");
 	
 	<?php
-		$clients = getClients();
+		$text_search = $_POST['text_search'];
+		$clients = searchClients($text_search);
 		foreach ($clients as $c) {
 			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$c['id'].'\'\">Modifica</button>';
 			$button_add = '<button onclick=\"window.location.href=\'add_visitor.php?id_client='.$c['id'].'\
-									& date_stamp_in='.$date_stamp_in.'\ & id_booking='.$id.'\'\">Aggiungi</button>';
+									& id_booking='.$id.'\'\">Aggiungi</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
 									$c['type_document']."\", \"".$c['number_document']."\", \"".
 									$c['date_birth']."\", \"".$c['city_birth']."\", \"".
@@ -55,13 +66,13 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 	?>
 	</script>
 	<br><br>
-	<form id="add_visitor" name="add_client" action="add_client.php" method="post">
+		<form id="add_visitor" name="add_client" action="add_client.php" method="post">
 					<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
 					<input type="hidden" name="date_stamp_in" value="<?php echo $date_stamp_in ?>"/>
 					<button id="add_visitor" value="submit">Aggiungi Visitatore</button>
-	</form>
-
+		</form>
 <?php
+	}
 }if((isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 
 		//Aggiungi nel db
@@ -70,8 +81,6 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		$id_visitor = addVisitor($id_booking,$id_client);
 		if($id_visitor==""){
 			echo "Visitatore aggiunto con successo.";
-			echo "<a href=\"booking.php?id_client=".$id_client."&date_stamp_in=".$date_stamp_in.
-							"&id_room=".$room."\">Ritorna a booking</a>";
 			}else{
 				echo "<a href=\"add_visitor.php\">ERRORE</a>";
 	}
@@ -80,5 +89,5 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 
 
 <?php }
-drawClosePage();
+drawClosePage("id_booking",$id_booking);
 ?>
