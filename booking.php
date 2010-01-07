@@ -38,7 +38,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:100%;height:150px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -71,7 +71,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		if(count($booking)!=0){  
 			$id_booking = $booking['id'];
 			$client_booking = $booking['client'];
-		$visitors = getVisitor($id_booking);
+			$visitors = getVisitor($id_booking);
 			foreach ($visitors as $v) {
 				$id_client = $v['id_client'];
 				$client = getClient($id_client);
@@ -113,14 +113,41 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
 		echo "<br><br><br>";
-		echo "<b>Informazioni prenotazione</b>";
-		echo "<br>Stanza: ".$booking['room'];
+		//echo "<b>Informazioni prenotazione</b>";
+		?>
+			<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox1" style="width:100%;height:60px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox1');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Stanza,CheckIn,CheckOut,Numero Clienti,Note");
+		mygrid.setInitWidths("90,150,150,100,310");
+		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black");
+		
+		<?php 
+			$str = "mygrid.addRow(".$booking['id'].", [\"".$booking['room']."\",\"".substr($booking['date_in'],0,10)."\", \"".
+									substr($booking['date_out'],0,10)."\", \"".$booking['number_client']."\", \"".
+									$booking['note']."\", \"".$booking['city_birth']."\", \"".
+									$booking['address']."\", \"".
+									$button_modify."\"]);";
+			echo $str;	
+		/*echo "<br>Stanza: ".$booking['room'];
 		echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
 		echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
 		echo "<br>Numero clienti: ".$booking['number_client'];
-		echo "<br>Note: ".$booking['note'];
+		echo "<br>Note: ".$booking['note'];*/
 		?>	
-	
+	</script>
     <?php drawClosePage("booking",$id_booking);?>
     <?php		
 	}else{
@@ -188,42 +215,61 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<?php
 			if(isset($_POST['search']) && $_POST['search']!="" ){
 			?>	
-				<form id="select_client" name="select_client" method="post">
-				<input id="client" name="client" type="hidden" value="client"></input>
-				<table border="1px;">
-					<tr>
-						<th></th>
-						<th>Nome</th>
-						<th>Cognome</th>
-						<th>Documento</th>
-						<th>Data Nascita</th>
-					</tr>
+			
+			<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+			<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+			<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+			<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+			<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
+			
+				<table width="805px">
+				    <tr>
+				        <td>
+				            <div id="gridbox2" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+				        </td>
+				    </tr>
+				</table>
+			   
+			<script>
+				mygrid = new dhtmlXGridObject('gridbox2');
+				mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+				mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Seleziona,Modifica");
+				mygrid.setInitWidths("70,70,60,70,70,70,70,70,50,50,90,80");
+				mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
+				mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+				mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
+				mygrid.init();
+				mygrid.setSkin("dhx_black");
+			
+				
+
+					
+					
 				<?php
 				$text_search = $_POST['text_search'];
 				$clients = searchClients($text_search);
 				
-				foreach ($clients as $c) {
-					$id = $c['id'];
-					$name = $c['name'];
-					$surname = $c['surname'];
-					$number_document = $c['number_document'];
-					$date_birth = $c['date_birth'];
-					echo "<tr>";
-					echo "<td><input type=\"radio\" name=\"id_client\" value=\"".$id."\"/></td>";
-					echo "<td>".$name."</td>";
-					echo "<td>".$surname."</td>";
-					echo "<td>".$number_document."</td>";
-					echo "<td>".$date_birth."</td>";
-					echo "</tr>";
+				foreach ($clients as $client) {
+					
+					$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
+									& id_room='.$id_room.'\
+									& date_stamp_in='.$date_stamp_in.'\'\">Modifica</button>';
+					
+					$button_select = '<button onclick=\"window.location.href=\'booking.php?id_client='.$client['id'].'\
+									& id_room='.$id_room.'\
+									& date_stamp_in='.$date_stamp_in.'\'\">Seleziona</button>';
+					
+					$str = "mygrid.addRow(".$client['id'].", [\"".$client['name']."\",\"".$client['surname']."\", \"".
+												$client['type_document']."\", \"".$client['number_document']."\", \"".
+												$client['date_birth']."\", \"".$client['city_birth']."\", \"".
+												$client['address']."\", \"".$client['city']."\", \"".
+												$client['telephone']."\", \"".$client['email']."\", \"".
+												$button_select."\",\"".$button_modify."\"]);";
+																		
+					echo $str;
 				}
-				?>
-				<tr>
-					<td></td>
-					<td><button id="picchio" value="submit">Invia</button></td>
-				</tr>
-				</table>
-				</form>
-				<?php }?>
+			 }?>
+			 </script>
 				<form id="add_client" name="add_client" action="add_client.php" method="post">
 					<input type="hidden" name="return_page" value="booking"/>
 					<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>

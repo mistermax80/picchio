@@ -1,8 +1,9 @@
 <?php
 
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_booking.php';
 
+drawOpenPage();
 
 ?><div id="titoloContenuti">OPTIONAL STANZA</div><?php 
 
@@ -39,7 +40,7 @@ $id_booking = $_REQUEST['id_booking'];
 </table>
 	
 	<?php 
-	include 'include/pagina_chiusura_is_booking.php';
+	drawClosePage();
 
 
 

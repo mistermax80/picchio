@@ -1,8 +1,10 @@
 <?php
 
-include 'include/pagina_apertura.php';
+include_once 'function/function_page.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
+
+drawOpenPage();
 
 $id_booking = $_REQUEST['id_booking'];
 $booking = getBookingById($id_booking);
@@ -25,7 +27,7 @@ if($_POST['salva']){
 	$note=$_POST['note'];
 	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note);
 	echo "Prenotazione Correttamente Modificata!";
-	include 'include/pagina_chiusura_is_booking.php';
+	drawClosePage($id_booking);
 }else{
 
 ?>
@@ -92,6 +94,6 @@ if($_POST['salva']){
 
 </form>
 <?php 
-include 'include/pagina_chiusura_is_booking.php';
+drawClosePage("booking",$id_booking);
 }
 ?>
