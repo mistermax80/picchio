@@ -27,7 +27,7 @@ if($_POST['salva']){
 	$note=$_POST['note'];
 	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note);
 	echo "Prenotazione Correttamente Modificata!";
-	drawClosePage($id_booking);
+	drawClosePage("id_booking",$id_booking);
 }else{
 
 ?>
@@ -94,6 +94,6 @@ if($_POST['salva']){
 
 </form>
 <?php 
-drawClosePage("booking",$id_booking);
+drawClosePage("id_booking",$id_booking);
 }
 ?>

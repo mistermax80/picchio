@@ -5,8 +5,9 @@ include_once 'function/function_client.php';
 include_once 'function/function_booking.php';
 
 drawOpenPage();
-/*
+
 $id = $_REQUEST['id_booking'];
+/*
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $booking=getBookingById($id);
 $room=$booking['room'];
@@ -18,7 +19,11 @@ $room=$booking['room'];
 		<input id="text_search" name="text_search" type="text" value=""/>
 		<input id="search" name="search" type="submit" value="Cerca"/>
 		</form>
-
+		<br><br>
+		<form id="add_visitor" name="add_client" action="add_client.php" method="post">
+		<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
+		<button id="add_visitor" value="submit">Aggiungi Visitatore</button>
+		</form>
 <?php 
 if(isset($_POST['search']) && $_POST['search']!="" ){
 if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
@@ -66,12 +71,6 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		}
 	?>
 	</script>
-	<br><br>
-		<form id="add_visitor" name="add_client" action="add_client.php" method="post">
-					<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
-					<input type="hidden" name="date_stamp_in" value="<?php echo $date_stamp_in ?>"/>
-					<button id="add_visitor" value="submit">Aggiungi Visitatore</button>
-		</form>
 <?php
 	}
 }if((isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
