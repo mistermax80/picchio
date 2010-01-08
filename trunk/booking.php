@@ -267,7 +267,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			 </script>
 				<form id="add_client" name="add_client" action="add_client.php" method="post">
 					<input type="hidden" name="return_page" value="booking"/>
-					<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+					<input type="hidden" name="date_in" value="<?php echo $date_stamp_in;?>"/>
 					<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
 					<button id="add_client" value="submit">Aggiungi Cliente</button>
 				</form>
