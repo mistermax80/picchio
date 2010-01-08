@@ -38,12 +38,13 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	echo "Cliente eliminato con successo.";
 	drawClosePage("id_booking",$id_booking['id']);
 	
-}else if(isset($_POST['delete_visitor']) && $_POST['delete_visitor']!=""){
-	//elimina dal db il visitatore
+}else if((isset($_POST['delete_visitor']) && $_POST['delete_visitor']!="")||(isset($_REQUEST['delete_visitor']))){
+	//elimina dal db il visitatore(provengo o da booking(request)o da modifica cliente(post))
 	$id = $_POST['id_visitor'];
-	deleteVisitor($id_visitor);
+	$id = $_REQUEST['delete_visitor'];
+	deleteVisitor($id);
 	echo "Visitatore eliminato con successo.";
-	drawClosePage("id_booking",$id_booking['id']);
+	drawClosePage("id_booking",$id_booking);
 	
 }else if($_REQUEST['id_client']){
 		
@@ -79,7 +80,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
-			<input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id_visitor'];;?>"/>
+			<!-- <input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id_visitor'];;?>"/> -->
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
@@ -227,6 +228,14 @@ drawClosePage("id_booking",$id_booking);
 
 }else{
 	?>
+	<form id="search_client" name="search_client" method="post">
+	<input id="text_search" name="text_search" type="text" value=""/>
+	<input id="search" name="search" type="submit" value="Cerca"/>
+	</form>
+
+<?php 
+if(isset($_POST['search']) && $_POST['search']!="" ){  ?>
+	
 	
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
@@ -254,7 +263,8 @@ drawClosePage("id_booking",$id_booking);
 		mygrid.setSkin("dhx_black");
 	
 	<?php
-		$clients = getClients();
+		$text_search = $_POST['text_search'];
+		$clients = searchClients($text_search);
 		foreach ($clients as $c) {
 			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$c['id'].'\'\">Modifica</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
@@ -265,6 +275,7 @@ drawClosePage("id_booking",$id_booking);
 									$button_modify."\"]);";
 			echo $str;
 		}	
+	}
 	?>
 	</script>
 	<form id="add_client" name="add_client" action="add_client.php" method="post">

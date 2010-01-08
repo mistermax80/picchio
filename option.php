@@ -53,7 +53,7 @@ if(!(isset($_REQUEST['id_report']))){
 	$id = $_REQUEST['id_report'];
 	deleteReport($id);
 	echo "Report eliminato con successo.";
-	echo "<a href=\"option.php\">Ritorna</a>";
+	//echo "<a href=\"option.php\">Ritorna</a>";
 	
 }	
 drawClosePage();

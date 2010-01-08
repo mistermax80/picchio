@@ -56,7 +56,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	
 	<?php 
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
-									& id_booking='.$booking['id'].'\'\">Modifica</button>';
+									&id_booking='.$booking['id'].'\'\">Modifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -75,9 +75,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				$id_client = $v['id_client'];
 				$client = getClient($id_client);
 				$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
-									& id_booking='.$booking['id'].'\'\">Modifica</button>';
-				$button_delete = '<button onclick=\"window.location.href=\'modific_client.php?id_client='.$client['id'].'\
-									& id_booking='.$booking['id'].'\'\">Elimina</button>';
+									&id_booking='.$booking['id'].'\'\">Modifica</button>';
+				$button_delete = '<button onclick=\"window.location.href=\'modific_client.php?delete_visitor='.$client['id'].'\
+									&id_booking='.$booking['id'].'\'\">Elimina</button>';
 				
 				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
@@ -101,8 +101,8 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			//Salvo i dati della prenotazione
 			insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
 			//Ritorno al calendario
-			echo "Inserimento avvenuto con successo";
-			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
+			//echo "Inserimento avvenuto con successo";
+			//echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
 			drawClosePage("booking",$id_booking);
 		}else{
 			echo "Stanza Occupata nei giorni richiesti!";

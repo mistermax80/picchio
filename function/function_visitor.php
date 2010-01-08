@@ -125,7 +125,7 @@ function deleteVisitor($id) {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "DELETE FROM visitor WHERE id=".$id;
+	$query = "DELETE FROM visitor WHERE id_client=".$id;
 	
 	//echo $query;
 	$result = mysql_query($query);

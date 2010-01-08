@@ -16,22 +16,77 @@ drawOpenPage();
 		$booking = getBookingById($id_booking);
 		$id_client = $booking['client'];
 		$client = getClient($id_client);
-		echo "Creare il notificato per la prenotazione:";
-		echo "<br><br><br>";
-		echo "<b>Informazioni Cliente</b>";
-		echo "<br>Nome: ".$client['name'];
-		echo "<br>Cognome: ".$client['surname'];
-		echo "<br>Indirizzo: ".$client['address'];
-		echo "<br>Citt&agrave;: ".$client['city'];
-		echo "<br>Telefono: ".$client['telephone'];
-		echo "<br><br><br>";
-		echo "<b>Informazioni prenotazione</b>";
-		echo "<br>Stanza: ".$booking['room'];
-		echo "<br>Data ingresso: ".substr($booking['date_in'],0,10);
-		echo "<br>Data uscita: ".substr($booking['date_out'],0,10);
-		echo "<br>Note: ".$booking['note'];
-		echo "<br><br><br>";
-?>		
+		//echo "Creare il notificato per la prenotazione:";
+		?>
+		<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
+		<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
+		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
+		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
+		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
+		
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox" style="width:110%;height:200px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
+		mygrid.setInitWidths("70,70,70,60,70,80,80,70,70,70,70,80");
+		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black"); 
+	
+	<?php 
+		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
+									&id_booking='.$booking['id'].'\'\">Modifica</button>';
+		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
+									$client['type_document']."\", \"".$client['number_document']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
+									$client['address']."\", \"".$client['city']."\", \"".
+									$client['telephone']."\", \"".$client['email']."\", \"".
+									$button_modify."\"]);";
+															
+		echo $str;						
+		
+	?>
+	</script>
+		<br><br>
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox1" style="width:110%;height:60px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox1');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
+		mygrid.setInitWidths("90,150,150,100,310");
+		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black");
+		
+		<?php 
+			$str = "mygrid.addRow(".$booking['id'].", [\"".$booking['room']."\",\"".substr($booking['date_in'],0,10)."\", \"".
+									substr($booking['date_out'],0,10)."\", \"".$booking['number_client']."\", \"".
+									$booking['note']."\", \"".$booking['city_birth']."\", \"".
+									$booking['address']."\", \"".
+									$button_modify."\"]);";
+			echo $str;
+	?>
+	</script>
+		<br><br>
 		<form id="report" name="report" action="" method="post">
 		<input type="hidden" name="report" value="true"/>
 		<input type="hidden" name="id_booking" value="<?php echo $booking['id'];?>"/>
@@ -47,8 +102,8 @@ drawOpenPage();
 		$booking = $surname;
 		$path = "....da inserire pikkio...";
 		insertReport($booking,$path);
-		echo "<b>Report generato con successot</b>";
-		echo "<a href=\"index.php\">Ritorna</a>";
+		echo "<b>Report generato con successo</b>";
+		//echo "<a href=\"index.php\">Ritorna</a>";
 	}
-drawClosePage();
+drawClosePage("id_booking",$id_booking);
 ?>
