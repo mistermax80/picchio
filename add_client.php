@@ -20,11 +20,11 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	
 	echo "Cliente aggiunto con successo.";
 	if(isset($_POST['return_page']) && $_POST['return_page']=="booking"){
-		echo "<a href=\"booking.php?id_client=".$id_client."&date_stamp_in=".$_POST['date_stamp_in']."&id_room=".$_POST['id_room']."\">Ritorna</a>";
+		echo "<a href=\"booking.php?id_client=".$id_client."&date_stamp_in=".$_POST['date_in']."&id_room=".$_POST['id_room']."\">Torna a prenotazione</a>";
 	}else if(isset($_POST['return_page']) && $_POST['return_page']=="client"){
 		echo "<a href=\"modific_client.php\">Ritorna</a>";
 	}else{
-		echo "<a href=\"index.php\">Ritorna</a>";
+		//echo "<a href=\"index.php\">Ritorna</a>";
 	}
 }else{
 
@@ -34,7 +34,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	<form id="add_client" name="add_client" method="post">
 		<input type="hidden" name="operation" value="save" />
 		<input type="hidden" name="id_booking" value="<?php echo $_POST['id_booking']?>"/>
-		<input type="hidden" name="date_stamp_in" value="<?php echo $_POST['date_stamp_in']?>"/>
+		<input type="hidden" name="date_in" value="<?php echo $_POST['date_in']?>"/>
 		<input type="hidden" name="id_room" value="<?php echo $_POST['id_room']?>"/>
 		<input type="hidden" name="return_page" value="<?php echo $_POST['return_page']?>"/>
 		<table align="center">
