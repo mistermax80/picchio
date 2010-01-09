@@ -17,7 +17,7 @@ $id_booking = $_REQUEST['id_booking'];
 	<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:73%;height:25px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:73%;height:85px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -25,15 +25,19 @@ $id_booking = $_REQUEST['id_booking'];
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Articolo,Prezzo (Euro),Aggiungi,Elimina");
-		mygrid.setInitWidths("200,150,120,112");
-		mygrid.setColAlign("left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str");
+		mygrid.setHeader("Articolo,Prezzo (Euro),Aggiungi");
+		mygrid.setInitWidths("200,150,120");
+		mygrid.setColAlign("left,left,left");
+		mygrid.setColTypes("ro,ro,ro");
+		mygrid.setColSorting("str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black");
 
-
+		<?php 
+		$str = "mygrid.addRow(56,\"colazione,45,colazione\");";
+		
+		echo $str;
+?>
 	</script>
 	
 	<table   height="60">
