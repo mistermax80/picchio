@@ -99,6 +99,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		//Controllo che disponibilità della stanza nell'intervallo dei giorni
 		if(checkFreeBooking($date_in,$date_out,$id_room)){
 			//Salvo i dati della prenotazione
+			if($number_client==0 || (isset($number_client))){
+				$number_client = 0;	
+			}
 			insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
 			//Ritorno al calendario
 			//echo "Inserimento avvenuto con successo";
