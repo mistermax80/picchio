@@ -71,6 +71,6 @@ drawOpenPage();
 			echo "Prenotazione eliminata con successo.";
 			// "<a href=\"index.php\">Ritorna</a>";
 		
-
-drawClosePage("id_booking",$id_booking);}
+    }
+drawClosePage("id_booking",$id_booking);
 ?>

@@ -2,6 +2,8 @@
 
 include_once 'function/function_page.php';
 include_once 'function/function_booking.php';
+include_once 'function/function_product.php';
+include_once 'function/function_optional.php';
 
 drawOpenPage();
 
@@ -10,6 +12,18 @@ drawOpenPage();
 $id_booking = $_REQUEST['id_booking'];
 //$id_booking = $_POST['id_booking']; //se lo mandano a vicenda con bar.php per non perdere il menù a six
 $booking = getBookingById($id_booking);
+
+if(isset($_REQUEST['delete_product'])){
+	echo "eliminare prodotto dalla prenotazione";
+}
+if(isset($_REQUEST['add_product'])){
+	
+		//inserisco nel db l'optional relativo alla prenotazione
+		$id_booking = $_REQUEST['id_booking'];
+		$id_product = $_REQUEST['add_product'];
+		addOptional($id_booking,$id_product);
+		
+	}
 //Visualizza Info Prenotazione
 ?>
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
@@ -48,14 +62,9 @@ $booking = getBookingById($id_booking);
 	<table>	
 		<tr>
 			<td width="200">
-				<form id="bar" name="bar" action="bar.php" method="request">
+				<form id="bar" name="bar" action="product.php" method="request">
 				<input type="hidden" name="id_booking" value="<?php echo $id_booking ?>"/>
-				<button id="bar" value="submit">Aggiungi Servizio Bar</button>
-				</form>
-			</td>
-			<td>
-				<form id="restorant" name="restorant" action="option_booking.php" method="request">
-				<button id="restorant" value="submit">Aggiungi Servizio Ristorante</button>
+				<button id="bar" value="submit">Aggiungi Servizio</button>
 				</form>
 			</td>
 		</tr>
@@ -63,13 +72,18 @@ $booking = getBookingById($id_booking);
 		<br><br><br>
 	
 	<?php 
-	if((isset($_POST['bar']))||(isset($_POST['restorant']))){?>
+	//visualizza servizi in stanza
+	
+		$optional_booking = getOptional($id_booking);
+	
+		if(!$optional_booking==""){
 		
-		
+		?>
+		 
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:40%;height:100px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:70%;height:100px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -77,29 +91,28 @@ $booking = getBookingById($id_booking);
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Servizio,Prezzo (Euro),Elimina");
-		mygrid.setInitWidths("90,149,80");
-		mygrid.setColAlign("left,left,left");
-		mygrid.setColTypes("ro,ro,ro");
-		mygrid.setColSorting("str,str,str");
+		mygrid.setHeader("Servizio,Prezzo (Euro),Descrizione,Elimina");
+		mygrid.setInitWidths("90,149,120,80");
+		mygrid.setColAlign("left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black");
 		
 		<?php 
-			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?bar='.$c['id'].'\'\">Elimina</button>';		
+		 	foreach ($optional_booking as $product){ 
+		 	$p = getProduct($product['id_product']);	
+			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_product='.$p['id'].'\
+									&id_booking='.$id_booking.'\'\">Elimina</button>';		
 		
-			$str = "mygrid.addRow(".$booking['id'].", [\"".$_POST['type']."\",\"".
-									$_POST['price']."\", \"".
-									$button_delete."\",\"".
-									"\"]);";
+			$str = "mygrid.addRow(".$p['id'].", [\"".$p['name']."\",\"".$p['price']."\", \"".
+									$p['description']."\", \"".
+									$button_delete."\"]);";
+									
 			echo $str;
-		
-	}
+		 	}
 	?></script><?php 
-
-	
-	 
+		}
 	drawClosePage("id_booking",$id_booking);
-
 
 
