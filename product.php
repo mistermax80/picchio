@@ -7,7 +7,7 @@ include_once 'function/function_product.php';
 drawOpenPage();
 
 $id_booking = $_REQUEST['id_booking'];
-?><div id="titoloContenuti">SERVIZI BAR</div>
+?><div id="titoloContenuti">SERVIZI IN STANZA</div>
 
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 	<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">

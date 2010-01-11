@@ -13,15 +13,16 @@ $id_booking = $_REQUEST['id_booking'];
 //$id_booking = $_POST['id_booking']; //se lo mandano a vicenda con bar.php per non perdere il menù a six
 $booking = getBookingById($id_booking);
 
-if(isset($_REQUEST['delete_product'])){
-	echo "eliminare prodotto dalla prenotazione";
+if(isset($_REQUEST['delete_optional'])){
+	//elimino dal db l'optional relativo alla prenotazione
+	$id_optional = $_REQUEST['delete_optional'];
+	deleteOptional($id_optional);
 }
 if(isset($_REQUEST['add_product'])){
-	
-		//inserisco nel db l'optional relativo alla prenotazione
-		$id_booking = $_REQUEST['id_booking'];
-		$id_product = $_REQUEST['add_product'];
-		addOptional($id_booking,$id_product);
+	//inserisco nel db l'optional relativo alla prenotazione
+	$id_booking = $_REQUEST['id_booking'];
+	$id_product = $_REQUEST['add_product'];
+	addOptional($id_booking,$id_product);
 		
 	}
 //Visualizza Info Prenotazione
@@ -69,7 +70,7 @@ if(isset($_REQUEST['add_product'])){
 			</td>
 		</tr>
 		</table>
-		<br><br><br>
+		<br>
 	
 	<?php 
 	//visualizza servizi in stanza
@@ -83,7 +84,7 @@ if(isset($_REQUEST['add_product'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:70%;height:100px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:58%;height:250px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -102,7 +103,7 @@ if(isset($_REQUEST['add_product'])){
 		<?php 
 		 	foreach ($optional_booking as $product){ 
 		 	$p = getProduct($product['id_product']);	
-			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_product='.$p['id'].'\
+			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_optional='.$product['id'].'\
 									&id_booking='.$id_booking.'\'\">Elimina</button>';		
 		
 			$str = "mygrid.addRow(".$p['id'].", [\"".$p['name']."\",\"".$p['price']."\", \"".
@@ -110,6 +111,7 @@ if(isset($_REQUEST['add_product'])){
 									$button_delete."\"]);";
 									
 			echo $str;
+			
 		 	}
 	?></script><?php 
 		}
