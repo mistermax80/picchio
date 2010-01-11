@@ -6,6 +6,7 @@ include_once 'function/function_visitor.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
 include_once 'include/costant_generic.php';
+include_once 'function/function_date.php';
 
 drawOpenPage();
 
@@ -98,19 +99,22 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		$note = $_POST['note'];
 		//Controllo che disponibilità della stanza nell'intervallo dei giorni
 		if(checkFreeBooking($date_in,$date_out,$id_room)){
-			//Salvo i dati della prenotazione
-			if($number_client==0 || (isset($number_client))){
-				$number_client = 0;	
+			if(date2dateStamp($date_in) > date2dateStamp($date_out)){
+				echo "Data di uscita precendente alla data di ingresso!";
+				drawClosePage();
 			}
-			insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
-			//Ritorno al calendario
-			//echo "Inserimento avvenuto con successo";
-			//echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			drawClosePage("booking",$id_booking);
+			else{//Salvo i dati della prenotazione
+				if($number_client==0 || (isset($number_client))){
+					$number_client = 0;	
+				}
+				insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
+				$date_stamp_in = date2dateStamp($date_in); 
+				$booking = getBooking($date_stamp_in,$id_room);
+				drawClosePage("id_booking",$booking['id']);
+			}
 		}else{
 			echo "Stanza Occupata nei giorni richiesti!";
-			echo "<br><a href=\"".page_calendar."\">Ritorna al calendario</a>";
-			drawClosePage("booking",$id_booking);
+			drawClosePage();
 		}
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
