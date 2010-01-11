@@ -34,7 +34,7 @@ if(isset($_REQUEST['add_product'])){
 	}
 if(isset($_REQUEST['add_quantity'])){
 	//aggiorno nel db l'optional relativo alla prenotazione
-	$id_optional = $_REQUEST['add_quantity'];s
+	$id_optional = $_REQUEST['add_quantity'];
 	$optional = getOptionalById($id_optional);
 	$quantity = $optional['quantity'] + 1;
 	updateQuantity($id_optional,$quantity);
