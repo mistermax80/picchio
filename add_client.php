@@ -39,12 +39,12 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 		<input type="hidden" name="return_page" value="<?php echo $_POST['return_page']?>"/>
 		<table align="center">
 			<tr>
-				<td>Nome</td>
-				<td><input type="text" name="name" autocomplete="off"/></td>
-			</tr>
-			<tr>
 				<td>Cognome</td>
 				<td><input type="text" name="surname" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Nome</td>
+				<td><input type="text" name="name" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Tipo Documento</td>

@@ -37,7 +37,7 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:110%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:110%;height:350px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>

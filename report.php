@@ -5,12 +5,7 @@ include_once 'function/function_client.php';
 include_once 'function/function_report.php';
 
 drawOpenPage();
-
-?><div id="titoloContenuti">CREA NOTIFICAZIONE</div> 
-
 		
-<?php
-	
 	if(!(isset($_POST['report']) && $_POST['report']!="")){
 		$id_booking = $_REQUEST['id_booking'];
 		$booking = getBookingById($id_booking);
@@ -18,6 +13,7 @@ drawOpenPage();
 		$client = getClient($id_client);
 		//echo "Creare il notificato per la prenotazione:";
 		?>
+		<div id="titoloContenuti">CREA NOTIFICAZIONE</div> 
 		<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
 		<link rel="stylesheet" type="text/css" href="include_js/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_black.css">
 		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxcommon.js"></script>
@@ -36,12 +32,12 @@ drawOpenPage();
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
-		mygrid.setInitWidths("70,70,70,60,70,80,80,70,70,70,70,80");
+		mygrid.setInitWidths("70,70,70,60,80,80,80,80,80,60,60,90");
 		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
 		mygrid.init();
-		mygrid.setSkin("dhx_black"); 
+		mygrid.setSkin("dhx_black");
 	
 	<?php 
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
@@ -70,7 +66,7 @@ drawOpenPage();
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
-		mygrid.setInitWidths("90,150,150,100,310");
+		mygrid.setInitWidths("120,200,200,100,260");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
@@ -86,6 +82,14 @@ drawOpenPage();
 			echo $str;
 	?>
 	</script>
+	<br><br>
+	<?php 
+	//controllo se è stato già generato il report
+	$report = getReportIdBooking($id_booking);
+	if(!$report==""){
+			echo "<b>Notificazione già generata</b>";
+		}			
+	?>
 		<br><br>
 		<form id="report" name="report" action="" method="post">
 		<input type="hidden" name="report" value="true"/>
@@ -94,14 +98,16 @@ drawOpenPage();
 		</form>
 <?php 
 	}else{
+		?><div id="titoloContenuti">NOTIFICAZIONE INVIATA</div><?php 
 		$id_booking = $_POST['id_booking'];
-				$id_client=getBookingById($id_booking);
-				$idd_client = $id_client['client'];
-				$client=getClient($idd_client);
-				$surname=$client['surname'];
+		$id_client=getBookingById($id_booking);
+		$idd_client = $id_client['client'];
+		$client=getClient($idd_client);
+		$surname=$client['surname'];
 		$booking = $surname;
 		$path = "....da inserire pikkio...";
-		insertReport($booking,$path);
+		$generate = 1;
+		insertReport($booking,$path,$id_booking);
 		echo "<b>Report generato con successo</b>";
 		//echo "<a href=\"index.php\">Ritorna</a>";
 	}
