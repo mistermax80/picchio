@@ -124,7 +124,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:110%;height:60px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:110%;height:45px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -133,7 +133,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
-		mygrid.setInitWidths("90,150,150,100,310");
+		mygrid.setInitWidths("120,200,200,100,260");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
