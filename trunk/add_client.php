@@ -1,8 +1,11 @@
 <?php
 include_once 'function/function_page.php';
 include_once 'function/function_client.php';
+include_once 'function/function_visitor.php';
 
 drawOpenPage();
+
+$id_booking = $_REQUEST['id_booking'];
 
 if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	//Aggiungi nel db
@@ -18,13 +21,14 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	$email = $_POST['email'];
 	$id_client = addClient($name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	
-	echo "Cliente aggiunto con successo.";
-	if(isset($_POST['return_page']) && $_POST['return_page']=="booking"){
-		echo "<a href=\"booking.php?id_client=".$id_client."&date_stamp_in=".$_POST['date_in']."&id_room=".$_POST['id_room']."\">Torna a prenotazione</a>";
-	}else if(isset($_POST['return_page']) && $_POST['return_page']=="client"){
-		echo "<a href=\"modific_client.php\">Ritorna</a>";
+	
+	if(isset($_POST['id_booking'])){
+		addVisitor($id_booking,$id_client);
+		echo "Visitatore aggiunto con successo.";
+		drawClosePage("id_booking",$id_booking);
 	}else{
-		//echo "<a href=\"index.php\">Ritorna</a>";
+		echo "Cliente aggiunto con successo.";
+		drawClosePage();
 	}
 }else{
 
@@ -33,10 +37,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 
 	<form id="add_client" name="add_client" method="post">
 		<input type="hidden" name="operation" value="save" />
-		<input type="hidden" name="id_booking" value="<?php echo $_POST['id_booking']?>"/>
-		<input type="hidden" name="date_in" value="<?php echo $_POST['date_in']?>"/>
-		<input type="hidden" name="id_room" value="<?php echo $_POST['id_room']?>"/>
-		<input type="hidden" name="return_page" value="<?php echo $_POST['return_page']?>"/>
+		<input type="hidden" name="id_booking" value="<?php echo $id_booking?>"/>
 		<table align="center">
 			<tr>
 				<td>Cognome</td>
@@ -88,8 +89,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			</tr>
 		</table>
 	</form>
-
-
-<?php }
-drawClosePage();
+	
+<?php drawClosePage();
+}
 ?>
