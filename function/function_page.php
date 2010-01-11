@@ -10,12 +10,7 @@ function drawOpenPage() {
 			<div id="contenuti">
 	<?php
 }
-if(isset($_REQUEST['delete'])){
-			deleteBooking($id);
-			echo "Prenotazione eliminata con successo.";
-			// "<a href=\"index.php\">Ritorna</a>";
-		
-    }
+
     
 function drawClosePage($type=NULL,$id=NULL) {
 	?>
