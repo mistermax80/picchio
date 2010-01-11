@@ -28,6 +28,31 @@ function getOptional($id_booking) {
 	return $optionals;
 }
 
+function getOptionalById($id) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT * FROM optional WHERE id=".$id;
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+		
+	if ($row = mysql_fetch_assoc($result)) {
+		$optional = $row;
+	}
+	mysql_close($link);
+	return $optional;
+}
+
 function addOptional($id_booking,$id_product) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
@@ -43,6 +68,30 @@ function addOptional($id_booking,$id_product) {
 				(id_booking,id_product)
 				VALUES
 				($id_booking,$id_product)";
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	mysql_close($link);
+	return $id_optional;
+}
+
+function updateQuantity($id,$quantity) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "UPDATE optional SET 
+				quantity='".$quantity."'
+				WHERE
+				id = ".$id.";";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
