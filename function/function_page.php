@@ -10,14 +10,29 @@ function drawOpenPage() {
 			<div id="contenuti">
 	<?php
 }
-
-
+if(isset($_REQUEST['delete'])){
+			deleteBooking($id);
+			echo "Prenotazione eliminata con successo.";
+			// "<a href=\"index.php\">Ritorna</a>";
+		
+    }
+    
 function drawClosePage($type=NULL,$id=NULL) {
 	?>
 	</div>
 	</div>
 	<!-- Chiusura div contenuti -->
 	<div id="menu">
+	<script LANGUAGE="JavaScript">
+			function confirmSubmit()
+				{
+					var agree=confirm("Eliminare prenotazione?");
+					if (agree)
+					return true ;
+					else
+					return false ;
+				}
+	</script>
 	<?php
 	if($type=="id_booking"){
 		include_once 'function/function_booking.php';
@@ -42,6 +57,18 @@ function drawClosePage($type=NULL,$id=NULL) {
 			</div>
 			<div id="item_menu" onclick="window.location.href='delete_booking.php?id_booking=<?php echo $id;?>'">
 				Elimina prenotazione
+				<form id="delete" name="delete" action="" method="request">
+    			<input id="delete" name="delete" type="hidden" onClick="return confirmSubmit();"/>
+    			</form>
+			    
+			    <?php 
+							echo "cancello";
+			    		//deleteBooking($id);
+						
+						//echo "Prenotazione eliminata con successo.";
+						"<a href=\"index.php\">Ritorna</a>";
+		
+			    ?>
 			</div>
 			<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'">
 				Servizi Stanza
