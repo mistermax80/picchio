@@ -23,16 +23,7 @@ function drawClosePage($type=NULL,$id=NULL) {
 	</div>
 	<!-- Chiusura div contenuti -->
 	<div id="menu">
-	<script LANGUAGE="JavaScript">
-			function confirmSubmit()
-				{
-					var agree=confirm("Eliminare prenotazione?");
-					if (agree)
-					return true ;
-					else
-					return false ;
-				}
-	</script>
+	
 	<?php
 	if($type=="id_booking"){
 		include_once 'function/function_booking.php';
@@ -57,6 +48,17 @@ function drawClosePage($type=NULL,$id=NULL) {
 			</div>
 			<div id="item_menu" onClick="return confirmSubmit();">
 				Elimina prenotazione
+				<script LANGUAGE="JavaScript">
+				function confirmSubmit()
+				{
+					var agree=confirm("Eliminare prenotazione?");
+					if (agree){
+					return true ;
+					}
+					else
+					return false ;
+				}
+	</script>
 				<form id="delete" name="delete" action="" method="request">
     			<input id="delete" name="delete" type="hidden" onClick="return confirmSubmit();"/>
     			</form>

@@ -58,7 +58,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	<?php 
 		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
 									&id_booking='.$booking['id'].'\'\">Modifica</button>';
-		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
+		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['surname']."\",\"".$client['name']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
@@ -80,7 +80,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				$button_delete = '<button onclick=\"window.location.href=\'modific_client.php?delete_visitor='.$client['id'].'\
 									&id_booking='.$booking['id'].'\'\">Elimina</button>';
 				
-				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
+				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['surname']."\",\"".$client['name']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
@@ -261,7 +261,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 									& id_room='.$id_room.'\
 									& date_stamp_in='.$date_stamp_in.'\'\">Seleziona</button>';
 					
-					$str = "mygrid.addRow(".$client['id'].", [\"".$client['name']."\",\"".$client['surname']."\", \"".
+					$str = "mygrid.addRow(".$client['id'].", [\"".$client['surname']."\",\"".$client['name']."\", \"".
 												$client['type_document']."\", \"".$client['number_document']."\", \"".
 												$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 												$client['address']."\", \"".$client['city']."\", \"".

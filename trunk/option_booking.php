@@ -17,12 +17,13 @@ if(isset($_REQUEST['delete_optional'])){
 	//elimino dal db l'optional relativo alla prenotazione
 	$id_optional = $_REQUEST['delete_optional'];
 	$optional = getOptionalById($id_optional);
-	$quantity = $optional['quantity'] - 1;
-	if($quantity>0){//quantità >1 elimina quantità
-	updateQuantity($id_optional,$quantity);
+	$quantity = $optional['quantity'];
+	if($quantity==1){//quantità >1 elimina quantità
+		deleteOptional($id_optional);
 	}
 	else{ //elimina prodotto
-	deleteOptional($id_optional);
+		$quantity = $optional['quantity'] - 1;
+		updateQuantity($id_optional,$quantity);
 	}
 }
 if(isset($_REQUEST['add_product'])){

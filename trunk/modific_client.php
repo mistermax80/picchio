@@ -27,7 +27,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	$email = $_POST['email'];
 	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	echo "Cliente aggiornato con successo.";
-	drawClosePage("id_booking",$id_booking['id']);
+	drawClosePage("id_booking",$id_booking);
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!="" && $_POST['return_addclient']){
 	//elimina dal db il cliente torno a add_client
@@ -89,12 +89,12 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
-					<td>Nome</td>
-					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
-				</tr>
-				<tr>
 					<td>Cognome</td>
 					<td><input type="text" name="surname" autocomplete="off" value="<?php echo $client['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
@@ -177,12 +177,12 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
-					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
-				</tr>
-				<tr>
 					<td>Cognome</td>
 					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
@@ -269,12 +269,12 @@ drawClosePage();
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
-					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
-				</tr>
-				<tr>
 					<td>Cognome</td>
 					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
@@ -346,7 +346,7 @@ if(isset($_POST['search']) && $_POST['search']!="" ){  ?>
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:100%;height:350px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
