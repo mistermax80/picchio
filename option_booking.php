@@ -16,7 +16,14 @@ $booking = getBookingById($id_booking);
 if(isset($_REQUEST['delete_optional'])){
 	//elimino dal db l'optional relativo alla prenotazione
 	$id_optional = $_REQUEST['delete_optional'];
+	$optional = getOptionalById($id_optional);
+	$quantity = $optional['quantity'] - 1;
+	if($quantity>0){//quantità >1 elimina quantità
+	updateQuantity($id_optional,$quantity);
+	}
+	else{ //elimina prodotto
 	deleteOptional($id_optional);
+	}
 }
 if(isset($_REQUEST['add_product'])){
 	//inserisco nel db l'optional relativo alla prenotazione
@@ -25,6 +32,13 @@ if(isset($_REQUEST['add_product'])){
 	addOptional($id_booking,$id_product);
 		
 	}
+if(isset($_REQUEST['add_quantity'])){
+	//aggiorno nel db l'optional relativo alla prenotazione
+	$id_optional = $_REQUEST['add_quantity'];s
+	$optional = getOptionalById($id_optional);
+	$quantity = $optional['quantity'] + 1;
+	updateQuantity($id_optional,$quantity);
+	}	
 //Visualizza Info Prenotazione
 ?>
 	<link rel="STYLESHEET" type="text/css" href="include_js/dhtmlxGrid/codebase/dhtmlxgrid.css">
@@ -76,7 +90,6 @@ if(isset($_REQUEST['add_product'])){
 	//visualizza servizi in stanza
 	
 		$optional_booking = getOptional($id_booking);
-	
 		if(!$optional_booking==""){
 		
 		?>
@@ -84,7 +97,7 @@ if(isset($_REQUEST['add_product'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:58%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:70%;height:250px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -92,23 +105,26 @@ if(isset($_REQUEST['add_product'])){
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Servizio,Prezzo (Euro),Descrizione,Elimina");
-		mygrid.setInitWidths("90,149,120,80");
-		mygrid.setColAlign("left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str");
+		mygrid.setHeader("Servizio,Prezzo (Euro),Quantità,Aumenta quantità,Elimina");
+		mygrid.setInitWidths("90,149,120,120,80");
+		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black");
 		
 		<?php 
 		 	foreach ($optional_booking as $product){ 
-		 	$p = getProduct($product['id_product']);	
+		 	$p = getProduct($product['id_product']);
 			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_optional='.$product['id'].'\
 									&id_booking='.$id_booking.'\'\">Elimina</button>';		
 		
+			$button_add = '<button onclick=\"window.location.href=\'option_booking.php?add_quantity='.$product['id'].'\
+									&id_booking='.$id_booking.'\'\">Aumenta</button>';
+			
 			$str = "mygrid.addRow(".$p['id'].", [\"".$p['name']."\",\"".$p['price']."\", \"".
-									$p['description']."\", \"".
-									$button_delete."\"]);";
+									$product['quantity']."\", \"".
+									$button_add."\",\"".$button_delete."\"]);";
 									
 			echo $str;
 			

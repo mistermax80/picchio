@@ -55,14 +55,14 @@ function drawClosePage($type=NULL,$id=NULL) {
 			<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'">
 				Modifica Prenotazione
 			</div>
-			<div id="item_menu" onclick="window.location.href='delete_booking.php?id_booking=<?php echo $id;?>'">
+			<div id="item_menu" onClick="return confirmSubmit();">
 				Elimina prenotazione
 				<form id="delete" name="delete" action="" method="request">
     			<input id="delete" name="delete" type="hidden" onClick="return confirmSubmit();"/>
     			</form>
 			    
 			    <?php 
-							echo "cancello";
+						//echo "cancello";
 			    		//deleteBooking($id);
 						
 						//echo "Prenotazione eliminata con successo.";
