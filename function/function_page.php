@@ -41,31 +41,21 @@ function drawClosePage($type=NULL,$id=NULL) {
 			<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'">
 				Modifica Prenotazione
 			</div>
-			<div id="item_menu" onClick="return confirmSubmit();">
-				Elimina prenotazione
-				<script LANGUAGE="JavaScript">
-				function confirmSubmit()
+			
+			<script LANGUAGE="JavaScript">
+				function confirmDeleteBooking(id_booking)
 				{
 					var agree=confirm("Eliminare prenotazione?");
 					if (agree){
-					return true ;
+						window.location.href="delete_booking.php?id_booking="+id_booking;
+						return true ;
 					}
 					else
-					return false ;
+						return false ;
 				}
-	</script>
-				<form id="delete" name="delete" action="" method="request">
-    			<input id="delete" name="delete" type="hidden" onClick="return confirmSubmit();"/>
-    			</form>
-			    
-			    <?php 
-						//echo "cancello";
-			    		//deleteBooking($id);
-						
-						//echo "Prenotazione eliminata con successo.";
-						"<a href=\"index.php\">Ritorna</a>";
-		
-			    ?>
+			</script>
+			<div id="item_menu" onClick="confirmDeleteBooking(<?php echo $id;?>);">
+				Elimina prenotazione
 			</div>
 			<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'">
 				Servizi Stanza
