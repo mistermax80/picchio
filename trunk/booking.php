@@ -110,6 +110,37 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
 				$date_stamp_in = date2dateStamp($date_in); 
 				$booking = getBooking($date_stamp_in,$id_room);
+				?>
+				<br><br>
+				<table width="805px">
+				    <tr>
+				        <td>
+				            <div id="gridbox1" style="width:110%;height:45px;background-color:white;overflow:hidden"></div>
+				        </td>
+				    </tr>
+				</table>
+			   
+				<script>
+				mygrid = new dhtmlXGridObject('gridbox1');
+				mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+				mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
+				mygrid.setInitWidths("120,200,200,100,260");
+				mygrid.setColAlign("left,left,left,left,left");
+				mygrid.setColTypes("ro,ro,ro,ro,ro");
+				mygrid.setColSorting("str,str,str,str,str");
+				mygrid.init();
+				mygrid.setSkin("dhx_black");
+				
+				<?php 
+					$str = "mygrid.addRow(".$booking['id'].", [\"".$booking['room']."\",\"".substr($booking['date_in'],0,10)."\", \"".
+											substr($booking['date_out'],0,10)."\", \"".$booking['number_client']."\", \"".
+											$booking['note']."\", \"".$booking['city_birth']."\", \"".
+											$booking['address']."\", \"".
+											$button_modify."\"]);";
+					echo $str;
+					?>
+				</script>
+				<?php 
 				drawClosePage("id_booking",$booking['id']);
 			}
 		}else{
