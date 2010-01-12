@@ -6,7 +6,7 @@ include_once 'function/function_booking.php';
 
 drawOpenPage();
 
-$id = $_REQUEST['id_booking'];
+$id_booking = $_REQUEST['id_booking'];
 /*
 $date_stamp_in = $_REQUEST['date_stamp_in'];
 $booking=getBookingById($id);
