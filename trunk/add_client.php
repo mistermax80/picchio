@@ -30,9 +30,10 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 		echo "Cliente aggiunto con successo.";
 		drawClosePage();
 	}
-}else{
-
+}else if (isset($_POST['id_booking'])){
+	//aggiungi cliente da prenotazione
 	?>
+	
 <div id="titoloContenuti">AGGIUNGI  NUOVO CLIENTE</div>
 
 	<form id="add_client" name="add_client" method="post">
@@ -90,6 +91,66 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 		</table>
 	</form>
 	
-<?php drawClosePage();
-}
+<?php drawClosePage("id_booking",$id_booking);
+}else{
+	?>
+	<div id="titoloContenuti">AGGIUNGI  NUOVO CLIENTE</div>
+
+	<form id="add_client" name="add_client" method="post">
+		<input type="hidden" name="operation" value="save" />
+		<input type="hidden" name="id_booking" value="<?php echo $id_booking?>"/>
+		<table align="center">
+			<tr>
+				<td>Cognome</td>
+				<td><input type="text" name="surname" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Nome</td>
+				<td><input type="text" name="name" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Tipo Documento</td>
+				<td><input type="text" name="type_document" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Num. Documento</td>
+				<td><input type="text" name="number_document" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Data Nascita</td>
+				<td><input type="text" name="date_birth" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Luogo Nascita</td>
+				<td><input type="text" name="city_birth" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Indirizzo</td>
+				<td><input type="text" name="address" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Citt&agrave;</td>
+				<td><input type="text" name="city" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Telefono</td>
+				<td><input type="text" name="telephone" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" name="email" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button value="submit">Salva</button></td>
+			</tr>
+		</table>
+	</form>
+	
+<?php drawClosePage(); 
+	}
 ?>

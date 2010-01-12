@@ -21,7 +21,7 @@ $room=$booking['room'];
 		</form>
 		<br><br>
 		<form id="add_visitor" name="add_client" action="add_client.php" method="post">
-		<input type="hidden" name="id_booking" value="<?php echo $id ?>"/>
+		<input type="hidden" name="id_booking" value="<?php echo $id_booking ?>"/>
 		<button id="add_visitor" value="submit">Aggiungi Visitatore</button>
 		</form>
 <?php 
