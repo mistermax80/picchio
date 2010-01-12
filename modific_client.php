@@ -229,7 +229,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	<?php 
 
 
-drawClosePage();
+drawClosePage("id_booking",$id_booking);
 
 
 }else if(($_REQUEST['client_booking'])&&(isset($_REQUEST['id_booking']))){
