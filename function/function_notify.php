@@ -2,6 +2,9 @@
 
 function generateNotification($filename,$id_booking) {
 	
+	if(!is_dir("report")){
+		mkdir("report", 0777);
+	}
 	fopen($filename,"w+");
 
 	//Dati Finti da inserire:
