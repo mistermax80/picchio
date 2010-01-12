@@ -3,8 +3,37 @@ include_once 'function/function_page.php';
 include_once 'function/function_booking.php';
 include_once 'function/function_client.php';
 include_once 'function/function_report.php';
+include_once 'function/function_notify.php';
 
 drawOpenPage();
+
+if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
+	
+	$id_booking = $_REQUEST['id_booking']; 
+	
+	unset($_REQUEST['notify']);
+	unset($_REQUEST['id_booking']);
+	
+	$filename = "report/notifica-".date("Ymd-H:m:s").".pdf";
+	$result = generateNotification($filename,$id_booking);
+	if($result){
+	?>
+	<script type="text/javascript">
+		alert("Report generato con successo!");
+		window.location.href="report.php?id_booking=<?php echo $id_booking?>";
+	</script>
+	<?php
+	//Salvalo nel db
+	insertReport($_REQUEST['id_client'],$filename,$id_booking);
+	}else{
+		?>
+	<script type="text/javascript">
+		alert("Errore nella generazione del Report!");
+		window.location.href="report.php?id_booking=<?php echo $id_booking?>";
+	</script>
+	<?php
+	}
+}else{
 		
 	if(!(isset($_POST['report']) && $_POST['report']!="")){
 		$id_booking = $_REQUEST['id_booking'];
@@ -31,7 +60,7 @@ drawOpenPage();
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
+		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Genera");
 		mygrid.setInitWidths("70,70,70,60,80,80,80,80,80,60,60,90");
 		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
@@ -40,8 +69,8 @@ drawOpenPage();
 		mygrid.setSkin("dhx_black");
 	
 	<?php 
-		$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$client['id'].'\
-									&id_booking='.$booking['id'].'\'\">Modifica</button>';
+		$button_modify = '<button onclick=\"window.location.href=\'report.php?id_booking='.$booking['id'].'\
+									&notify=true&id_client='.$booking['client'].'\'\">Notifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
@@ -82,34 +111,8 @@ drawOpenPage();
 			echo $str;
 	?>
 	</script>
-	<br><br>
-	<?php 
-	//controllo se è stato già generato il report
-	$report = getReportIdBooking($id_booking);
-	if(!$report==""){
-			echo "<b>Notificazione già generata</b>";
-		}			
-	?>
-		<br><br>
-		<form id="report" name="report" action="" method="post">
-		<input type="hidden" name="report" value="true"/>
-		<input type="hidden" name="id_booking" value="<?php echo $booking['id'];?>"/>
-		<button id="report" value="submit">Genera notificazione</button>
-		</form>
 <?php 
-	}else{
-		?><div id="titoloContenuti">NOTIFICAZIONE INVIATA</div><?php 
-		$id_booking = $_POST['id_booking'];
-		$id_client=getBookingById($id_booking);
-		$idd_client = $id_client['client'];
-		$client=getClient($idd_client);
-		$surname=$client['surname'];
-		$booking = $surname;
-		$path = "....da inserire pikkio...";
-		$generate = 1;
-		insertReport($booking,$path,$id_booking);
-		echo "<b>Report generato con successo</b>";
-		//echo "<a href=\"index.php\">Ritorna</a>";
 	}
-drawClosePage("id_booking",$id_booking);
+	drawClosePage("id_booking",$id_booking);
+}
 ?>
