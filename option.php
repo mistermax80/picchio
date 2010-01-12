@@ -38,7 +38,7 @@ if(!(isset($_REQUEST['id_report']))){
 	<?php 
 		$reports = getReports();
 		foreach ($reports as $r) {
-			$button_modify = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Invia</button>';
+			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Report</button>';
 			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
 			$str = "mygrid.addRow(".$r['id'].", [\"".$r['booking']."\",\"".$r['path']."\", \"".
 									$r['date']."\", \"".$r['send']."\", \"".

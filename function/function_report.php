@@ -1,7 +1,7 @@
 <?php
 include_once 'include/costant.php';
 
-function insertReport($id,$path,$id_booking){
+function insertReport($id_client,$path,$id_booking){
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -13,7 +13,7 @@ function insertReport($id,$path,$id_booking){
 	}
 
 	$query = "INSERT INTO report 
-				(booking,path,id_booking) 
+				(id_client,path,id_booking) 
 				VALUES 
 				('$id','$path','$id_booking')";
 	//echo $query;
@@ -36,7 +36,7 @@ function getReports() {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM report";
+	$query = "SELECT * FROM report AS r, booking AS b, client AS c WHERE ";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
