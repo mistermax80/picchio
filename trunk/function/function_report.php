@@ -15,7 +15,7 @@ function insertReport($id_client,$path,$id_booking){
 	$query = "INSERT INTO report 
 				(id_client,path,id_booking) 
 				VALUES 
-				('$id','$path','$id_booking')";
+				('$id_client','$path','$id_booking')";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
@@ -36,8 +36,17 @@ function getReports() {
 		die ('Can\'t use foo : ' . mysql_error());
 	}
 
-	$query = "SELECT * FROM report AS r, booking AS b, client AS c WHERE ";
-	//echo $query;
+	$query = "SELECT
+				r.id as id,
+				c.surname as surname,
+				r.path as path,
+				r.date as date,
+				r.send as send				 
+				FROM 
+				report AS r, booking AS b, client AS c 
+				WHERE 
+				r.id_client=c.id AND
+				r.id_booking=b.id";
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
