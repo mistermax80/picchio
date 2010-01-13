@@ -16,7 +16,7 @@ function insertReport($id_client,$path,$id_booking){
 				(id_client,path,id_booking) 
 				VALUES 
 				('$id_client','$path','$id_booking')";
-	echo $query;
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

@@ -3,6 +3,7 @@ include_once 'function/function_page.php';
 include_once 'function/function_client.php';
 include_once 'function/function_visitor.php';
 include_once 'function/function_date.php';
+include_once 'function/function_booking.php';
 
 drawOpenPage();
 
