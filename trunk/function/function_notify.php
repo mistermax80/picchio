@@ -18,7 +18,7 @@ function generateNotification($filename,$id_booking) {
 	$surname = $client['surname'];
 	$name = $client['name'];
 	$city_birth = $client['city_birth'];
-	$nationality = "Italiana";
+	$nationality = $client['nationality'];;
 	$date_birth = $client['date_birth'];
 	$gg_birth = "23";
 	$mm_birth = "02";

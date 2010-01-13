@@ -7,6 +7,7 @@ include_once 'function/function_report.php';
 
 drawOpenPage();
 
+
 if(!(isset($_REQUEST['id_report']))){
 ?>
 <div id="titoloContenuti">NOTIFICHE CLIENTI</div> 
@@ -28,17 +29,17 @@ if(!(isset($_REQUEST['id_report']))){
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cliente,Path,Data,spedizione,Vedi,Elimina");
-		mygrid.setInitWidths("100,100,130,100,100,100,100");
-		mygrid.setColAlign("left,left,left,left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str,str,str");
+		mygrid.setInitWidths("100,100,130,100,100,100");
+		mygrid.setColAlign("left,left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black"); 
 	
 	<?php 
 		$reports = getReports();
-		
 		foreach ($reports as $r) {
+			
 			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Report</button>';
 			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
 			$str = "mygrid.addRow(".$r['id'].", [\"".$r['surname']."\",\"".$r['path']."\", \"".
@@ -46,8 +47,8 @@ if(!(isset($_REQUEST['id_report']))){
 									$button_modify."\",\"".$button_delete."\"]);";
 			echo $str;
 		}
-drawClosePage();
 	?></script><?php
+	drawClosePage();
 }else{
 	?><div id="titoloContenuti">ELIMINAZIONE NOTIFICA CLIENTE</div>
 	<?php 

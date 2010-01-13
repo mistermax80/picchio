@@ -27,13 +27,14 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	$number_document = $_POST['number_document'];
 	$release_document_date = $_POST['release_document_date'];
 	$release_document_to = $_POST['release_document_to'];
+	$nationality = $_POST['nationality'];
 	$date_birth = $_POST['date_birth'];
 	$city_birth = $_POST['city_birth'];
 	$address = $_POST['address'];
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	//echo "Cliente aggiornato con successo.";
 	if(isset($_REQUEST['modific_client'])){
 		?>
@@ -100,6 +101,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		$number_document = $client['number_document'];
 		$release_document_date = $client['release_document_date'];
 		$release_document_to = $client['release_document_to'];
+		$nationality = $_POST['nationality'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -150,6 +152,10 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
+					<td>Cittadinanza</td>
+					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
+				</tr>
+				<tr>
 					<td>Data Nascita</td>
 					<td><input type="text" name="date_birth" autocomplete="off" value="<?php echo $client['date_birth'];?>"/></td>
 				</tr>
@@ -198,6 +204,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		$number_document = $client['number_document'];
 		$release_document_date = $_POST['release_document_date'];
 		$release_document_to = $_POST['release_document_to'];
+		$nationality = $_POST['nationality'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -246,6 +253,10 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				<tr>
 					<td>Documento rilasciato da</td>
 					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Cittadinanza</td>
+					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
@@ -301,6 +312,7 @@ drawClosePage("id_booking",$id_booking);
 		$number_document = $client['number_document'];
 		$release_document_date = $_POST['release_document_date'];
 		$release_document_to = $_POST['release_document_to'];
+		$nationality = $_POST['nationality'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -348,6 +360,10 @@ drawClosePage("id_booking",$id_booking);
 				<tr>
 					<td>Documento rilasciato da</td>
 					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Cittadinanza</td>
+					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
@@ -400,6 +416,7 @@ drawClosePage("id_booking",$id_booking);
 		$number_document = $client['number_document'];
 		$release_document_date = $_POST['release_document_date'];
 		$release_document_to = $_POST['release_document_to'];
+		$nationality = $_POST['nationality'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -447,6 +464,10 @@ drawClosePage("id_booking",$id_booking);
 				<tr>
 					<td>Documento rilasciato da</td>
 					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Cittadinanza</td>
+					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>

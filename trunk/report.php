@@ -15,10 +15,13 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	unset($_REQUEST['id_booking']);
 	
 	$booking = getBookingById($id_booking);
-	$client = getClient($booking['client']);
+	$id_client = $booking['client'];
+	$client = getClient($id_client);
 	$surname = $client['surname'];
 	
 	$filename = "report\\".$surname."-".$id_booking.".pdf";
+	//var_dump($filename);
+	//insertReport($id_client,$filename,$id_booking);
 	$result = generateNotification($filename,$id_booking);
 	if($result){
 	?>
@@ -28,7 +31,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	</script>
 	<?php
 	//Salvalo nel db
-	insertReport($_REQUEST['id_client'],$filename,$id_booking);
+	//insertReport($booking['client'],$filename,$id_booking);
 	}else{
 		?>
 	<script type="text/javascript">

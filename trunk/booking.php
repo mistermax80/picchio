@@ -100,8 +100,12 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		//Controllo che disponibilità della stanza nell'intervallo dei giorni
 		if(checkFreeBooking($date_in,$date_out,$id_room)){
 			if(date2dateStamp($date_in) > date2dateStamp($date_out)){
-				echo "Data di uscita precendente alla data di ingresso!";
-				drawClosePage();
+				?>
+				<script type="text/javascript">
+					alert("Data di uscita precedente alla data di ingresso!");
+					window.location.href="index.php";
+				</script>
+				<?php 
 			}
 			else{//Salvo i dati della prenotazione
 				if($number_client==0 || (isset($number_client))){
@@ -144,8 +148,12 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				drawClosePage("id_booking",$booking['id']);
 			}
 		}else{
-			echo "Stanza Occupata nei giorni richiesti!";
-			drawClosePage();
+				?>
+				<script type="text/javascript">
+					alert("Stanza occupata nei giorni richiesti!");
+					window.location.href="index.php";
+				</script>
+				<?php 
 		}
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
