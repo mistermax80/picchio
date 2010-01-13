@@ -85,6 +85,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		alert("Visitatore eliminato con successo!");
 		window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
 	</script>
+	<div id="titoloContenuti">GESTIONE CLIENTI</div> 
 	<?php 
 	
 }else if($_REQUEST['id_client']){

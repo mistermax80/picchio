@@ -8,8 +8,11 @@
 	<div id="item_menu" onclick="window.location.href='room.php'">
 		Stanze
 	</div>
+	<div id="item_menu" onclick="window.location.href='product.php?add_product=true'">
+		Servizi
+	</div>
 	<div id="item_menu" onclick="window.location.href='option.php'">
-		Invio notificazione
+		Notificati
 	</div>
 	
 					<div id="little_calendar">
