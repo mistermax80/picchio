@@ -2,6 +2,8 @@
 include_once 'function/function_page.php';
 include_once 'function/function_client.php';
 include_once 'function/function_visitor.php';
+include_once 'function/function_date.php';
+include_once 'function/function_booking.php';
 
 drawOpenPage();
 
@@ -9,7 +11,11 @@ drawOpenPage();
 <div id="titoloContenuti">GESTIONE CLIENTI</div> 
 <?php
 
-$id_booking = $_REQUEST['id_booking'];
+if(isset($_REQUEST['id_booking'])){
+	$id_booking = $_REQUEST['id_booking'];
+	$booking = getBookingById($id_booking);
+	$date_stamp_in = date2dateStamp($booking['date_in']);
+}
 
 if(isset($_POST['save']) && $_POST['save']!=""){
 	
@@ -19,37 +25,66 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	$surname = $_POST['surname'];
 	$type_document = $_POST['type_document'];
 	$number_document = $_POST['number_document'];
+	$release_document_date = $_POST['release_document_date'];
+	$release_document_to = $_POST['release_document_to'];
 	$date_birth = $_POST['date_birth'];
 	$city_birth = $_POST['city_birth'];
 	$address = $_POST['address'];
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	updateClient($id,$name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
-	echo "Cliente aggiornato con successo.";
-	drawClosePage("id_booking",$id_booking);
+	updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	//echo "Cliente aggiornato con successo.";
+	if(isset($_REQUEST['modific_client'])){
+		?>
+	<script type="text/javascript">
+		alert("Cliente aggiornato con successo!");
+		window.location.href="index.php";
+	</script>
+	<?php 
+	}
+	else {
+		?>
+		<script type="text/javascript">
+			alert("Cliente aggiornato con successo!");
+			window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
+		</script>
+		<?php 
+	}
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!="" && $_POST['return_addclient']){
 	//elimina dal db il cliente torno a add_client
 	$id = $_POST['id'];
 	deleteClient($id);
-	echo "Cliente eliminato con successo.";
-	drawClosePage();	
+	?>
+	<script type="text/javascript">
+		alert("Cliente eliminato con successo!");
+		window.location.href="index.php";
+	</script>
+	<?php 	
 	
 }else if(isset($_POST['delete']) && $_POST['delete']!=""){
 	//elimina dal db il cliente e torno a prenotazione 
 	$id = $_POST['id'];
 	deleteClient($id);
-	echo "Cliente eliminato con successo.";
-	drawClosePage("id_booking",$id_booking['id']);
+	?>
+	<script type="text/javascript">
+		alert("Cliente eliminato con successo!");
+		window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
+	</script>
+	<?php 
 	
 }else if((isset($_POST['delete_visitor']) && $_POST['delete_visitor']!="")||(isset($_REQUEST['delete_visitor']))){
 	//elimina dal db il visitatore(provengo o da booking(request)o da modifica cliente(post))
 	$id = $_POST['id_visitor'];
 	$id = $_REQUEST['delete_visitor'];
 	deleteVisitor($id);
-	echo "Visitatore eliminato con successo.";
-	drawClosePage("id_booking",$id_booking);
+	?>
+	<script type="text/javascript">
+		alert("Visitatore eliminato con successo!");
+		window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
+	</script>
+	<?php 
 	
 }else if($_REQUEST['id_client']){
 		
@@ -63,6 +98,8 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		$surname = $client['surname'];
 		$type_document = $client['type_document'];
 		$number_document = $client['number_document'];
+		$release_document_date = $client['release_document_date'];
+		$release_document_to = $client['release_document_to'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -103,6 +140,14 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				<tr>
 					<td>Num. Documento</td>
 					<td><input type="text" name="number_document" autocomplete="off" value="<?php echo $client['number_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato il</td>
+					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato da</td>
+					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
@@ -151,6 +196,8 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		$surname = $client['surname'];
 		$type_document = $client['type_document'];
 		$number_document = $client['number_document'];
+		$release_document_date = $_POST['release_document_date'];
+		$release_document_to = $_POST['release_document_to'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -191,6 +238,14 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				<tr>
 					<td>Num. Documento</td>
 					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato il</td>
+					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato da</td>
+					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
@@ -244,6 +299,8 @@ drawClosePage("id_booking",$id_booking);
 		$surname = $client['surname'];
 		$type_document = $client['type_document'];
 		$number_document = $client['number_document'];
+		$release_document_date = $_POST['release_document_date'];
+		$release_document_to = $_POST['release_document_to'];
 		$date_birth = $client['date_birth'];
 		$city_birth = $client['city_birth'];
 		$address = $client['address'];
@@ -285,6 +342,14 @@ drawClosePage("id_booking",$id_booking);
 					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
 				</tr>
 				<tr>
+					<td>Documento rilasciato il</td>
+					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato da</td>
+					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+				</tr>
+				<tr>
 					<td>Data Nascita</td>
 					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
 				</tr>
@@ -319,12 +384,106 @@ drawClosePage("id_booking",$id_booking);
 			</table>
 		</form>		
 	<?php 
-
-
 drawClosePage("id_booking",$id_booking);
 
+}else if(($_REQUEST['modific_client'])&&(isset($_REQUEST['modific_client']))){
+		
+		//echo "modifico cliente";
 
-
+		$id_client = $_REQUEST['modific_client']; 
+		$client = getClient($id_client);
+		//Aggiungi nel db
+		$id = $client['id'];
+		$name = $client['name'];
+		$surname = $client['surname'];
+		$type_document = $client['type_document'];
+		$number_document = $client['number_document'];
+		$release_document_date = $_POST['release_document_date'];
+		$release_document_to = $_POST['release_document_to'];
+		$date_birth = $client['date_birth'];
+		$city_birth = $client['city_birth'];
+		$address = $client['address'];
+		$city = $client['city'];
+		$telephone = $client['telephone'];
+		$email = $client['email'];
+		
+		?>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare cliente?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
+	
+	
+	<form id="mofidic_client" name="mofidic_client" action="" method="post">
+			<input type="hidden" id="client" name="client" value="client"/>
+			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
+			<table align="center">
+				<tr>
+					<td>Cognome</td>
+					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Tipo Documento</td>
+					<td><input type="text" name="type_document" value="<?php echo $client['type_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Num. Documento</td>
+					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato il</td>
+					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Documento rilasciato da</td>
+					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Data Nascita</td>
+					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Luogo Nascita</td>
+					<td><input type="text" name="city_birth" value="<?php echo $client['city_birth'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Indirizzo</td>
+					<td><input type="text" name="address" value="<?php echo $client['address'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Citt&agrave;</td>
+					<td><input type="text" name="city" value="<?php echo $client['city'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Telefono</td>
+					<td><input type="text" name="telephone" value="<?php echo $client['telephone'];?>"/></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" name="email" value="<?php echo $client['email'];?>"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
+					<td><input id="save" name="save" type="submit" value="Salva"/></td>
+				</tr>
+			</table>
+		</form>		
+	<?php 
+drawClosePage();
 
 }else{
 	?>
@@ -366,7 +525,7 @@ if(isset($_POST['search']) && $_POST['search']!="" ){  ?>
 		$text_search = $_POST['text_search'];
 		$clients = searchClients($text_search);
 		foreach ($clients as $c) {
-			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?client_booking='.$c['id'].'\'\">Modifica</button>';
+			$button_modify = '<button onclick=\"window.location.href=\'modific_client.php?modific_client='.$c['id'].'\'\">Modifica</button>';
 			$str = "mygrid.addRow(".$c['id'].", [\"".$c['surname']."\", \"".$c['name']."\", \"".
 									$c['type_document']."\", \"".$c['number_document']."\", \"".
 									$c['date_birth']."\", \"".$c['city_birth']."\", \"".

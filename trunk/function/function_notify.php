@@ -6,25 +6,28 @@ function generateNotification($filename,$id_booking) {
 		mkdir("report", 0777);
 	}
 	fopen($filename,"w+");
-
+	
+	$booking = getBookingById($id_booking);
+	$client = getClient($booking['client']); 
+	
 	//Dati Finti da inserire:
 	$gg = "12";
 	$mm = "04";
 	$aa = "10";
 	$date_in = "12-01-2010";
-	$surname = "Rossi";
-	$name = "Mario";
-	$city_birth = "Roma (Rm)";
+	$surname = $client['surname'];
+	$name = $client['name'];
+	$city_birth = $client['city_birth'];
 	$nationality = "Italiana";
-	$date_birth = "23-04-1987";
+	$date_birth = $client['date_birth'];
 	$gg_birth = "23";
 	$mm_birth = "02";
 	$aa_birth = "80";
-	$address = "via, citta', provincia";
-	$type_doc = "Carta di identita'";
-	$num_doc = "RMdsgf4445wgjh32874";
-	$release_date = "23-12-2001";
-	$release_to = "Roma";
+	$address = $client['address'];
+	$type_doc = $client['type_document'];
+	$num_doc = $client['number_document'];
+	$release_date = $client['release_document_date'];
+	$release_to = $client['release_document_to'];
 
 	//Another family component
 	$surname2 = "D'Arco";
@@ -58,7 +61,7 @@ function generateNotification($filename,$id_booking) {
 	//Parameter PFD
 	$background_template = 1;
 	$margin_sx = 5;
-	$margin_top = 40;
+	$margin_top = 0;
 	$border = 0;
 	//*******************************************
 	

@@ -1022,7 +1022,7 @@ function Output($file='',$download=false)
 			//Save file locally
 			$f=fopen($file,'wb');
 			if(!$f)
-				$this->Error('Unable to create output file: '.$file);
+				$this->Error('Apertura non avvenuta: '.$file);
 			fwrite($f,$this->buffer,strlen($this->buffer));
 			fclose($f);
 		}

@@ -14,7 +14,11 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	unset($_REQUEST['notify']);
 	unset($_REQUEST['id_booking']);
 	
-	$filename = "report/notifica-".date("Ymd-H:m:s").".pdf";
+	$booking = getBookingById($id_booking);
+	$client = getClient($booking['client']);
+	$surname = $client['surname'];
+	
+	$filename = "report\\".$surname."-".$id_booking.".pdf";
 	$result = generateNotification($filename,$id_booking);
 	if($result){
 	?>

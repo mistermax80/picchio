@@ -2,10 +2,15 @@
 include_once 'function/function_page.php';
 include_once 'function/function_client.php';
 include_once 'function/function_visitor.php';
+include_once 'function/function_date.php';
 
 drawOpenPage();
 
-$id_booking = $_REQUEST['id_booking'];
+if(isset($_REQUEST['id_booking'])){
+	$id_booking = $_REQUEST['id_booking'];
+	$booking = getBookingById($id_booking);
+	$date_stamp_in = date2dateStamp($booking['date_in']);
+}
 
 if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	//Aggiungi nel db
@@ -13,22 +18,32 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	$surname = $_POST['surname'];
 	$type_document = $_POST['type_document'];
 	$number_document = $_POST['number_document'];
+	$release_document_date = $_POST['release_document_date'];
+	$release_document_to = $_POST['release_document_to'];
 	$date_birth = $_POST['date_birth'];
 	$city_birth = $_POST['city_birth'];
 	$address = $_POST['address'];
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	$id_client = addClient($name,$surname,$type_document,$number_document,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	$id_client = addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	
 	
 	if(isset($_POST['id_booking'])){
 		addVisitor($id_booking,$id_client);
-		echo "Visitatore aggiunto con successo.";
-		drawClosePage("id_booking",$id_booking);
+		?>
+		<script type="text/javascript">
+			alert("Visitatore aggiunto con successo!");
+			window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
+	</script>
+	<?php 
 	}else{
-		echo "Cliente aggiunto con successo.";
-		drawClosePage();
+		?>
+		<script type="text/javascript">
+			alert("Prenotazione Eliminata con successo!");
+			window.location.href="index.php";
+		</script>
+		<?php 
 	}
 }else if (isset($_POST['id_booking'])){
 	//aggiungi cliente da prenotazione
@@ -55,6 +70,14 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			<tr>
 				<td>Num. Documento</td>
 				<td><input type="text" name="number_document" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Documento rilasciato il</td>
+				<td><input type="text" name="release_document_date" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Documento rilasciato da</td>
+				<td><input type="text" name="release_document_to" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Data Nascita</td>
@@ -98,7 +121,6 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 
 	<form id="add_client" name="add_client" method="post">
 		<input type="hidden" name="operation" value="save" />
-		<input type="hidden" name="id_booking" value="<?php echo $id_booking?>"/>
 		<table align="center">
 			<tr>
 				<td>Cognome</td>
@@ -115,6 +137,14 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			<tr>
 				<td>Num. Documento</td>
 				<td><input type="text" name="number_document" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Documento rilasciato il</td>
+				<td><input type="text" name="release_document_date" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Documento rilasciato da</td>
+				<td><input type="text" name="release_document_to" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Data Nascita</td>

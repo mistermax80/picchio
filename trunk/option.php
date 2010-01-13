@@ -46,16 +46,18 @@ if(!(isset($_REQUEST['id_report']))){
 									$button_modify."\",\"".$button_delete."\"]);";
 			echo $str;
 		}
+drawClosePage();
 	?></script><?php
 }else{
 	?><div id="titoloContenuti">ELIMINAZIONE NOTIFICA CLIENTE</div>
 	<?php 
 	$id = $_REQUEST['id_report'];
 	deleteReport($id);
-	echo "Report eliminato con successo.";
-	//echo "<a href=\"option.php\">Ritorna</a>";
-	
+	?>
+	<script type="text/javascript">
+		alert("Cliente aggiornato con successo!");
+		window.location.href="option.php";
+	</script>
+	<?php 	
 }	
-drawClosePage();
-
 ?>

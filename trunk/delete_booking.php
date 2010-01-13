@@ -11,7 +11,6 @@ drawOpenPage();
 if($_REQUEST['id_booking']){
 	deleteBooking($_REQUEST['id_booking']);
 }
-drawClosePage();
 ?>
 
 <script type="text/javascript">
