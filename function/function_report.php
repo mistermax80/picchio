@@ -16,7 +16,7 @@ function insertReport($id_client,$path,$id_booking){
 				(id_client,path,id_booking) 
 				VALUES 
 				('$id_client','$path','$id_booking')";
-	//echo $query;
+	echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
@@ -47,18 +47,20 @@ function getReports() {
 				WHERE 
 				r.id_client=c.id AND
 				r.id_booking=b.id";
+	//$query = "SELECT * FROM report ";
+	
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
 	
-	$bookings = array();
+	$reports = array();
 		
 	while ($row = mysql_fetch_assoc($result)) {
-		$bookings[] = $row;
+		$reports[] = $row;
 	}
 	mysql_close($link);
-	return $bookings;
+	return $reports;
 }
 
 function getReport($id) {

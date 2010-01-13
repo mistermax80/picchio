@@ -20,13 +20,14 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	$number_document = $_POST['number_document'];
 	$release_document_date = $_POST['release_document_date'];
 	$release_document_to = $_POST['release_document_to'];
+	$nationality = $_POST['nationality'];
 	$date_birth = $_POST['date_birth'];
 	$city_birth = $_POST['city_birth'];
 	$address = $_POST['address'];
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	$id_client = addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	$id_client = addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email);
 	
 	
 	if(isset($_POST['id_booking'])){
@@ -78,6 +79,10 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			<tr>
 				<td>Documento rilasciato da</td>
 				<td><input type="text" name="release_document_to" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Cittadinanza</td>
+				<td><input type="text" name="nationality" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Data Nascita</td>
@@ -145,6 +150,10 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			<tr>
 				<td>Documento rilasciato da</td>
 				<td><input type="text" name="release_document_to" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Cittadinanza</td>
+				<td><input type="text" name="nationality" autocomplete="off"/></td>
 			</tr>
 			<tr>
 				<td>Data Nascita</td>

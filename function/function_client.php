@@ -79,7 +79,7 @@ function getClient($id) {
 	return $client;
 }
 
-function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email){
+function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email){
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -91,9 +91,9 @@ function addClient($name,$surname,$type_document,$number_document,$release_docum
 	}
 
 	$query = "INSERT INTO client 
-				(name,surname,type_document,number_document,release_document_date,release_document_to,date_birth,city_birth,address,city,telephone,email)
+				(name,surname,type_document,number_document,release_document_date,release_document_to,nationality,date_birth,city_birth,address,city,telephone,email)
 				VALUES
-				('$name','$surname','$type_document','$number_document','$release_document_date','$release_document_to','$date_birth','$city_birth','$address','$city','$telephone','$email')";
+				('$name','$surname','$type_document','$number_document','$release_document_date','$release_document_to','$nationality','$date_birth','$city_birth','$address','$city','$telephone','$email')";
 	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
@@ -105,7 +105,7 @@ function addClient($name,$surname,$type_document,$number_document,$release_docum
 }
 
 
-function updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+function updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -124,6 +124,7 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$releas
 				number_document='".$number_document."',
 				release_document_date='".$release_document_date."',
 				release_document_to='".$release_document_to."',
+				nationality='".$nationality."',
 				date_birth='".$date_birth."',
 				city_birth='".$city_birth."',
 				address='".$address."',
