@@ -22,7 +22,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	$datefile = date("Ymdhms");
 
 	//Se windows mettere a true la seguente variabile
-	$ifWindows = true;
+	$ifWindows = false;
 	if ($ifWindows) {
 		$absolute_filename = "report\\notifica-".$datefile.".pdf";
 	}else{
