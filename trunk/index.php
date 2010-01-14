@@ -1,6 +1,7 @@
 <?php
 include_once 'include/header.php';
 include_once 'function/function_calendar.php';
+include_once 'function/function_page.php';
 
 $month = $_REQUEST['month'];
 $year = $_REQUEST['year'];
@@ -13,6 +14,7 @@ $year = (empty($year)) ? date("Y") : $year;
 
 drawCalendar("index.php","booking.php",$month,$year);
 
-include_once 'include/menu.php';
-include_once 'include/footer.php';
+//include_once 'include/menu.php';
+//include_once 'include/footer.php';
+drawClosePage();
 ?>
