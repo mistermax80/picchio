@@ -28,128 +28,74 @@ function drawClosePage($type=NULL,$id=NULL) {
 		$id_room = $booking['room'];
 		$id_client = $booking['client'];
 		?>
-			<div id="item_menu" onclick="window.location.href='index.php'">
-				Mese Corrente
-			</div>
-			<div id="item_menu" onclick="window.location.href='booking.php?id_room=<?php echo $id_room;?>
-									&date_stamp_in=<?php echo $date_stamp_in;?>&id_client=<?php echo $id_client;?>'">
-				Torna a prenotazione
-			</div>
-			<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $id;?>'">
-				Aggiungi Visitatore
-			</div>
-			<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'">
-				Modifica Prenotazione
-			</div>
-			
-			<script LANGUAGE="JavaScript">
-				function confirmDeleteBooking(id_booking)
-				{
-					var agree=confirm("Eliminare prenotazione?");
-					if (agree){
-						window.location.href="delete_booking.php?id_booking="+id_booking;
-						return true ;
-					}
-					else
-						return false ;
+		<div id="item_menu" onclick="window.location.href='index.php'" title="Mese Corrente">
+			<img alt="Mese Corrente" title="Mese Corrente" src="images/icons/calendar.png"/>
+			Mese Corrente
+		</div>
+		<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $id;?>'" title="Aggiungi Visitatore">
+			<img alt="Aggiungi Visitatore" title="Aggiungi Visitatore" src="images/icons/visitors.png"/>
+			Visitatore
+		</div>
+		<div id="item_menu" onclick="window.location.href='booking.php?id_room=<?php echo $id_room;?>
+								&date_stamp_in=<?php echo $date_stamp_in;?>&id_client=<?php echo $id_client;?>'" title="Ritorna alla Prenotazione">
+			<img alt="Ritorna alla Prenotazione" title="Ritorna alla Prenotazione" src="images/icons/return_booking.png"/>
+			Prenotazione
+		</div>
+		<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'" title="Modifica Prenotazione">
+			<img alt="Modifica Prenotazione" title="Modifica Prenotazione" src="images/icons/edit_booking.png"/>
+			Prenotazione
+		</div>
+		
+		<script LANGUAGE="JavaScript">
+			function confirmDeleteBooking(id_booking)
+			{
+				var agree=confirm("Eliminare prenotazione?");
+				if (agree){
+					window.location.href="delete_booking.php?id_booking="+id_booking;
+					return true ;
 				}
-			</script>
-			<div id="item_menu" onClick="confirmDeleteBooking(<?php echo $id;?>);">
-				Elimina prenotazione
-			</div>
-			<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'">
-				Servizi Stanza
-			</div>
-			<div id="item_menu" onclick="window.location.href='report.php?id_booking=<?php echo $id;?>'">
-				Crea notificato
-			</div>
+				else
+					return false ;
+			}
+		</script>
+		<div id="item_menu" onClick="confirmDeleteBooking(<?php echo $id;?>);" title="Elimina Prenotazione">
+			<img alt="Elimina Prenotazione" title="Elimina Prenotazione" src="images/icons/delete_booking.png"/>
+			Prenotazione
+		</div>
+		<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'" title="Servizi Stanza">
+			<img alt="Servizi Stanza" title="Servizi Stanza" src="images/icons/services.png"/>
+			Servizi Stanza
+		</div>
+		<div id="item_menu" onclick="window.location.href='report.php?id_booking=<?php echo $id;?>'" title="Crea notificato">
+			<img alt="Crea notificato" title="Crea notificato" src="images/icons/notify1.png"/>
+			Crea notificato
+		</div>
 	<?php
 	}else{
 		?>
-			<div id="item_menu" onclick="window.location.href='index.php'">
-				Mese Corrente
-			</div>
-			<div id="item_menu" onclick="window.location.href='modific_client.php'">
-				Clienti
-			</div>
-			<div id="item_menu" onclick="window.location.href='room.php'">
-				Stanze
-			</div>
-			<div id="item_menu" onclick="window.location.href='product.php?add_product=true'">
-				Servizi
-			</div>
-			<div id="item_menu" onclick="window.location.href='option.php'">
-				Notificazioni
-			</div>
+		<div id="item_menu" onclick="window.location.href='index.php'" title="Mese Corrente">
+			<img alt="Mese Corrente" title="Mese Corrente" src="images/icons/calendar.png"/>
+			Mese Corrente
+		</div>
+		<div id="item_menu" onclick="window.location.href='modific_client.php'" title="Gestione clienti">
+			<img alt="Gestione clienti" title="Gestione clienti" src="images/icons/client.png"/>
+			Clienti
+		</div>
+		<div id="item_menu" onclick="window.location.href='room.php'" title="Gestione Stanze">
+			<img alt="Gestione Stanze" title="Gestione Stanze" src="images/icons/room.png"/>
+			Stanze
+		</div>
+		<div id="item_menu" onclick="window.location.href='product.php?add_product=true'" title="Gestione Servizi">
+			<img alt="Gestione Servizi" title="Gestione Servizi" src="images/icons/services.png"/>
+			Servizi
+		</div>
+		<div id="item_menu" onclick="window.location.href='option.php'" title="Gestione Notificati">
+			<img alt="Gestione Notificati" title="Gestione Notificati" src="images/icons/notify.png"/>
+			Notificati
+		</div>
 		<?php
 	}
 	?>
-		<div id="little_calendar">
-			<table>
-				<thead>
-					<tr>
-						<th abbr="Monday" scope="col" title="Monday">M</th>
-						<th abbr="Tuesday" scope="col" title="Tuesday">T</th>
-						<th abbr="Wednesday" scope="col" title="Wednesday">W</th>
-						<th abbr="Thursday" scope="col" title="Thursday">T</th>
-						<th abbr="Friday" scope="col" title="Friday">F</th>
-						<th abbr="Saturday" scope="col" title="Saturday">S</th>
-						<th abbr="Sunday" scope="col" title="Sunday">S</th>
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<td abbr="September" colspan="3" id="prev"><a href="#" title="View posts for September 2009">&laquo; Sep</a></td>
-						<td class="pad">&nbsp;</td>
-						<td colspan="3" id="next">&nbsp;</td>
-					</tr>
-				</tfoot>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td id="today">4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td>9</td>
-						<td>10</td>
-						<td>11</td>
-						<td>12</td>
-						<td>13</td>
-						<td>14</td>
-					</tr>
-					<tr>
-						<td>15</td>
-						<td>16</td>
-						<td>17</td>
-						<td>18</td>
-						<td>19</td>
-						<td>20</td>
-						<td>21</td>
-					</tr>
-					<tr>
-						<td>22</td>
-						<td>23</td>
-						<td>24</td>
-						<td>25</td>
-						<td>26</td>
-						<td>27</td>
-						<td>28</td>
-					</tr>
-					<tr>
-						<td>29</td>
-						<td>30</td>
-						<td>31</td>
-						<td class="pad" colspan="4">&nbsp;</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 	</div>
 	
 	<?php
