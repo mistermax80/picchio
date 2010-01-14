@@ -6,6 +6,8 @@ include_once 'function/function_date.php';
 include_once 'function/function_booking.php';
 
 drawOpenPage();
+$date_in = $_POST['date_in'];
+$id_room = $_POST['id_room'];
 
 if(isset($_REQUEST['id_booking'])){
 	$id_booking = $_REQUEST['id_booking'];
@@ -42,8 +44,8 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	}else{
 		?>
 		<script type="text/javascript">
-			alert("Prenotazione Eliminata con successo!");
-			window.location.href="index.php";
+			alert("Cliente aggiunto con successo!");
+			window.location.href="booking.php?id_room=<?php echo $id_room?>&date_stamp_in=<?php echo $date_in ?>&id_client=<?php echo $id_client?>";
 		</script>
 		<?php 
 	}
@@ -126,6 +128,8 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	<div id="titoloContenuti">AGGIUNGI  NUOVO CLIENTE</div>
 
 	<form id="add_client" name="add_client" method="post">
+	<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
+		<input type="hidden" name="id_room" value="<?php echo $id_room;?>"/>
 		<input type="hidden" name="operation" value="save" />
 		<table align="center">
 			<tr>
