@@ -3,8 +3,42 @@
 include_once 'function/function_page.php';
 include_once 'function/function_product.php';
 
-
+?>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit()
+		{
+			var agree=confirm("Eliminare prodotto?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script> 
+<?php
 drawOpenPage();
+
+if(isset($_REQUEST['delete']) && ($_REQUEST['delete']!="")){
+	
+	
+	deleteProduct($_REQUEST['id']);
+	
+	if($_REQUEST['id_booking']){
+	?>
+		<script type="text/javascript">
+			alert("Prodotto eliminato con successo!");
+			window.location.href="product.php?id_booking=<?php echo $_REQUEST['id_booking']?>";
+		</script>
+		<?php 
+	}
+	else{
+		?>
+		<script type="text/javascript">
+			alert("Prodotto eliminato con successo!");
+			window.location.href="product.php?add_product=true";
+		</script>
+		<?php 
+	}
+}
 
 if(isset($_REQUEST['modify']) && ($_REQUEST['modify']!="")){
 
@@ -13,7 +47,7 @@ if(isset($_REQUEST['modify']) && ($_REQUEST['modify']!="")){
 	if($_REQUEST['id_booking']){
 	?>
 		<script type="text/javascript">
-			alert("Prodotto aggiunto con successo!");
+			alert("Prodotto modificato con successo!");
 			window.location.href="product.php?id_booking=<?php echo $_REQUEST['id_booking']?>";
 		</script>
 		<?php 
@@ -21,14 +55,12 @@ if(isset($_REQUEST['modify']) && ($_REQUEST['modify']!="")){
 	else{
 		?>
 		<script type="text/javascript">
-			alert("Prodotto aggiunto con successo!");
+			alert("Prodotto modificato con successo!");
 			window.location.href="product.php?add_product=true";
 		</script>
 		<?php 
 	}
 }
-
-
 
 if(isset($_REQUEST['add']) && ($_REQUEST['add']!="")){
 	?><div id="titoloContenuti">AGGIUNGI PRODOTTO</div><?php 
@@ -82,7 +114,7 @@ if(isset($_REQUEST['add']) && ($_REQUEST['add']!="")){
 		<td><input type="text" id="price" name="price" autocomplete="off" value="<?php echo $product['price'];?>"/></td>
 	</tr>
 	<tr>
-		<td></td>
+		<td><input id="delete" name="delete" type="submit" onClick="return confirmSubmit();" value="Elimina"/></td>
 		<td><button value="submit">Salva</button></td>
 	</tr>
 </table>
@@ -113,7 +145,7 @@ if(isset($_REQUEST['add']) && ($_REQUEST['add']!="")){
 		?>
 		<script type="text/javascript">
 			alert("Prodotto aggiunto con successo!");
-			window.location.href="index.php";
+			window.location.href="product.php?add_product=true";
 		</script>
 		<?php 
 	}
