@@ -19,11 +19,19 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	$client = getClient($id_client);
 	$surname = $client['surname'];
 	
-	$filename = "report\\notifica-"."-".$id_booking.".pdf";
-	//var_dump($filename);
-	//insertReport($id_client,$filename,$id_booking);
+	$datefile = date("Ymdhms");
+
+	//Se windows mettere a true la seguente variabile
+	$ifWindows = false;
+	if ($ifWindows) {
+		$filename = "report\\notifica-".$datefile.".pdf";
+	}else{
+		$filename = "report/notifica-".$datefile.".pdf";
+	}
+	
 	$result = generateNotification($filename,$id_booking);
 	if($result){
+		insertReport($id_client,$filename,$id_booking);
 	?>
 	<script type="text/javascript">
 		alert("Report generato con successo!");

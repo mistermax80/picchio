@@ -61,7 +61,7 @@ function generateNotification($filename,$id_booking) {
 	//Parameter PFD
 	$background_template = 1;
 	$margin_sx = 5;
-	$margin_top = 0;
+	$margin_top = 20;
 	$border = 0;
 	//*******************************************
 	
