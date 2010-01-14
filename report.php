@@ -19,7 +19,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	$client = getClient($id_client);
 	$surname = $client['surname'];
 	
-	$filename = "report\\".$surname."-".$id_booking.".pdf";
+	$filename = "report\\notifica-"."-".$id_booking.".pdf";
 	//var_dump($filename);
 	//insertReport($id_client,$filename,$id_booking);
 	$result = generateNotification($filename,$id_booking);
