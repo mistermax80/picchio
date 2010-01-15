@@ -151,7 +151,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		//stampami quelli già generati
 		?>
 		<br><br><br>
-		<b><?php echo "Notificazioni già generate"?></b>
+		<b><?php echo "Notifiche generate"?></b>
 		<br><br>
 		<table width="805px">
 		    <tr>
@@ -178,11 +178,11 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 			$id_client = $r['id_client'];
 			$client = getClient($id_client);
 			
-			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Visualizza</button>';
-			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
+			$button_view = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Visualizza</button>';
+
 			$str = "mygrid.addRow(".$r['id'].", [\"".$client['surname']."  ".$client['name']."\",\"".$r['path']."\", \"".
 									$r['date']."\", \"".
-									$button_modify."\"]);";
+									$button_view."\"]);";
 			echo $str;
 		}
 	?></script>

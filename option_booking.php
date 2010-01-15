@@ -13,7 +13,22 @@ $id_booking = $_REQUEST['id_booking'];
 //$id_booking = $_POST['id_booking']; //se lo mandano a vicenda con bar.php per non perdere il menù a six
 $booking = getBookingById($id_booking);
 
+if(isset($_REQUEST['perfunctory'])){
+	//generare file servizi stanza..prendo tutti gli optional con le quanità e i prezzi
+	$optionals = getOptional($id_booking);
+	
+	$datefile = date("Ymdhms");
 
+	//Se windows mettere a true la seguente variabile
+	$ifWindows = false;
+	if ($ifWindows) {
+		$absolute_filename = "service\\proforma-".$datefile.".pdf";
+	}else{
+		$absolute_filename = "service/proforma-".$datefile.".pdf";
+	}
+	$result = generatePerfunctory($absolute_filename,$optionals);
+		
+	}
 if(isset($_REQUEST['delete_optional'])){
 	//elimino dal db l'optional relativo alla prenotazione
 	$id_optional = $_REQUEST['delete_optional'];
@@ -94,6 +109,7 @@ if(isset($_REQUEST['add_quantity'])){
 		$optional_booking = getOptional($id_booking);
 		if(!$optional_booking==""){
 			$totale = 0;
+			$quantity = 0;
 			?>
 		 
 		<table width="805px">
@@ -121,6 +137,7 @@ if(isset($_REQUEST['add_quantity'])){
 		 	foreach ($optional_booking as $product){ 	
 		 	$p = getProduct($product['id_product']);
 		 	$totale = $totale + ($p['price']*$product['quantity']);
+		 	$quantity = $quantity + $product['quantity'];
 			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_optional='.$product['id'].'\
 									&id_booking='.$id_booking.'\'\">Elimina</button>';		
 		
@@ -138,9 +155,12 @@ if(isset($_REQUEST['add_quantity'])){
 									$vuoto."\",\"".$vuoto."\"]);";
 			echo $str;
 			
+			$button_view = '<button onclick=\"window.location.href=\'option_booking.php?perfunctory=treu'.'\
+									&id_booking='.$id_booking.'\'\">Visualizza</button>';
+			
 			$str = "mygrid.addRow(".$p['id'].", [\"".$stotale."\",\"".$totale."\", \"".
-									$vuoto."\", \"".
-									$vuoto."\",\"".$vuoto."\"]);";
+									$quantity."\", \"".
+									$button_view."\",\"".$vuoto."\"]);";
 			echo $str;
 		 	
 		 	

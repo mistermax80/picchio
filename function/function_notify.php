@@ -128,5 +128,20 @@ function generateNotification($filename,$id_client) {
 	$pdf->Output($filename);
 	return true;
 }
+
+function generatePerfunctory($filename,$optionals) {
+	
+	/*
+	if(!is_dir("service")){
+		mkdir("service", 0777);
+	}
+	fopen($filename,"w+");
+	
+	foreach($optionals as $o){
+		$product = getProduct($o['id']);
+		//stampiamo prodotto con quantità e il prezzo
+	}*/
+	
+}
 	?>
 
