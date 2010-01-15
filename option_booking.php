@@ -13,6 +13,7 @@ $id_booking = $_REQUEST['id_booking'];
 //$id_booking = $_POST['id_booking']; //se lo mandano a vicenda con bar.php per non perdere il menù a six
 $booking = getBookingById($id_booking);
 
+
 if(isset($_REQUEST['delete_optional'])){
 	//elimino dal db l'optional relativo alla prenotazione
 	$id_optional = $_REQUEST['delete_optional'];
@@ -86,14 +87,14 @@ if(isset($_REQUEST['add_quantity'])){
 		</tr>
 		</table>
 		<br>
-	
+		
 	<?php 
 	//visualizza servizi in stanza
 	
 		$optional_booking = getOptional($id_booking);
 		if(!$optional_booking==""){
-		
-		?>
+			$totale = 0;
+			?>
 		 
 		<table width="805px">
 		    <tr>
@@ -115,8 +116,11 @@ if(isset($_REQUEST['add_quantity'])){
 		mygrid.setSkin("dhx_black");
 		
 		<?php 
-		 	foreach ($optional_booking as $product){ 
+			$vuoto = "";
+			$stotale = "Totale servizi";
+		 	foreach ($optional_booking as $product){ 	
 		 	$p = getProduct($product['id_product']);
+		 	$totale = $totale + ($p['price']*$product['quantity']);
 			$button_delete = '<button onclick=\"window.location.href=\'option_booking.php?delete_optional='.$product['id'].'\
 									&id_booking='.$id_booking.'\'\">Elimina</button>';		
 		
@@ -129,7 +133,17 @@ if(isset($_REQUEST['add_quantity'])){
 									
 			echo $str;
 			
+		 	$str = "mygrid.addRow(".$p['id'].", [\"".$vuoto."\",\"".$vuoto."\", \"".
+									$vuoto."\", \"".
+									$vuoto."\",\"".$vuoto."\"]);";
+			echo $str;
+			
+			$str = "mygrid.addRow(".$p['id'].", [\"".$stotale."\",\"".$totale."\", \"".
+									$vuoto."\", \"".
+									$vuoto."\",\"".$vuoto."\"]);";
+			echo $str;
 		 	}
+		 	
 	?></script><?php 
 		}
 	drawClosePage("id_booking",$id_booking);
