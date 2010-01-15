@@ -67,7 +67,7 @@ if(isset($_REQUEST['add_quantity'])){
 	<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:100%;height:50px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:100%;height:47px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -124,7 +124,7 @@ if(isset($_REQUEST['add_quantity'])){
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Servizio,Prezzo (Euro),Quantità,Aumenta quantità,Elimina");
-		mygrid.setInitWidths("90,149,120,120,80");
+		mygrid.setInitWidths("90,149,120,120,81");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");

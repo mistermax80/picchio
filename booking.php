@@ -109,7 +109,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			}
 			else{//Salvo i dati della prenotazione
 				if($number_client==0 || (isset($number_client))){
-					$number_client = 0;	
+					$number_client = 1;	
 				}
 				insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note);
 				$date_stamp_in = date2dateStamp($date_in); 
@@ -136,8 +136,9 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				mygrid.setSkin("dhx_black");
 				
 				<?php 
+					
 					$str = "mygrid.addRow(".$booking['id'].", [\"".$booking['room']."\",\"".substr($booking['date_in'],0,10)."\", \"".
-											substr($booking['date_out'],0,10)."\", \"".$booking['number_client']."\", \"".
+											substr($booking['date_out'],0,10)."\", \"".$number_client."\", \"".
 											$booking['note']."\", \"".$booking['city_birth']."\", \"".
 											$booking['address']."\", \"".
 											$button_modify."\"]);";
@@ -158,6 +159,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		
 	}else if(count($booking)>0){  //Esiste la prenotazione
 		echo "<br><br><br>";
+		$number_client = 1+ getNumeberClientVisitor($booking['id']);
 		//echo "<b>Informazioni prenotazione</b>";
 		?>
 			<table width="805px">
@@ -181,10 +183,8 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 		
 		<?php 
 			$str = "mygrid.addRow(".$booking['id'].", [\"".$booking['room']."\",\"".substr($booking['date_in'],0,10)."\", \"".
-									substr($booking['date_out'],0,10)."\", \"".$booking['number_client']."\", \"".
-									$booking['note']."\", \"".$booking['city_birth']."\", \"".
-									$booking['address']."\", \"".
-									$button_modify."\"]);";
+									substr($booking['date_out'],0,10)."\", \"".$number_client."\", \"".
+									$booking['note']."\"]);";
 			echo $str;
 			?>
 	</script>
@@ -266,7 +266,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				<table width="805px">
 				    <tr>
 				        <td>
-				            <div id="gridbox2" style="width:100%;height:250px;background-color:white;overflow:hidden"></div>
+				            <div id="gridbox2" style="width:103%;height:250px;background-color:white;overflow:hidden"></div>
 				        </td>
 				    </tr>
 				</table>

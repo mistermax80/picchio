@@ -62,7 +62,7 @@ body {
 
 #calendario_tabella_giorni{
 	float: right;
-	height: 450px;
+	height: 550px;
 	width: 750px;
 	overflow: auto;
 }
