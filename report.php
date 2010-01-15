@@ -11,12 +11,11 @@ drawOpenPage();
 if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	
 	$id_booking = $_REQUEST['id_booking']; 
+	$id_client = $_REQUEST['id_client'];
 	
 	unset($_REQUEST['notify']);
 	unset($_REQUEST['id_booking']);
 	
-	$booking = getBookingById($id_booking);
-	$id_client = $booking['client'];
 	$client = getClient($id_client);
 	$surname = $client['surname'];
 	
@@ -30,15 +29,8 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		$absolute_filename = "report/notifica-".$datefile.".pdf";
 	}
 	$filename = "report/notifica-".$datefile.".pdf";
-	
-	if(isset($_REQUEST['family'])){
-		$id_client = $_REQUEST['family']; 
-		$result = generateNotificationFamily($absolute_filename,$id_booking,$id_client);
-	}
-	
-	else { 
-		$result = generateNotification($absolute_filename,$id_booking);
-	}
+	 
+	$result = generateNotification($absolute_filename,$id_client);
 	
 	if($result){
 		insertReport($id_client,$filename,$id_booking);
@@ -110,12 +102,12 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 				$client = getClient($id_client);
 				
 				$button_notify = '<button onclick=\"window.location.href=\'report.php?id_booking='.$booking['id'].'\
-									&notify=true&id_client='.$booking['client'].'\'\">Notifica</button>';
+									&notify=true&id_client='.$id_client.'\'\">Notifica</button>';
 				
 				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['surname']."\",\"".$client['name']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
-									$client['address']."\", \"".$client['city']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
+									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
 									$button_notify."\"]);";
 				echo $str;	
@@ -195,10 +187,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		}
 	?></script>
 		<?php 
-	
-	}
-	
-	
+	}	
 	drawClosePage("id_booking",$id_booking);
 }
 ?>
