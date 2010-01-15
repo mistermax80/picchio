@@ -28,6 +28,33 @@ function getOptional($id_booking) {
 	return $optionals;
 }
 
+function getSum($id_booking) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+
+	$query = "SELECT SUM(price) 
+				FROM optional as o
+					 product WHERE id_booking=".$id_booking;
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+		
+	if ($row = mysql_fetch_assoc($result)) {
+		$optional = $row;
+	}
+	mysql_close($link);
+	return $optional;
+}
+
 function getOptionalById($id) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
