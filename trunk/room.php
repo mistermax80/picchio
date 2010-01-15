@@ -38,7 +38,7 @@ else if(!(isset($_REQUEST['id_room']))){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:90%;height:250px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:82%;height:244px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -47,8 +47,8 @@ else if(!(isset($_REQUEST['id_room']))){
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Numero,Tipo,Descrizione,Prezzo,Modifica");
-		mygrid.setInitWidths("50,200,200,100,102");
-		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setInitWidths("50,200,200,100,106");
+		mygrid.setColAlign("left,left,left,left,center");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
 		mygrid.init();
@@ -66,8 +66,9 @@ else if(!(isset($_REQUEST['id_room']))){
 				?>
 
 	</script>
-		<form id="add_room" name="add_room" action="add_room.php">
-				<button id="add_room" value="submit">Aggiungi Stanza</button>
+	<br><br>	
+	<form id="add_room" name="add_room" action="add_room.php">
+		<button id="add_room" value="submit">Aggiungi Stanza</button>
 	</form>
 
 	

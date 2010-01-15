@@ -28,6 +28,33 @@ function getVisitors() {
 	return $visitors;
 }
 
+function getNumeberClientVisitor($id_booking) {
+
+	$link = mysql_connect(DB_ADDRESS,USER,PASS);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
+	}
+	$db_selected = mysql_select_db(DB_NAME, $link);
+	if (!$db_selected) {
+		die ('Can\'t use foo : ' . mysql_error());
+	}
+	
+	$query = "SELECT count(*) FROM visitor  WHERE id_booking=".$id_booking;
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	
+	$visitors = 0;
+		
+	if ($row = mysql_fetch_assoc($result)) {
+		$visitors = $row['count(*)'];
+	}
+	mysql_close($link);
+	return $visitors;
+}
+
 function getVisitor($id_booking) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);

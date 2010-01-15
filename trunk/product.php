@@ -185,7 +185,7 @@ if(isset($_REQUEST['search']) && $_REQUEST['search']!="" ){?>
 	<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:71%;height:400px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:64%;height:400px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -194,7 +194,7 @@ if(isset($_REQUEST['search']) && $_REQUEST['search']!="" ){?>
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Articolo,Prezzo (Euro),Descrizione,Modifica");
-		mygrid.setInitWidths("200,150,120,98");
+		mygrid.setInitWidths("130,150,120,90");
 		mygrid.setColAlign("left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str");

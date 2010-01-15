@@ -69,7 +69,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:108%;height:160px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:107%;height:160px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -77,7 +77,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data nascita,Luogo nascita,Indirizzo,Citt&agrave;,Telefono,Email,Genera");
-		mygrid.setInitWidths("70,70,70,60,80,60,60,80,80,80,65,80,90");
+		mygrid.setInitWidths("70,70,70,60,80,60,60,80,80,80,65,80,93");
 		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
@@ -118,7 +118,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:108%;height:55px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:107%;height:47px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -127,7 +127,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
-		mygrid.setInitWidths("120,200,200,100,238");
+		mygrid.setInitWidths("120,200,200,100,236");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
@@ -165,7 +165,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		mygrid = new dhtmlXGridObject('gridbox2');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cliente,Path,Data,Visualizza");
-		mygrid.setInitWidths("100,200,130,112");
+		mygrid.setInitWidths("100,200,130,114");
 		mygrid.setColAlign("left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str");
