@@ -77,7 +77,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:108%;height:200px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:108%;height:160px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -126,7 +126,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:108%;height:60px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:108%;height:55px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -158,6 +158,8 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	if(!$reports==0){
 		//stampami quelli già generati
 		?>
+		<br><br><br>
+		<b><?php echo "Notificazioni già generate"?></b>
 		<br><br>
 		<table width="805px">
 		    <tr>
