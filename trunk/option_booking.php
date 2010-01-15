@@ -118,7 +118,6 @@ if(isset($_REQUEST['add_quantity'])){
 		<?php 
 			$vuoto = "";
 			$stotale = "Totale servizi";
-			$virgola = ",00";
 		 	foreach ($optional_booking as $product){ 	
 		 	$p = getProduct($product['id_product']);
 		 	$totale = $totale + ($p['price']*$product['quantity']);
@@ -139,7 +138,7 @@ if(isset($_REQUEST['add_quantity'])){
 									$vuoto."\",\"".$vuoto."\"]);";
 			echo $str;
 			
-			$str = "mygrid.addRow(".$p['id'].", [\"".$stotale."\",\"".$totale."".$virgola."\", \"".
+			$str = "mygrid.addRow(".$p['id'].", [\"".$stotale."\",\"".$totale."\", \"".
 									$vuoto."\", \"".
 									$vuoto."\",\"".$vuoto."\"]);";
 			echo $str;
