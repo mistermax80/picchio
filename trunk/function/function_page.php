@@ -39,11 +39,11 @@ function drawClosePage($type=NULL,$id=NULL) {
 		<div id="item_menu" onclick="window.location.href='booking.php?id_room=<?php echo $id_room;?>
 								&date_stamp_in=<?php echo $date_stamp_in;?>&id_client=<?php echo $id_client;?>'" title="Ritorna alla Prenotazione">
 			<img alt="Ritorna alla Prenotazione" title="Ritorna alla Prenotazione" src="images/icons/return_booking.png"/>
-			Prenotazione
+			Info Prenotazione
 		</div>
 		<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'" title="Modifica Prenotazione">
 			<img alt="Modifica Prenotazione" title="Modifica Prenotazione" src="images/icons/edit_booking.png"/>
-			Prenotazione
+			Modifica
 		</div>
 		
 		<script LANGUAGE="JavaScript">
@@ -60,7 +60,7 @@ function drawClosePage($type=NULL,$id=NULL) {
 		</script>
 		<div id="item_menu" onClick="confirmDeleteBooking(<?php echo $id;?>);" title="Elimina Prenotazione">
 			<img alt="Elimina Prenotazione" title="Elimina Prenotazione" src="images/icons/delete_booking.png"/>
-			Prenotazione
+			Elimina
 		</div>
 		<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'" title="Servizi Stanza">
 			<img alt="Servizi Stanza" title="Servizi Stanza" src="images/icons/services.png"/>

@@ -5,9 +5,6 @@ include_once 'include/costant_generic.php';
 
 drawOpenPage();
 
-?>
-<div id="titoloContenuti">PRENOTAZIONE ELIMINATA</div>
-<?php
 if($_REQUEST['id_booking']){
 	deleteBooking($_REQUEST['id_booking']);
 }
