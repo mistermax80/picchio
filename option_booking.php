@@ -132,7 +132,7 @@ if(isset($_REQUEST['add_quantity'])){
 									$button_add."\",\"".$button_delete."\"]);";
 									
 			echo $str;
-			
+		 	}
 		 	$str = "mygrid.addRow(".$p['id'].", [\"".$vuoto."\",\"".$vuoto."\", \"".
 									$vuoto."\", \"".
 									$vuoto."\",\"".$vuoto."\"]);";
@@ -142,7 +142,7 @@ if(isset($_REQUEST['add_quantity'])){
 									$vuoto."\", \"".
 									$vuoto."\",\"".$vuoto."\"]);";
 			echo $str;
-		 	}
+		 	
 		 	
 	?></script><?php 
 		}
