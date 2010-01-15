@@ -4,6 +4,7 @@ include_once 'function/function_booking.php';
 include_once 'function/function_client.php';
 include_once 'function/function_report.php';
 include_once 'function/function_notify.php';
+include_once 'function/function_visitor.php';
 
 drawOpenPage();
 
@@ -30,7 +31,15 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	}
 	$filename = "report/notifica-".$datefile.".pdf";
 	
-	$result = generateNotification($absolute_filename,$id_booking);
+	if(isset($_REQUEST['family'])){
+		$id_client = $_REQUEST['family']; 
+		$result = generateNotificationFamily($absolute_filename,$id_booking,$id_client);
+	}
+	
+	else { 
+		$result = generateNotification($absolute_filename,$id_booking);
+	}
+	
 	if($result){
 		insertReport($id_client,$filename,$id_booking);
 	?>
@@ -68,16 +77,15 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox" style="width:110%;height:200px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox" style="width:108%;height:200px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
-	   
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Genera");
-		mygrid.setInitWidths("70,70,70,60,80,80,80,80,80,60,60,90");
+		mygrid.setHeader("Utente,Cognome,Nome,Tipo Doc.,Num Doc.,Data nascita,Luogo nascita,Indirizzo,Citt&agrave;,Telefono,Email,Genera");
+		mygrid.setInitWidths("70,70,70,60,80,60,60,80,80,80,65,80,90");
 		mygrid.setColAlign("left,left,left,left,left,left,left,left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str,str,str,str,str,str,str,str");
@@ -85,24 +93,40 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		mygrid.setSkin("dhx_black");
 	
 	<?php 
-		$button_modify = '<button onclick=\"window.location.href=\'report.php?id_booking='.$booking['id'].'\
+		$button_notify = '<button onclick=\"window.location.href=\'report.php?id_booking='.$booking['id'].'\
 									&notify=true&id_client='.$booking['client'].'\'\">Notifica</button>';
 		$str = "mygrid.addRow(".$client['id'].", [\"".Cliente."\",\"".$client['name']."\",\"".$client['surname']."\", \"".
 									$client['type_document']."\", \"".$client['number_document']."\", \"".
 									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
 									$client['address']."\", \"".$client['city']."\", \"".
 									$client['telephone']."\", \"".$client['email']."\", \"".
-									$button_modify."\"]);";
+									$button_notify."\"]);";
 															
 		echo $str;						
 		
+			$visitors = getVisitor($id_booking);
+			foreach ($visitors as $v) {
+				$id_client = $v['id_client'];
+				$client = getClient($id_client);
+				
+				$button_notify = '<button onclick=\"window.location.href=\'report.php?id_booking='.$booking['id'].'\
+									&notify=true&id_client='.$booking['client'].'\'\">Notifica</button>';
+				
+				$str = "mygrid.addRow(".$client['id'].", [\"".Ospite."\",\"".$client['surname']."\",\"".$client['name']."\", \"".
+									$client['type_document']."\", \"".$client['number_document']."\", \"".
+									$client['address']."\", \"".$client['city']."\", \"".
+									$client['date_birth']."\", \"".$client['city_birth']."\", \"".
+									$client['telephone']."\", \"".$client['email']."\", \"".
+									$button_notify."\"]);";
+				echo $str;	
+			}
 	?>
 	</script>
 		<br><br>
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox1" style="width:110%;height:60px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox1" style="width:108%;height:60px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>
@@ -111,7 +135,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		mygrid = new dhtmlXGridObject('gridbox1');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Stanza,Check  In,Check  Out,Numero Clienti,Note");
-		mygrid.setInitWidths("120,200,200,100,260");
+		mygrid.setInitWidths("120,200,200,100,238");
 		mygrid.setColAlign("left,left,left,left,left");
 		mygrid.setColTypes("ro,ro,ro,ro,ro");
 		mygrid.setColSorting("str,str,str,str,str");
@@ -129,6 +153,50 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	</script>
 <?php 
 	}
+	
+	$reports = getReportIdBooking($id_booking);
+	if(!$reports==0){
+		//stampami quelli già generati
+		?>
+		<br><br>
+		<table width="805px">
+		    <tr>
+		        <td>
+		            <div id="gridbox2" style="width:68%;height:100px;background-color:white;overflow:hidden"></div>
+		        </td>
+		    </tr>
+		</table>
+	   
+	<script>
+		mygrid = new dhtmlXGridObject('gridbox2');
+		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
+		mygrid.setHeader("Cliente,Path,Data,spedizione,Vedi");
+		mygrid.setInitWidths("100,100,130,100,100");
+		mygrid.setColAlign("left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str");
+		mygrid.init();
+		mygrid.setSkin("dhx_black"); 
+	
+	<?php 
+		foreach ($reports as $r) {
+			
+			$id_client = $r['id_client'];
+			$client = getClient($id_client);
+			
+			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Report</button>';
+			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
+			$str = "mygrid.addRow(".$r['id'].", [\"".$client['surname']."  ".$client['name']."\",\"".$r['path']."\", \"".
+									$r['date']."\", \"".$r['send']."\", \"".
+									$button_modify."\",\"".$button_delete."\"]);";
+			echo $str;
+		}
+	?></script>
+		<?php 
+	
+	}
+	
+	
 	drawClosePage("id_booking",$id_booking);
 }
 ?>

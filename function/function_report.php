@@ -101,7 +101,7 @@ function getReportIdBooking($id_booking) {
 
 	$query = "SELECT * FROM report WHERE id_booking=".$id_booking.";";
 	
-	$result = mysql_query($query);
+	/*$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
@@ -110,7 +110,20 @@ function getReportIdBooking($id_booking) {
 		$report = $row;
 	}
 	mysql_close($link);
-	return $report;
+	return $report;*/
+	$result = mysql_query($query);
+	if (!$result) {
+		die('Invalid query: ' . mysql_error());
+	}
+	
+	$reports = array();
+		
+	while ($row = mysql_fetch_assoc($result)) {
+		$reports[] = $row;
+	}
+	mysql_close($link);
+	return $reports;
+
 }
 
 
