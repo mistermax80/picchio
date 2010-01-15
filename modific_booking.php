@@ -3,6 +3,7 @@
 include_once 'function/function_page.php';
 include_once 'function/function_room.php';
 include_once 'function/function_booking.php';
+include_once 'function/function_date.php';
 
 drawOpenPage();
 
@@ -11,7 +12,6 @@ $booking = getBookingById($id_booking);
 
 //var_dump($booking);
 
-?><div id="titoloContenuti">MODIFICA PRENOTAZIONE</div><?php 
 
 $rooms = getRooms();
 
@@ -26,12 +26,18 @@ if($_POST['salva']){
 	$number_client=$_POST['number_client'];
 	$note=$_POST['note'];
 	updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client,$note);
-	echo "Prenotazione Correttamente Modificata!";
-	drawClosePage("id_booking",$id_booking);
+	$date_stamp_in = date2dateStamp($booking['date_in']);
+	$link = "booking.php?id_room=".$booking['room']."&date_stamp_in=".$date_stamp_in."&id_client=".$booking['client'];
+	?>
+		<script type="text/javascript">
+			alert("Prenotazione modifica con successo!");
+			window.location.href="<?php echo $link?>";
+		</script>
+	<?php 
 }else{
 
 ?>
-
+<div id="titoloContenuti">MODIFICA PRENOTAZIONE</div>< 
 		<link type="text/css" href="include_js/jquery-ui-1.7.2.custom/css/ui-darkness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
 		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="include_js/jquery-ui-1.7.2.custom//js/jquery-ui-1.7.2.custom.min.js"></script>
