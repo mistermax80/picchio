@@ -146,15 +146,15 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 				</tr>
 				<tr>
 					<td>Documento rilasciato il</td>
-					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+					<td><input type="text" name="release_document_date" autocomplete="off" value="<?php echo $client['release_document_date'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato da</td>
-					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+					<td><input type="text" name="release_document_to" autocomplete="off" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Cittadinanza</td>
-					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
+					<td><input type="text" name="nationality" autocomplete="off" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
@@ -233,55 +233,55 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 			<table align="center">
 				<tr>
 					<td>Cognome</td>
-					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+					<td><input type="text" name="surname" autocomplete="off" value="<?php echo $client['surname'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
+					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
-					<td><input type="text" name="type_document" value="<?php echo $client['type_document'];?>"/></td>
+					<td><input type="text" name="type_document" autocomplete="off" value="<?php echo $client['type_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Num. Documento</td>
-					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
+					<td><input type="text" name="number_document" autocomplete="off" value="<?php echo $client['number_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato il</td>
-					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+					<td><input type="text" name="release_document_date" autocomplete="off" value="<?php echo $client['release_document_date'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato da</td>
-					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+					<td><input type="text" name="release_document_to" autocomplete="off" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Cittadinanza</td>
-					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
+					<td><input type="text" name="nationality" autocomplete="off" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
-					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
+					<td><input type="text" name="date_birth" autocomplete="off" value="<?php echo $client['date_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Luogo Nascita</td>
-					<td><input type="text" name="city_birth" value="<?php echo $client['city_birth'];?>"/></td>
+					<td><input type="text" name="city_birth" autocomplete="off" value="<?php echo $client['city_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Indirizzo</td>
-					<td><input type="text" name="address" value="<?php echo $client['address'];?>"/></td>
+					<td><input type="text" name="address" autocomplete="off" value="<?php echo $client['address'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Citt&agrave;</td>
-					<td><input type="text" name="city" value="<?php echo $client['city'];?>"/></td>
+					<td><input type="text" name="city" autocomplete="off" value="<?php echo $client['city'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Telefono</td>
-					<td><input type="text" name="telephone" value="<?php echo $client['telephone'];?>"/></td>
+					<td><input type="text" name="telephone" autocomplete="off" value="<?php echo $client['telephone'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email" value="<?php echo $client['email'];?>"/></td>
+					<td><input type="text" name="email" autocomplete="off" value="<?php echo $client['email'];?>"/></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -340,55 +340,55 @@ drawClosePage("id_booking",$id_booking);
 			<table align="center">
 				<tr>
 					<td>Cognome</td>
-					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+					<td><input type="text" name="surname" autocomplete="off" value="<?php echo $client['surname'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
+					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
-					<td><input type="text" name="type_document" value="<?php echo $client['type_document'];?>"/></td>
+					<td><input type="text" name="type_document" autocomplete="off" value="<?php echo $client['type_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Num. Documento</td>
-					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
+					<td><input type="text" name="number_document" autocomplete="off" value="<?php echo $client['number_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato il</td>
-					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+					<td><input type="text" name="release_document_date" autocomplete="off" value="<?php echo $client['release_document_date'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato da</td>
-					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+					<td><input type="text" name="release_document_to" autocomplete="off" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Cittadinanza</td>
-					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
+					<td><input type="text" name="nationality" autocomplete="off" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
-					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
+					<td><input type="text" name="date_birth" autocomplete="off" value="<?php echo $client['date_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Luogo Nascita</td>
-					<td><input type="text" name="city_birth" value="<?php echo $client['city_birth'];?>"/></td>
+					<td><input type="text" name="city_birth" autocomplete="off"value="<?php echo $client['city_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Indirizzo</td>
-					<td><input type="text" name="address" value="<?php echo $client['address'];?>"/></td>
+					<td><input type="text" name="address" autocomplete="off" value="<?php echo $client['address'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Citt&agrave;</td>
-					<td><input type="text" name="city" value="<?php echo $client['city'];?>"/></td>
+					<td><input type="text" name="city" autocomplete="off" value="<?php echo $client['city'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Telefono</td>
-					<td><input type="text" name="telephone" value="<?php echo $client['telephone'];?>"/></td>
+					<td><input type="text" name="telephone" autocomplete="off" value="<?php echo $client['telephone'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email" value="<?php echo $client['email'];?>"/></td>
+					<td><input type="text" name="email" autocomplete="off" value="<?php echo $client['email'];?>"/></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -444,55 +444,55 @@ drawClosePage("id_booking",$id_booking);
 			<table align="center">
 				<tr>
 					<td>Cognome</td>
-					<td><input type="text" name="surname" value="<?php echo $client['surname'];?>"/></td>
+					<td><input type="text" name="surname" autocomplete="off" value="<?php echo $client['surname'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Nome</td>
-					<td><input type="text" name="name" value="<?php echo $client['name'];?>"/></td>
+					<td><input type="text" name="name" autocomplete="off" value="<?php echo $client['name'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Tipo Documento</td>
-					<td><input type="text" name="type_document" value="<?php echo $client['type_document'];?>"/></td>
+					<td><input type="text" name="type_document" autocomplete="off" value="<?php echo $client['type_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Num. Documento</td>
-					<td><input type="text" name="number_document" value="<?php echo $client['number_document'];?>"/></td>
+					<td><input type="text" name="number_document" autocomplete="off" value="<?php echo $client['number_document'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato il</td>
-					<td><input type="text" name="release_document_date" value="<?php echo $client['release_document_date'];?>"/></td>
+					<td><input type="text" name="release_document_date" autocomplete="off" value="<?php echo $client['release_document_date'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Documento rilasciato da</td>
-					<td><input type="text" name="release_document_to" value="<?php echo $client['release_document_to'];?>"/></td>
+					<td><input type="text" name="release_document_to" autocomplete="off" value="<?php echo $client['release_document_to'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Cittadinanza</td>
-					<td><input type="text" name="nationality" value="<?php echo $client['nationaliyy'];?>"/></td>
+					<td><input type="text" name="nationality" autocomplete="off" value="<?php echo $client['nationaliyy'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Data Nascita</td>
-					<td><input type="text" name="date_birth" value="<?php echo $client['date_birth'];?>"/></td>
+					<td><input type="text" name="date_birth" autocomplete="off" value="<?php echo $client['date_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Luogo Nascita</td>
-					<td><input type="text" name="city_birth" value="<?php echo $client['city_birth'];?>"/></td>
+					<td><input type="text" name="city_birth" autocomplete="off" value="<?php echo $client['city_birth'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Indirizzo</td>
-					<td><input type="text" name="address" value="<?php echo $client['address'];?>"/></td>
+					<td><input type="text" name="address" autocomplete="off" value="<?php echo $client['address'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Citt&agrave;</td>
-					<td><input type="text" name="city" value="<?php echo $client['city'];?>"/></td>
+					<td><input type="text" name="city" autocomplete="off" value="<?php echo $client['city'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Telefono</td>
-					<td><input type="text" name="telephone" value="<?php echo $client['telephone'];?>"/></td>
+					<td><input type="text" name="telephone" autocomplete="off" value="<?php echo $client['telephone'];?>"/></td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email" value="<?php echo $client['email'];?>"/></td>
+					<td><input type="text" name="email" autocomplete="off" value="<?php echo $client['email'];?>"/></td>
 				</tr>
 				<tr>
 					<td></td>
