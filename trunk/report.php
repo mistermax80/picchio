@@ -172,11 +172,11 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox2');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Cliente,Path,Data,spedizione,Vedi");
-		mygrid.setInitWidths("100,100,130,100,100");
-		mygrid.setColAlign("left,left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str");
+		mygrid.setHeader("Cliente,Path,Data,Vedi");
+		mygrid.setInitWidths("100,200,130,100");
+		mygrid.setColAlign("left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black"); 
 	
@@ -189,8 +189,8 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Report</button>';
 			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
 			$str = "mygrid.addRow(".$r['id'].", [\"".$client['surname']."  ".$client['name']."\",\"".$r['path']."\", \"".
-									$r['date']."\", \"".$r['send']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$r['date']."\", \"".
+									$button_modify."\"]);";
 			echo $str;
 		}
 	?></script>
