@@ -16,7 +16,7 @@ p.left_arrow {
 	text-align: justify;
 	line-height: 15px;
 	padding: 0px 0 5px 60px;
-	background: url(images/tool.gif) no-repeat left top;
+	background: url(images/letto.jpg) no-repeat left top;
 }
 
 .clear {
@@ -28,6 +28,13 @@ p.left_arrow {
 	height: auto;
 	margin: auto;
 	background: url(images/header_bg2.png) no-repeat top center;
+}
+
+#main_container_restorant {
+	width: 900px;
+	height: auto;
+	margin: auto;
+	background: url(images/header_restorant.png) no-repeat top center;
 }
 
 .center_content {
@@ -148,8 +155,9 @@ a.testimonial {
 }
 
 .boxtitle {
+	text-align: center;
 	font-size: 18px;
-	color: #ffe5aa;
+	color: darkolivegreen;
 	padding: 10px 0 0 15px;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -166,7 +174,7 @@ a.testimonial {
 }
 
 p.text_content {
-	width: 135px;
+	width: 180px;
 	float: left;
 	text-align: left;
 	padding: 5px 10px 0 15px;
@@ -175,7 +183,7 @@ p.text_content {
 }
 
 a.read_more {
-	padding: 10px 0 0 0;
+	padding: 10px 0 0 50px;
 }
 
 .title {
