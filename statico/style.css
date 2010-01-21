@@ -27,14 +27,35 @@ p.left_arrow {
 	width: 900px;
 	height: auto;
 	margin: auto;
-	background: url(images/header_bg2.png) no-repeat top center;
+	background: url(images/header_bg.png) no-repeat top center;
+}
+
+#main_container_gallery {
+	width: 900px;
+	height: auto;
+	margin: auto;
+	background: url(images/header_bg_gallery.png) no-repeat top center;
 }
 
 #main_container_restorant {
 	width: 900px;
 	height: auto;
 	margin: auto;
-	background: url(images/header_restorant.png) no-repeat top center;
+	background: url(images/header_bg_restorant.png) no-repeat top center;
+}
+
+#main_container_price {
+	width: 900px;
+	height: auto;
+	margin: auto;
+	background: url(images/header_bg_price.png) no-repeat top center;
+}
+
+#main_container_about {
+	width: 900px;
+	height: auto;
+	margin: auto;
+	background: url(images/header_bg_about.png) no-repeat top center;
 }
 
 .center_content {
