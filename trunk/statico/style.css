@@ -76,7 +76,7 @@ a.testimonial {
 /*----------------------menu-------------------------*/
 #menu {
 	float: right;
-	padding: 32px 50px 0 0;
+	padding: 32px 0px 0 0;
 }
 
 #menu ul {
@@ -105,6 +105,10 @@ a.testimonial {
 	margin: 0px 8px 0 8px;
 	color: #871A1F;
 	text-align: center;
+}
+
+#menu img {
+border:0 none;
 }
 
 #menu ul li a:hover {
@@ -143,6 +147,13 @@ a.testimonial {
 	margin: auto;
 }
 
+#boxes_content_large {
+	width: 865px;
+	height: 650px;
+	clear: both;
+	margin: auto;
+}
+
 .box {
 	padding: 10px 10px 10px 16px;
 	float: left;
@@ -151,6 +162,13 @@ a.testimonial {
 .box_content {
 	background: url(images/box_bg.jpg) no-repeat center;
 	width: 259px;
+	height: 202px;
+}
+
+.box_content_large {
+	background: url(images/box_bg_large.jpg) no-repeat center;
+	padding-left: 35px;
+	width: 800px;
 	height: 202px;
 }
 
