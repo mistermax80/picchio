@@ -227,6 +227,16 @@ p.text_content {
 	line-height: 15px;
 }
 
+v.text_content {
+	font-size: 15px;
+	width: 240px;
+	float: left;
+	text-align: left;
+	padding: 5px 10px 0 15px;
+	color: #ffe5aa;
+	line-height: 15px;
+}
+
 a.read_more {
 	padding: 10px 0 0 50px;
 }
@@ -271,14 +281,44 @@ a.read_more {
 	padding: 10px 0 8px 0;
 }
 
-.news_icon {
+.news_icon_antipasto {
 	width: 48px;
 	height: 36px;
 	float: left;
-	background: url(images/news.gif) no-repeat center;
+	background: url(images/antipasto.jpg) no-repeat center;
+}
+
+.news_icon_primo {
+	width: 48px;
+	height: 33px;
+	float: left;
+	background: url(images/primo.jpg) no-repeat center;
+}
+
+.news_icon_secondo {
+	width: 48px;
+	height: 36px;
+	float: left;
+	background: url(images/secondi.jpg) no-repeat center;
+}
+
+.news_icon_pizza {
+	width: 48px;
+	height: 48px;
+	float: left;
+	background: url(images/pizze.jpg) no-repeat center;
+}
+
+.news_content_title{
+	width: 310px;
+	float: left;
+	text-align: justify;
+	line-height: 15px;
+	padding: 0 0 0 10px;
 }
 
 .news_content {
+	color: darkolivegreen;
 	width: 310px;
 	float: left;
 	text-align: justify;
