@@ -3,10 +3,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Hotel - La Villa</title>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />	
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA1kq_42LPUGY55kUVy8jCyRTmuag3l-0lXm3YGRAJlDJjee8LCBSvZHimYeWaMpO1o1NNqjHoO96sOQ" type="text/javascript"></script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+// Aggiunge dei controlli
+// questo per lo zoom e lo spostamento
+            map.addControl(new GSmallMapControl());
+// questo invece per selezionare la tipologia: Mappa - Satellite - Ibrida
+            map.addControl(new GMapTypeControl());
+// inserisco le coordinate del punto su cui voglio centrare la mappa e definisco lo zoom della stessa a 16
+// le coordinate naturalmente sono quelle che ho ricavato prima dal servizio di mapki
+// io ho voluto esagerare ma...normalmente bastano tre cifre dopo la virgola
+            map.setCenter(new GLatLng(42.089, 12.268), 3);
+
+// Creo un nuovo segnaposto (marker) nel punto specificato
+// lo rendo clickabile e al click associo una descrizione
+        function createMarker(point, description) {
+          var marker = new GMarker(point);
+          GEvent.addListener(marker, "click", function() {
+            marker.openInfoWindowHtml(description);
+          });
+          return marker;
+        }
+// naturalmente ogni segnaposto avrà le sue coordinate,
+// in questo esempio io ho utilizzato le stesse di prima
+// per comodità e ...pigrizia.
+          map.addOverlay(
+            createMarker(new GLatLng(42.0892738853234, 12.268091440200806), "Hotel La Villa, Anguillara")
+        );
+    }
+}
+    //]]>
+   </script>
+
 </head>
 
-<body>
+
+
+<body onload="load()" onunload="GUnload()">
+
+
 <div id="main_container_about">
 	<div class="center_content">
 	<div id="header">
@@ -32,6 +74,7 @@
   
   
   <div class="main_content">
+  
   <div class="main_content_top"></div>
   	
            
@@ -42,52 +85,78 @@
     
     
     <div class="left_content">
-    <div class="title">Il ristorante</div>
-	<p>
- 		Nel ristorante "Sette camini", dalla spiccata tendenza mediterranea, è possibile gustare pietanze tipiche della cucina del Lazio 
- 		e piatti a base di pesce, proveniente dal lago di Bracciano; grazie alla varietà dei piatti proposti, comprende anche ricette 
- 		regionali ed internazionali.<br />
-		L'ambientazione è caratteristica: una terrazza panoramica garantisce, oltre alla splendida vista, un sollievo dalla canicola estiva;
-		 d'inverno, un camino acceso nella sala interna accoglie la clientela in un invitante tepore.
-		Durante le festività il ristorante propone di volta in volta un menù fisso, con un occhio alla convenienza senza rinunciare 
-		alla qualità della buona cucina, e nel rispetto della tradizione che associa alcune portate ad eventi particolari.   
-    </p>    
-
-	<p class="left_arrow">
-“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.    
-    </p> 
-
-	<p class="left_arrow">
-“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.    
-    </p> 
+    <br><br>
+      
+	<div id="map">
+  	Your browser doesn't support Google Maps or Javascript is turned off.
+	</div>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="title">Come arrivare</div>
+    <br>
+ 		<table>
+ 			<tr>
+ 				<td>Dall'aeroporto</td>
+ 				<td><div class="news_content">Seguire la Roma-Fiumicino e prendere l'uscita Civitavecchia-Aurelia. Una volta immessi sull'Aurelia
+ 						all'altezza di Torrimpietra svoltare a destra seguendo le indicazioni Aunguillara e Bracciano;
+ 						proseguire per una decina di km e arriverete ad Anguillara </div></td>
+ 			</tr>
+ 			<tr>
+ 				<td></td>
+ 			</tr>
+ 			<tr>
+ 				<td>Da Roma Termini</td>
+ 				<td><div class="news_content">Prendere la metro B (colore blu) da Termini direzione Laurentina; scendere alla fermata Piramide e raggiungere a piedi (3 min cc)
+ 						la stazione di Roma Ostiense. Prendere il treno per Bracciano o Viterbo e scendere alla fermata Anguillara (50 min cc)</div></td>
+ 			</tr>
+ 		</table>
     
     </div><!--end of left content-->
     
 
     <div class="right_content">
-    <div class="title">Piatti tipici</div>
+    <div class="title">Il territorio</div>
  
 
 	<div class="right_news">
     	<div class="news_icon"></div>
-        <div class="news_content">
-“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        	<div class="news_content">
+		Il lago di Bracciano, di origine vulcanica, si trova a pochi chilometri da Roma, incastonato fra i paesi di Anguillara, Bracciano e Trevignano.
+		Anguillara Sabazia è il vero polmone di Roma, il modo giusto per uscire dal caos
+		e regalarsi delle piacevoli giornate tra la quite del lago e il verde che la circonda.<br> 
+		A pochi chilometri dal centro troviamo il lago di Martignano
+		immerso in una riserva naturale regala ai turisti una piacevole giornata immersa nel verde.
+			
+			</div>
+		</div>	
+		<div class="right_news">
+			<div class="news_content">
+		Se alcuni reperti ci svelano una Bracciano abitata dagli Etruschi, la vera tappa obbligata per 
+		chi visita questo paese è senz'altro il castello Orsini-Odescalchi, edificio fortificato inizialmente sede del prefetto, 
+		che nel 1475 fu ampliato da Napoleone Orsini; nei secoli passò dalle mani degli Orsini 
+		a quelle degli Odescalchi a quelle dei Torlonia, per poi tornare definitivamente agli Odescalchi che ne sono tuttora i proprietari.
+		
+		
+			</div>
+		</div>
+		<div class="right_news">
+			<div class="news_content">
+		Trevignano nasce dalle ceneri dell'etrusca Sabate, i cui resti sarebbero sprofondati nel lago. Il Museo Etrusco, 
+		sito nel palazzo Comunale, custodisce i preziosi reperti rinvenuti nella necropoli dell'Olivetello.
+		Suggestiva testimonianza del feudo medievale, i resti della rocca Orsini si ergono dalla cima di un'alta rupe, circondati 
+		dall'antico borgo e dalle sue mura.
+			
+			</div>
+		</div>
+		<div class="right_news">	
+			<div class="news_content">
+		Inutile dire che la vera culla di Anguillara Sabazia è Roma. Con cinquanta minuti di treno 
+		si entra nel cuore delle città eterna; una visita che parte dal Colosseo al Circo Massimo, da San Pietro a piazza del Popolo.
+
+			</div>
 		</div>   
     </div> 
     
- 	<div class="right_news">
-    	<div class="news_icon"></div>
-        <div class="news_content">
-“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		</div>   
-    </div>    
-    
- 	<div class="right_news">
-    	<div class="news_icon"></div>
-        <div class="news_content">
-“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		</div>   
-    </div>    
     
     </div><!--end of right content--> 
  
