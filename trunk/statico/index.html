@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/slideshow.css" media="screen" />
 	<script type="text/javascript" src="js/mootools.js"></script>
 	<script type="text/javascript" src="js/slideshow.js"></script>
-	<script type="text/javascript" src="js/slideshow.kenburns.js"></script>
+	<!--<script type="text/javascript" src="js/slideshow.kenburns.js"></script>-->
 	<script type="text/javascript">		
 	//<![CDATA[
 	  window.addEvent('domready', function(){
@@ -18,7 +18,8 @@
 	      '3.jpg': { caption: '' }, 
 	      '4.jpg': { caption: '' }
 	    };
-	    var myShow = new Slideshow.KenBurns('show', data, { captions: false, controller: true, delay: 2000, duration: 8000, height: 170, hu: 'images/image_box', width: 220 });
+	    var myShow = new Slideshow('show', data, { captions: false, controller: false, delay: 3000, height: 170, hu: 'images/image_box', linked: false, width: 220 }); 
+	    //var myShow = new Slideshow.KenBurns('show', data, { captions: false, controller: true, delay: 2000, duration: 8000, height: 170, hu: 'images/image_box', width: 220 });
 		});
 	//]]>
 	</script>
@@ -58,10 +59,10 @@
     	<div class="box">
         	<div class="box_content">
         	<div class="boxtitle"><blink>Offerte e Promozioni</blink></div>
-            <v class="text_content"><br>
+            <p class="text_content_promotion"><br>
  			<b>Offeta San Valentino </b><br><a href="price.html">[vedi area listino]</a><br><br>
           	Le promozioni sono riservate alle Forze Armate, all'Enea, ai gruppi sportivi e ai circoli velici.
-            </v> 
+            </p> 
             </div>                  
         </div>
 
@@ -83,7 +84,7 @@
 			Tel 06 99900591  <br />
 			Fax 0699900357 <br />
 			info@lavillahotel.com<br /><br />
- 			<a href="#" class="read_more"><img src="images/mail.jpg" alt="" title="" border="0" /></a>        
+ 			<a href="mail.php" class="read_more"><img src="images/chiocciola.png" alt="" title="Qui per scriverci" border="0" /></a>      
             </p> 
             </div>                  
         </div>   
