@@ -215,7 +215,7 @@ border:0 none;
 }
 
 .box_slideshow {
-	padding: 15px 0 0 20px;
+	padding: 16px 0 0 0px;
 }
 
 p.text_content {
@@ -227,7 +227,7 @@ p.text_content {
 	line-height: 15px;
 }
 
-v.text_content {
+p.text_content_promotion {
 	font-size: 15px;
 	width: 240px;
 	float: left;
@@ -235,6 +235,21 @@ v.text_content {
 	padding: 5px 10px 0 15px;
 	color: #ffe5aa;
 	line-height: 15px;
+}
+
+p.text_content_promotion a:link {
+	text-decoration: none;
+	color: #ffe5aa;
+}
+
+p.text_content_promotion a:visited {
+	text-decoration: none;
+	color: #ffe5aa;
+}
+
+p.text_content_promotion a:hover {
+	text-decoration: none;
+	color: #ffe5aa;
 }
 
 a.read_more {
