@@ -48,7 +48,7 @@
 <?php
 //**************************
 //Costanti mail
-$mail_from = "info@lavillahotel.com";
+$mail_from = "MailWeb";
 $mail_to = "stmontori@libero.it";
 //**************************
 
