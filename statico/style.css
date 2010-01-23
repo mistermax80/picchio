@@ -156,6 +156,14 @@ border:0 none;
 	background-color: #FFE5AA;
 }
 
+.main_content_gallery {
+	width: 865px;
+	height: 750px;
+	margin: auto;
+	padding: 0 0 30px 0;
+	background-color: #FFE5AA;
+}
+
 .main_content_top {
 	width: 865px;
 	height: 16px;
