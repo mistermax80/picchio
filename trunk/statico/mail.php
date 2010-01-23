@@ -2,8 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hotel - La Villa</title>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />	
+	<title>Hotel - La Villa</title>
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	
+	<link type="text/css" href="jquery-ui/css/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="jquery-ui/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.7.2.custom.min.js"></script>
+	<script type="text/javascript" src="jquery-ui/development-bundle/ui/i18n/ui.datepicker-it.js"></script>
+	<script type="text/javascript">
+				$(function() {
+					$("#datepicker").datepicker($.datepicker.regional['it']);
+					$("#in").datepicker({dateFormat: 'dd-mm-yy'});
+					$("#out").datepicker({dateFormat: 'dd-mm-yy'});
+				});
+	</script>
+		
 </head>
 
 <body>
@@ -83,14 +96,25 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 
 			$sended = mail($mail_to,$oggetto,$messaggio,$header);
 			if($sended){
-				echo "Mail Inviata!";
+				?>
+				<script type="text/javascript">
+					alert("Richiesta inoltrata con successo, la rigranziamo!");
+					window.location.href="index.html";
+				</script>
+			<?php
 			}else{
-				echo "ERRORE, Mail non Inviata!";
+				?>
+				<script type="text/javascript">
+					alert("Attenzione la richiesta non è stata inoltrata, \n riprovi o utilizzi la propria mail!");
+					window.location.href="index.html";
+				</script>
+			<?php
 			}	
 		}else{
 			?>
 			<script type="text/javascript">
 				alert("Attenzione compila tutti i campi obbligatori!");
+				history.back();
 			</script>
 			<?php
 		}
@@ -121,15 +145,19 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 		</tr>
 		<tr>
 			<td>Data check-in</td>
-			<td><input type="text" name="in"/></td>
+			<td><input type="text" id="in" name="in"/></td>
 		</tr>
 		<tr>
 			<td>Data check-out</td>
-			<td><input type="text" name="out"/></td>
+			<td><input type="text" id="out" name="out"/></td>
 		</tr>
 		<tr>
 			<td>Messaggio *</td>
 			<td><textarea name="message" rows="5"></textarea></td>
+		</tr>
+		<tr>
+			<td>* Compilare i campi obbligatori</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -139,24 +167,18 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 </form>
 <?php
 }
-?>
-	<div class="left_content">
-       * Compilare i campi obbligatori
-     </div>           
+?>       
    </div>    
 </div>
                 
-  <div id="footer">
+	<div id="footer">
      	<div class="copyright">
-<a href="http://csstemplatesmarket.com"><img src="images/csstemplatesmarket.gif" border="0" alt="" title="" /></a>
+			<a href="http://csstemplatesmarket.com"><img src="images/csstemplatesmarket.gif" border="0" alt="" title="" /></a>
         </div>
     	<div class="footer_links"> 
-        <a href="#">About us</a>
-         <a href="#">Privacy policy</a> 
-        <a href="#">Contact us </a>
-        
+      		© Copyright 2002 - 2010 La Villa Hotel EKTO s.a.s. - Tutti i diritti riservati P.Iva 07029801003        
         </div>
-    
+	</div>
     
 </div>
 </body>
