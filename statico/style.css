@@ -220,6 +220,18 @@ border:0 none;
 	padding-right: 30px;
 }
 
+.box_content_large_into a:link {
+	text-decoration: none;
+}
+
+.box_content_large_into a:visited {
+	text-decoration: none;
+}
+
+.box_content_large_into a:hover {
+	text-decoration: none;
+}
+
 .boxtitle {
 	text-align: center;
 	font-size: 18px;
