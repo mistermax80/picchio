@@ -215,6 +215,10 @@ border:0 none;
 	padding-left: 20px;
 }
 
+.box_content_large_into img{
+	border: none;
+}
+
 .boxtitle {
 	text-align: center;
 	font-size: 18px;
