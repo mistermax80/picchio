@@ -171,13 +171,10 @@ if(isset($_POST['send']) && $_POST['send']!=""){
                 
   <div id="footer">
      	<div class="copyright">
-<a href="http://csstemplatesmarket.com"><img src="images/csstemplatesmarket.gif" border="0" alt="" title="" /></a>
+			<a href="http://csstemplatesmarket.com"><img src="images/csstemplatesmarket.gif" border="0" alt="" title="" /></a>
         </div>
-    	<div class="footer_links"> 
-        <a href="#">About us</a>
-         <a href="#">Privacy policy</a> 
-        <a href="#">Contact us </a>
-        
+        <div class="footer_links"> 
+      		© Copyright 2002 - 2010 La Villa Hotel ekto sas - All rights reserved P. Iva 07029801003        
         </div>
     
     
