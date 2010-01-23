@@ -5,51 +5,36 @@
 <title>Hotel - La Villa</title>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 
-<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAA1kq_42LPUGY55kUVy8jCyRTmuag3l-0lXm3YGRAJlDJjee8LCBSvZHimYeWaMpO1o1NNqjHoO96sOQ" type="text/javascript"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAA1kq_42LPUGY55kUVy8jCyRTmuag3l-0lXm3YGRAJlDJjee8LCBSvZHimYeWaMpO1o1NNqjHoO96sOQ" type="text/javascript"></script>
+    <script type="text/javascript">
 
-<script type="text/javascript">
-    //<![CDATA[
-    function load() {
+    function initialize() {
       if (GBrowserIsCompatible()) {
-        var map = new GMap2(document.getElementById("map"));
-// Aggiunge dei controlli
-// questo per lo zoom e lo spostamento
-            map.addControl(new GSmallMapControl());
-// questo invece per selezionare la tipologia: Mappa - Satellite - Ibrida
-            map.addControl(new GMapTypeControl());
-// inserisco le coordinate del punto su cui voglio centrare la mappa e definisco lo zoom della stessa a 16
-// le coordinate naturalmente sono quelle che ho ricavato prima dal servizio di mapki
-// io ho voluto esagerare ma...normalmente bastano tre cifre dopo la virgola
-            map.setCenter(new GLatLng(42.089, 12.268), 3);
-
-// Creo un nuovo segnaposto (marker) nel punto specificato
-// lo rendo clickabile e al click associo una descrizione
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(42.08906,12.266208), 15);
+	    // Crea un nuovo marker nel punto specificato con una descrizione HTML associata
         function createMarker(point, description) {
-          var marker = new GMarker(point);
-          GEvent.addListener(marker, "click", function() {
-            marker.openInfoWindowHtml(description);
-          });
-          return marker;
+	        var marker = new GMarker(point);
+	        GEvent.addListener(marker, "mouseover", function() {marker.openInfoWindowHtml(description);});
+        		return marker;
         }
-// naturalmente ogni segnaposto avrà le sue coordinate,
-// in questo esempio io ho utilizzato le stesse di prima
-// per comodità e ...pigrizia.
-          map.addOverlay(
-            createMarker(new GLatLng(42.0892738853234, 12.268091440200806), "Hotel La Villa, Anguillara")
+        // Aggiungi il marker alla mappa
+        map.addOverlay(
+        	createMarker(new GLatLng(42.08906,12.266208), "Hotel La Villa<br>Ristorante Sette Camini")
         );
+        map.setUIToDefault();
+      }
     }
-}
-    //]]>
-   </script>
+</script>
 
 </head>
 
 
 
-<body onload="load()" onunload="GUnload()">
+<body onload="initialize()" onunload="GUnload()">
 
 
-<div id="main_container_about">
+<div id="main_container">
 	<div class="center_content">
 	<div id="header">
     	<!--<div id="logo"><a href="index.html"><img src="images/logo.png" alt="" title="" border="0" /></a></div>-->
@@ -77,21 +62,13 @@
   
   <div class="main_content_top"></div>
   	
-           
-               
-                
-        
-    <!--end of boxes content-->
-    
-    
     <div class="left_content">
     <br><br>
       
-	<div id="map">
-  	Your browser doesn't support Google Maps or Javascript is turned off.
+	<div id="map_canvas" style="width: 400px; height: 300px; padding-left: 40px;">
+  		Your browser doesn't support Google Maps or Javascript is turned off.
 	</div>
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
     <div class="title">How to get there</div>
     <br>
  		<table>
@@ -161,12 +138,9 @@
 		</div>   
     </div> 
     
-    
-    </div><!--end of right content--> 
- 
-    
+       
   
-  <div class="clear"></div>
+  	<div class="clear"></div>
   </div><!--end of main content-->
     
     
@@ -177,6 +151,7 @@
     	<div class="footer_links"> 
       		© Copyright 2002 - 2010 La Villa Hotel ekto sas - All rights reserved P. Iva 07029801003        
         </div>
+      </div>
 </div>
 </body>
 </html>

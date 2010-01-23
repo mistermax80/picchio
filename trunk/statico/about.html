@@ -11,7 +11,7 @@
     function initialize() {
       if (GBrowserIsCompatible()) {
         var map = new GMap2(document.getElementById("map_canvas"));
-        map.setCenter(new GLatLng(42.089225,12.268027), 16);
+        map.setCenter(new GLatLng(42.08906,12.266208), 15);
 	    // Crea un nuovo marker nel punto specificato con una descrizione HTML associata
         function createMarker(point, description) {
 	        var marker = new GMarker(point);
@@ -20,7 +20,7 @@
         }
         // Aggiungi il marker alla mappa
         map.addOverlay(
-        createMarker(new GLatLng(42.089225,12.268027), "Hotel La Villa<br>Ristorante Sette Camini")
+        	createMarker(new GLatLng(42.08906,12.266208), "Hotel La Villa<br>Ristorante Sette Camini")
         );
         map.setUIToDefault();
       }
@@ -34,7 +34,7 @@
 <body onload="initialize()" onunload="GUnload()">
 
 
-<div id="main_container_about">
+<div id="main_container">
 	<div class="center_content">
 	<div id="header">
     	<!--<div id="logo"><a href="index.html"><img src="images/logo.png" alt="" title="" border="0" /></a></div>-->
@@ -55,26 +55,18 @@
         <a href="#" class="testimonial"></a>
         </div>
     
-  </div>
+  	</div>
   
   
   <div class="main_content">
   
   <div class="main_content_top"></div>
   	
-           
-               
-                
-        
-    <!--end of boxes content-->
-    
-    
     <div class="left_content">
     <br><br>
       
-	<div id="map_canvas" style="width: 500px; height: 300px">
+	<div id="map_canvas" style="width: 400px; height: 300px; padding-left: 40px;">
 		Il tuo browser non supporta Google Maps o Javaascript è spento.
-  		Your browser doesn't support Google Maps or Javascript is turned off.
 	</div>
 	
 	
@@ -145,15 +137,10 @@
 			</div>
 		</div>   
     </div> 
+      
+ 	<div class="clear"></div>
     
-    
-    </div><!--end of right content--> 
- 
-    
-  
-  <div class="clear"></div>
   </div><!--end of main content-->
-    
     
 	<div id="footer">
      	<div class="copyright">

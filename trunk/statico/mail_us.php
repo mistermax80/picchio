@@ -46,6 +46,15 @@
   	
     
 <?php
+//Funzioni di supporto
+function ControlloEmail($email){
+	$result = eregi("^[_a-z0-9+-]+(\.[_a-z0-9+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)+$",$email);
+	if($result == false){
+		return false;
+	}else{
+		return true;
+	}
+}
 //**************************
 //Costanti mail
 $mail_from = "MailWeb <no-replay@lavillahotel.com>";
@@ -56,56 +65,65 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 	if(isset($_POST['surname']) && $_POST['surname']!="" && 
 		isset($_POST['email']) && $_POST['email']!="" &&
 		isset($_POST['message']) && $_POST['message']!=""){
-			//Setup mail
-			$surname = stripslashes($_POST['surname']);
-			$name = stripslashes($_POST['name']);
-			$mail_reply = stripslashes($_POST['email']);
-			$phone = stripslashes($_POST['phone']);
-			$cell = stripslashes($_POST['cell']);
-			$in = stripslashes($_POST['in']);
-			$out = stripslashes($_POST['out']);
-			$message = stripslashes($_POST['message']);
-			//Send mail
-			$header = "Content-Type: text/plain; "
-			."charset=UTF-8; format=flowed\n"
-			."MIME-Version: 1.0\n"
-			."Content-Transfer-Encoding: 8bit\n";
-			//$header .= "To: ".$mail_to."\n";
-			$header .= "From: ".$mail_from."\n"; //Inviante <mail@mail.mail>
-			$header .= "Reply-To: ".$surname." ".$name."<".$mail_reply.">\n";
-			//$header .= "CC: Altro Ricevente <mail@mail.mail>\n";
-			//$header .= "Bcc: Ricevente Nascosto <mail@mail.mail>\n";
-			$header .= "X-Mailer: Modulo online per invio mail\n\n";
-			
-			$oggetto = "Richiesta informazione online Hotel La Villa";
-			
-			$messaggio .= "Richiesta informazioni da: ".$surname." ".$name."\n\n";
-			$messaggio .= "Data Arrivo:   ".$in."\n";
-			$messaggio .= "Data Partenza: ".$out."\n";
-			$messaggio .= "Telefono:      ".$phone."\n";
-			$messaggio .= "Cellulare:     ".$cell."\n";
-			$messaggio .= "----------MESSAGGIO-----------\n";
-			$messaggio .= $message."\n";
-			$messaggio .= "------------------------------\n";
-			$messaggio .= "\n";
-			
-			$messaggio = wordwrap($messaggio,70);
-
-			$sended = mail($mail_to,$oggetto,$messaggio,$header);
-			if($sended){
-			?>
+			if(!ControlloEmail($_POST['email'])){
+				?>
 				<script type="text/javascript">
-					alert("Successfully send Mail, thank you!");
-					window.location.href="index_us.html";
+					alert("ERROR Mail is not valid!");
+					history.back();
 				</script>
-			<?php
+				<?php
 			}else{
-			?>
-				<script type="text/javascript">
-					alert("ERROR, mail not sent!\n Try again or use your Mail!");
-					window.location.href="index_us.html";
-				</script>
-			<?php
+				//Setup mail
+				$surname = stripslashes($_POST['surname']);
+				$name = stripslashes($_POST['name']);
+				$mail_reply = stripslashes($_POST['email']);
+				$phone = stripslashes($_POST['phone']);
+				$cell = stripslashes($_POST['cell']);
+				$in = stripslashes($_POST['in']);
+				$out = stripslashes($_POST['out']);
+				$message = stripslashes($_POST['message']);
+				//Send mail
+				$header = "Content-Type: text/plain; "
+				."charset=UTF-8; format=flowed\n"
+				."MIME-Version: 1.0\n"
+				."Content-Transfer-Encoding: 8bit\n";
+				//$header .= "To: ".$mail_to."\n";
+				$header .= "From: ".$mail_from."\n"; //Inviante <mail@mail.mail>
+				$header .= "Reply-To: ".$surname." ".$name."<".$mail_reply.">\n";
+				//$header .= "CC: Altro Ricevente <mail@mail.mail>\n";
+				//$header .= "Bcc: Ricevente Nascosto <mail@mail.mail>\n";
+				$header .= "X-Mailer: Modulo online per invio mail\n\n";
+				
+				$oggetto = "Richiesta informazione online Hotel La Villa";
+				
+				$messaggio .= "Richiesta informazioni da: ".$surname." ".$name."\n\n";
+				$messaggio .= "Data Arrivo:   ".$in."\n";
+				$messaggio .= "Data Partenza: ".$out."\n";
+				$messaggio .= "Telefono:      ".$phone."\n";
+				$messaggio .= "Cellulare:     ".$cell."\n";
+				$messaggio .= "----------MESSAGGIO-----------\n";
+				$messaggio .= $message."\n";
+				$messaggio .= "------------------------------\n";
+				$messaggio .= "\n";
+				
+				$messaggio = wordwrap($messaggio,70);
+	
+				$sended = mail($mail_to,$oggetto,$messaggio,$header);
+				if($sended){
+				?>
+					<script type="text/javascript">
+						alert("Successfully send Mail, thank you!");
+						window.location.href="index_us.html";
+					</script>
+				<?php
+				}else{
+				?>
+					<script type="text/javascript">
+						alert("ERROR, mail not sent!\n Try again or use your Mail!");
+						window.location.href="index_us.html";
+					</script>
+				<?php
+				}
 			}	
 		}else{
 			?>
