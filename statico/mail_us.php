@@ -1,3 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hotel - La Villa</title>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />	
+</head>
+
+<body>
+<div id="main_container_price">
+	<div class="center_content">
+	<div id="header">
+    	<!--<div id="logo"><a href="index.html"><img src="images/logo.png" alt="" title="" border="0" /></a></div>-->
+        
+        <div id="menu">
+            <ul>                                              
+                <li><a href="index_us.html" title="">Home</a></li>
+                <li><a href="gallery_us.html" title="">Gallery</a></li>
+                <li><a href="restorant_us.html" title="">Restaurant</a></li>
+                <li><a class="current" href="price_us.html" title="">Rates</a></li>
+                <li><a href="about_us.html" title="">Directions</a></li>
+                <li><a href="index_us.html" title=""><img src="images/ita.png"/></a></li>
+            </ul>
+        </div>
+        
+        <div class="top_text">
+        <p></p>
+        <a href="#" class="testimonial"></a>
+        </div>
+    
+  </div>
+  
+  
+  <div class="main_content_mail">
+  <div class="main_content_top"></div>
+  	
+    
 <?php
 //**************************
 //Costanti mail
@@ -100,8 +137,29 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 		</tr>
 	</table>
 </form>
-	 * Please fill in all the required fields
+	 
 <?php
 }
 ?>
-	
+
+	<div class="left_content">
+       * Please fill in all the required fields
+     </div>           
+   </div>    
+</div>
+                
+  <div id="footer">
+     	<div class="copyright">
+<a href="http://csstemplatesmarket.com"><img src="images/csstemplatesmarket.gif" border="0" alt="" title="" /></a>
+        </div>
+    	<div class="footer_links"> 
+        <a href="#">About us</a>
+         <a href="#">Privacy policy</a> 
+        <a href="#">Contact us </a>
+        
+        </div>
+    
+    
+</div>
+</body>
+</html>	
