@@ -41,15 +41,15 @@
   </div>
   
   
-  <div class="main_content_mail">
+  <div class="main_content">
   <div class="main_content_top"></div>
   	
     
 <?php
 //**************************
 //Costanti mail
-$mail_from = "MailWeb";
-$mail_to = "stmontori@libero.it";
+$mail_from = "MailWeb <no-replay@lavillahotel.com>";
+$mail_to = "Stefano Montori <stmontori@libero.it>";
 //**************************
 
 if(isset($_POST['send']) && $_POST['send']!=""){
@@ -57,14 +57,14 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 		isset($_POST['email']) && $_POST['email']!="" &&
 		isset($_POST['message']) && $_POST['message']!=""){
 			//Setup mail
-			$surname = $_POST['surname'];
-			$name = $_POST['name'];
-			$mail_reply = $_POST['email'];
-			$phone = $_POST['phone'];
-			$cell = $_POST['cell'];
-			$in = $_POST['in'];
-			$out = $_POST['out'];
-			$message = $_POST['message'];
+			$surname = stripslashes($_POST['surname']);
+			$name = stripslashes($_POST['name']);
+			$mail_reply = stripslashes($_POST['email']);
+			$phone = stripslashes($_POST['phone']);
+			$cell = stripslashes($_POST['cell']);
+			$in = stripslashes($_POST['in']);
+			$out = stripslashes($_POST['out']);
+			$message = stripslashes($_POST['message']);
 			//Send mail
 			$header = "Content-Type: text/plain; "
 			."charset=UTF-8; format=flowed\n"
@@ -150,7 +150,7 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 		</tr>
 		<tr>
 			<td>Message *</td>
-			<td><textarea name="message" rows="5"></textarea></td>
+			<td><textarea name="message" rows="10" cols="40"></textarea></td>
 		</tr>
 		<tr>
 			<td>* Please fill in all the required fields</td>
