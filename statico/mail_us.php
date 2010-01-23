@@ -70,7 +70,7 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 			."charset=UTF-8; format=flowed\n"
 			."MIME-Version: 1.0\n"
 			."Content-Transfer-Encoding: 8bit\n";
-			$header .= "To: ".$mail_to."\n";
+			//$header .= "To: ".$mail_to."\n";
 			$header .= "From: ".$mail_from."\n"; //Inviante <mail@mail.mail>
 			$header .= "Reply-To: ".$surname." ".$name."<".$mail_reply.">\n";
 			//$header .= "CC: Altro Ricevente <mail@mail.mail>\n";
@@ -79,14 +79,14 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 			
 			$oggetto = "Richiesta informazione online Hotel La Villa";
 			
-			$messaggio .= "Richiesta info da:".$surname." ".$name."\n";
-			$messaggio .= "in:".$in."\n";
-			$messaggio .= "out:".$out."\n";
-			$messaggio .= "phone:".$phone."\n";
-			$messaggio .= "cell:".$cell."\n";
-			$messaggio .= "-----------------------------\n";
+			$messaggio .= "Richiesta informazioni da: ".$surname." ".$name."\n\n";
+			$messaggio .= "Data Arrivo:   ".$in."\n";
+			$messaggio .= "Data Partenza: ".$out."\n";
+			$messaggio .= "Telefono:      ".$phone."\n";
+			$messaggio .= "Cellulare:     ".$cell."\n";
+			$messaggio .= "----------MESSAGGIO-----------\n";
 			$messaggio .= $message."\n";
-			$messaggio .= "-----------------------------\n";
+			$messaggio .= "------------------------------\n";
 			$messaggio .= "\n";
 			
 			$messaggio = wordwrap($messaggio,70);
