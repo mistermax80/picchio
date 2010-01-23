@@ -1,9 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hotel - La Villa</title>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Hotel - La Villa</title>
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	
+	<link type="text/css" href="jquery-ui/css/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="jquery-ui/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.7.2.custom.min.js"></script>
+	<script type="text/javascript">
+				$(function() {
+					$("#in").datepicker({dateFormat: 'dd-mm-yy'});
+					$("#out").datepicker({dateFormat: 'dd-mm-yy'});
+				});
+	</script>	
 </head>
 
 <body>
@@ -83,14 +93,25 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 
 			$sended = mail($mail_to,$oggetto,$messaggio,$header);
 			if($sended){
-				echo "Successfully send Mail!";
+			?>
+				<script type="text/javascript">
+					alert("Successfully send Mail, thank you!");
+					window.location.href="index_us.html";
+				</script>
+			<?php
 			}else{
-				echo "ERROR, mail not sent!";
+			?>
+				<script type="text/javascript">
+					alert("ERROR, mail not sent!\n Try again or use your Mail!");
+					window.location.href="index_us.html";
+				</script>
+			<?php
 			}	
 		}else{
 			?>
 			<script type="text/javascript">
 				alert("Please fill in all the required fields!");
+				history.back();
 			</script>
 			<?php
 		}
@@ -121,15 +142,19 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 		</tr>
 		<tr>
 			<td>Date check-in</td>
-			<td><input type="text" name="in"/></td>
+			<td><input type="text" id="in" name="in"/></td>
 		</tr>
 		<tr>
 			<td>Date check-out</td>
-			<td><input type="text" name="out"/></td>
+			<td><input type="text" id="out" name="out"/></td>
 		</tr>
 		<tr>
 			<td>Message *</td>
 			<td><textarea name="message" rows="5"></textarea></td>
+		</tr>
+		<tr>
+			<td>* Please fill in all the required fields</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -141,11 +166,7 @@ if(isset($_POST['send']) && $_POST['send']!=""){
 <?php
 }
 ?>
-
-	<div class="left_content">
-       * Please fill in all the required fields
-     </div>           
-   </div>    
+  </div>    
 </div>
                 
   <div id="footer">
