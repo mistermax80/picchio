@@ -2,6 +2,7 @@
 
 body {
 	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	background: #dee0e2;
 	text-align: justify;
 	font-family:  Tahoma, Arial, Helvetica, sans-serif;
@@ -20,14 +21,11 @@ body {
 /* Impaginazione Menu*/
 
 #menu{
+	float: left;
+	width: 230px;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
-	margin-left: 20px;
-	margin-top:30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 15px;
 	background-image: url(images/background_menu_vertical.png);
 	background-repeat: no-repeat;
 }
@@ -35,8 +33,7 @@ body {
 #item_menu{
 	background-image: url(images/background_item_menu.png);
 	background-repeat: no-repeat;
-	height: 35px;
-	width: 190px;
+	width: 200px;
 	padding-left: 15px;
 	padding-top: 0px;
 	margin-top: 5px;
@@ -52,7 +49,8 @@ body {
 /* Impaginazione Calendario*/
 
 #calendario{
-	float: right;
+	float:right;
+	width:750px;
 }
 
 #calendario_tabella_intestazione{
@@ -61,17 +59,13 @@ body {
 }
 
 #calendario_tabella_giorni{
-	float: right;
 	height: 550px;
-	width: 750px;
 	overflow: auto;
 }
 
 #contenuti{
-	width: 650px;
+	width: 750px;
 	float: right;
-	margin-right: 50px;
-	margin-top: 10px;
 }
 #titoloContenuti{
 	color: white;
