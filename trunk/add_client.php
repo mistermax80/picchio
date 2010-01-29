@@ -45,7 +45,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 		?>
 		<script type="text/javascript">
 			alert("Cliente aggiunto con successo!");
-			window.location.href="booking.php?id_room=<?php echo $id_room?>&date_stamp_in=<?php echo $date_in ?>&id_client=<?php echo $id_client?>";
+			window.location.href="modific_client.php";
 		</script>
 		<?php 
 	}
