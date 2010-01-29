@@ -2,22 +2,22 @@
 function drawOpenPage() {
 	include 'include/header.php';
 	?>
-		<div align="center" style="height: 30px;">
-		</div>
-	<!-- Apertura div pagina -->
-		<div class="pagina">
-		<!-- Apertura div contenuti -->
-			<div id="contenuti">
+		<div align="center" style="height: 30px;">HOTEL 2010</div>
+			<div class="pagina"><!-- Apertura div pagina -->
+				<div id="contenuti"><!-- Apertura div contenuti -->
 	<?php
 }
 
     
 function drawClosePage($type=NULL,$id=NULL) {
+	/*
+	 * Il problema di explorer dovrebbe essere il div contenuti seguente
+	 * che non va chiuso in index 
+	 * 
+	 */
 	?>
-	</div>
-	</div>
-	<!-- Chiusura div contenuti -->
-	<div id="menu">
+	</div><!-- Chiusura div contenuti -->
+	<div id="menu"><!-- Apertura div menu -->
 	
 	<?php
 	if($type=="id_booking"){
@@ -96,8 +96,8 @@ function drawClosePage($type=NULL,$id=NULL) {
 		<?php
 	}
 	?>
-	</div>
-	
+	</div><!-- Chiusura div menu -->
+	</div><!-- Chiusura div pagina -->
 	<?php
 	include 'include/footer.php';
 }

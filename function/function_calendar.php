@@ -200,7 +200,9 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 }
 
 function drawFooterCalendar($link){
-	echo "</table></div></div>";
+	echo "</table>";
+	echo "</div> <!-- Chiusura div Tabella Giorni -->";
+	echo "</div> <!-- Chiusura div Calendario -->";
 }
 
 function drawCellRoom($num_room,$link_booking,$date_stamp){
