@@ -61,7 +61,7 @@ function ControlloEmail($email){
 //**************************
 //Costanti mail
 $mail_from = "MailWeb <no-replay@lavillahotel.com>";
-$mail_to = "Stefano Montori <stmontori@libero.it>";
+$mail_to = "La Villa Hotel <info@lavillahotel.com>";
 //**************************
 
 if(isset($_POST['send']) && $_POST['send']!=""){
