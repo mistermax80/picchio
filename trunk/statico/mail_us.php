@@ -27,7 +27,7 @@
                 <li><a href="index_us.html" title="">Home</a></li>
                 <li><a href="gallery_us.html" title="">Gallery</a></li>
                 <li><a href="restorant_us.html" title="">Restaurant</a></li>
-                <li><a class="current" href="price_us.html" title="">Rates</a></li>
+                <li><a href="price_us.html" title="">Rates</a></li>
                 <li><a href="about_us.html" title="">Directions</a></li>
                 <li><a href="index_us.html" title=""><img src="images/ita.png"/></a></li>
             </ul>
