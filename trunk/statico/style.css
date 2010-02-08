@@ -290,6 +290,7 @@ a.read_more {
 }
 
 .title {
+	clear: left;
 	font-size: 18px;
 	color: #981E32;
 	padding: 10px 0 0 0px;
