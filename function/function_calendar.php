@@ -178,7 +178,7 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 <div class="pagina">
 	<div id="calendario">
 	<div id="calendario_tabella_intestazione">
-		<table align="center" style="width: 750px;">
+		<table align="center">
 		<TR ALIGN='center'>
 			<TD><B>Domenica</B></TD>
 			<TD><B>Luned&igrave;</B></TD>
@@ -202,7 +202,8 @@ function drawHeaderCalendar($link,$prev,$prev_yr,$first_day,$temp_yr,$next,$next
 function drawFooterCalendar($link){
 	echo "</table>";
 	echo "</div> <!-- Chiusura div Tabella Giorni -->";
-	echo "</div> <!-- Chiusura div Calendario -->";
+	//Viene chiusa direttamente in drawClosePage che è un div comune a calendario o a contenuti
+	//echo "</div> <!-- Chiusura div Calendario -->";
 }
 
 function drawCellRoom($num_room,$link_booking,$date_stamp){

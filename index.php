@@ -14,7 +14,5 @@ $year = (empty($year)) ? date("Y") : $year;
 
 drawCalendar("index.php","booking.php",$month,$year);
 
-//include_once 'include/menu.php';
-//include_once 'include/footer.php';
 drawClosePage();
 ?>
