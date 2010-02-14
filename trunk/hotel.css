@@ -165,9 +165,38 @@ select.headerCalendar{
 	width:200px;
 }
 
-/* PROVE */
-
-#prova{
-
+/* Tabelle javascript */
+#table_report{
+	width:800px;
+	height:500px;
+	background-color:white;
+	overflow:hidden
 }
 
+#table_client{
+	width:800px;
+	height:500px;
+	background-color:white;
+	overflow:hidden
+}
+
+#table_visitor{
+	width:800px;
+	height:500px;
+	background-color:white;
+	overflow:hidden
+}
+	
+#table_client{
+	width:880px;
+	height:200px;
+	background-color:white;
+	overflow:hidden
+}
+
+#table_booking{
+	width:880px;
+	height:50px;
+	background-color:white;
+	overflow:hidden
+}

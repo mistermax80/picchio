@@ -7,10 +7,6 @@ include_once 'function/function_booking.php';
 
 drawOpenPage();
 
-?>
-<div id="titoloContenuti">GESTIONE CLIENTI</div> 
-<?php
-
 if(isset($_REQUEST['id_booking'])){
 	$id_booking = $_REQUEST['id_booking'];
 	$booking = getBookingById($id_booking);
@@ -85,7 +81,6 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		alert("Visitatore eliminato con successo!");
 		window.location.href="booking.php?id_room=<?php echo $booking['room']?>&date_stamp_in=<?php echo $date_stamp_in ?>&id_client=<?php echo $booking['client']?>";
 	</script>
-	<div id="titoloContenuti">GESTIONE CLIENTI</div> 
 	<?php 
 	
 }else if($_REQUEST['id_client']){
@@ -122,10 +117,10 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		}
 	</script>
 	
-	
+	<div id="titoloContenuti">MODIFICA CLIENTE1</div> 
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
-			<!-- <input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id_visitor'];;?>"/> -->
+			<!-- <input type="hidden" id="id_visitor" name="id_visitor" value="<?php echo $_REQUEST['id_visitor'];?>"/> -->
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
 			<table align="center">
 				<tr>
@@ -225,7 +220,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 		}
 	</script>
 	
-	
+	<div id="titoloContenuti">MODIFICA CLIENTE2</div> 
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
 			<input type="hidden" id="return_add_client" name="return_addclient" value="return_addclient"/>
@@ -296,7 +291,7 @@ if(isset($_POST['save']) && $_POST['save']!=""){
 	<?php 
 
 
-drawClosePage("id_booking",$id_booking);
+drawClosePage();
 
 
 }else if(($_REQUEST['client_booking'])&&(isset($_REQUEST['id_booking']))){
@@ -333,7 +328,7 @@ drawClosePage("id_booking",$id_booking);
 		}
 	</script>
 	
-	
+	<div id="titoloContenuti">MODIFICA CLIENTE3</div> 
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
@@ -437,7 +432,7 @@ drawClosePage("id_booking",$id_booking);
 		}
 	</script>
 	
-	
+	<div id="titoloContenuti">MODIFICA CLIENTE4</div> 
 	<form id="mofidic_client" name="mofidic_client" action="" method="post">
 			<input type="hidden" id="client" name="client" value="client"/>
 			<input type="hidden" id="id" name="id" value="<?php echo $client['id'];?>"/>
@@ -509,9 +504,14 @@ drawClosePage();
 
 }else{
 	?>
+	<div id="titoloContenuti">GESTIONE CLIENTI</div> 
 	<form id="search_client" name="search_client" method="post">
 	<input id="text_search" name="text_search" type="text" value=""/>
 	<input id="search" name="search" type="submit" value="Cerca"/>
+	</form>
+	<form id="add_client" name="add_client" action="add_client.php" method="post">
+					<input type="hidden" name="return_page" value="client"/>
+					<button id="add_client" value="submit">Aggiungi Cliente</button>
 	</form>
 
 <?php 
@@ -524,16 +524,10 @@ if(isset($_POST['search']) && $_POST['search']!="" ){  ?>
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
 	
-		<table width="805px">
-		    <tr>
-		        <td>
-		            <div id="gridbox" style="width:100%;height:350px;background-color:white;overflow:hidden"></div>
-		        </td>
-		    </tr>
-		</table>
+    <div id="table_client"></div>
 	   
 	<script>
-		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid = new dhtmlXGridObject('table_client');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Modifica");
 		mygrid.setInitWidths("70,70,70,70,70,70,70,70,80,80,80");
@@ -559,8 +553,4 @@ if(isset($_POST['search']) && $_POST['search']!="" ){  ?>
 	}
 	?>
 	</script>
-	<form id="add_client" name="add_client" action="add_client.php" method="post">
-					<input type="hidden" name="return_page" value="client"/>
-					<button id="add_client" value="submit">Aggiungi Cliente</button>
-	</form>
 	<?php  drawClosePage(); }?>

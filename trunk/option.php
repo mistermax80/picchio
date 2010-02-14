@@ -17,22 +17,16 @@ if(!(isset($_REQUEST['id_report']))){
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
 	
-		<table width="805px">
-		    <tr>
-		        <td>
-		            <div id="gridbox" style="width:80%;height:250px;background-color:white;overflow:hidden"></div>
-		        </td>
-		    </tr>
-		</table>
+	<div id="table_report"></div>
 	   
 	<script>
-		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid = new dhtmlXGridObject('table_report');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
-		mygrid.setHeader("Cliente,Path,Data,spedizione,Vedi,Elimina");
-		mygrid.setInitWidths("100,100,130,100,100,100");
-		mygrid.setColAlign("left,left,left,left,left,left");
-		mygrid.setColTypes("ro,ro,ro,ro,ro,ro");
-		mygrid.setColSorting("str,str,str,str,str,str");
+		mygrid.setHeader("Cliente,Path,Data,inviato,spedizione,Vedi,Elimina");
+		mygrid.setInitWidths("100,200,100,100,100,100,100,100");
+		mygrid.setColAlign("left,left,left,left,left,left,left");
+		mygrid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
+		mygrid.setColSorting("str,str,str,str,str,str,str");
 		mygrid.init();
 		mygrid.setSkin("dhx_black"); 
 	
@@ -42,9 +36,10 @@ if(!(isset($_REQUEST['id_report']))){
 			
 			$button_modify = '<button onclick=\"window.open(\''.$r['path'].'\', \'Report\',\'\');\">Report</button>';
 			$button_delete = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
+			$button_send = '<button onclick=\"window.location.href=\'option.php?id_report='.$r['id'].'\'\">Elimina</button>';
 			$str = "mygrid.addRow(".$r['id'].", [\"".$r['surname']."\",\"".$r['path']."\", \"".
 									$r['date']."\", \"".$r['send']."\", \"".
-									$button_modify."\",\"".$button_delete."\"]);";
+									$button_modify."\",\"".$button_modify."\",\"".$button_delete."\"]);";
 			echo $str;
 		}
 	?></script><?php
@@ -56,7 +51,7 @@ if(!(isset($_REQUEST['id_report']))){
 	deleteReport($id);
 	?>
 	<script type="text/javascript">
-		alert("Cliente aggiornato con successo!");
+		alert("Notifica Eliminata con successo!");
 		window.location.href="option.php";
 	</script>
 	<?php 	

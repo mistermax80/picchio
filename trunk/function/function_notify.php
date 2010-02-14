@@ -6,7 +6,9 @@ function generateNotification($filename,$id_client) {
 	if(!is_dir("report")){
 		mkdir("report", 0777);
 	}
-	fopen($filename,"w+");
+	if(!fopen($filename,"w+")){
+		return false;
+	}
 	
 	$client = getClient($id_client); 
 	
@@ -20,9 +22,9 @@ function generateNotification($filename,$id_client) {
 	$city_birth = $client['city_birth'];
 	$nationality = $client['nationality'];;
 	$date_birth = $client['date_birth'];
-	$gg_birth = date("d",$date_birth); 
-	$mm_birth = date("m",$date_birth); 
-	$aa_birth = date("Y",$date_birth);
+	$gg_birth = date("d",(int)$date_birth); 
+	$mm_birth = date("m",(int)$date_birth); 
+	$aa_birth = date("Y",(int)$date_birth);
 	$address = $client['address'];
 	$type_doc = $client['type_document'];
 	$num_doc = $client['number_document'];
@@ -139,7 +141,7 @@ function generatePerfunctory($filename,$optionals) {
 	
 	foreach($optionals as $o){
 		$product = getProduct($o['id']);
-		//stampiamo prodotto con quantità e il prezzo
+		//stampiamo prodotto con quantitï¿½ e il prezzo
 	}*/
 	
 }

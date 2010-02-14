@@ -30,7 +30,9 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	$city = $_POST['city'];
 	$telephone = $_POST['telephone'];
 	$email = $_POST['email'];
-	$id_client = addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email);
+	$relative = $booking["client"];
+	$relationship = $_POST['relationship'];
+	$id_client = addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email,$relative,$relationship);
 	
 	
 	if(isset($_POST['id_booking'])){
@@ -53,7 +55,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 	//aggiungi cliente da prenotazione
 	?>
 	
-<div id="titoloContenuti">AGGIUNGI  NUOVO CLIENTE</div>
+<div id="titoloContenuti">AGGIUNGI NUOVO VISITATORE</div>
 
 	<form id="add_client" name="add_client" method="post">
 		<input type="hidden" name="operation" value="save" />
@@ -66,6 +68,17 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 			<tr>
 				<td>Nome</td>
 				<td><input type="text" name="name" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<td>Parentela</td>
+				<td><select name="relationship">
+						<option value = "Nessuna">Nessuna</option>
+						<option value = "Coniuge">Coniuge</option>
+						<option value = "Genitore">Genitore</option>
+						<option value = "Figlio">Figlio/a</option>
+						<option value = "Altro">Altro</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>Tipo Documento</td>
@@ -125,7 +138,7 @@ if(isset($_POST['operation']) && $_POST['operation']=='save'){
 <?php drawClosePage("id_booking",$id_booking);
 }else{
 	?>
-	<div id="titoloContenuti">AGGIUNGI  NUOVO CLIENTE</div>
+	<div id="titoloContenuti">AGGIUNGI NUOVO CLIENTE</div>
 
 	<form id="add_client" name="add_client" method="post">
 	<input type="hidden" name="date_in" value="<?php echo $date_in;?>"/>
