@@ -28,22 +28,24 @@ body {
 	color: white;
 	background-image: url(images/background_menu_vertical.png);
 	background-repeat: no-repeat;
+	padding-left: 15px;
 }
 
 #item_menu{
 	background-image: url(images/background_item_menu.png);
 	background-repeat: no-repeat;
 	width: 200px;
-	padding-left: 15px;
-	padding-top: 0px;
-	margin-top: 5px;
+	padding: 0px 0px 0px 15px;
+	margin: 5px 0px 5px 0px;
 	cursor: pointer;
 }
 
 #item_menu img{
 	width: 32px;
 }
+
 #item_menu span{
+	vertical-align: bottom;
 }
 
 /* Impaginazione Calendario*/
@@ -56,6 +58,16 @@ body {
 #calendario_tabella_intestazione{
 	width: 750px;
 	text-align: center;
+}
+
+#calendario_tabella_intestazione table{
+	width: 750px;
+}
+
+#calendario_tabella_intestazione td{
+	width: 100px;
+	text-align: left;
+	padding-left: 10px;
 }
 
 #calendario_tabella_giorni{

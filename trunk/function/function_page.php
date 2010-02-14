@@ -13,10 +13,11 @@ function drawClosePage($type=NULL,$id=NULL) {
 	/*
 	 * Il problema di explorer dovrebbe essere il div contenuti seguente
 	 * che non va chiuso in index 
+	 * Il div è comune a contenuti o a calendario
 	 * 
 	 */
 	?>
-	</div><!-- Chiusura div contenuti -->
+	</div><!-- Chiusura div contenuti o calendario se c'è il calendario visualizzato -->
 	<div id="menu"><!-- Apertura div menu -->
 	
 	<?php
@@ -30,20 +31,20 @@ function drawClosePage($type=NULL,$id=NULL) {
 		?>
 		<div id="item_menu" onclick="window.location.href='index.php'" title="Mese Corrente">
 			<img alt="Mese Corrente" title="Mese Corrente" src="images/icons/calendar.png"/>
-			Mese Corrente
+			<span>Mese Corrente</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='add_visitor.php?id_booking=<?php echo $id;?>'" title="Aggiungi Visitatore">
 			<img alt="Aggiungi Visitatore" title="Aggiungi Visitatore" src="images/icons/visitors.png"/>
-			Visitatore
+			<span>Visitatore</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='booking.php?id_room=<?php echo $id_room;?>
 								&date_stamp_in=<?php echo $date_stamp_in;?>&id_client=<?php echo $id_client;?>'" title="Ritorna alla Prenotazione">
 			<img alt="Ritorna alla Prenotazione" title="Ritorna alla Prenotazione" src="images/icons/return_booking.png"/>
-			Info Prenotazione
+			<span>Info Prenotazione</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='modific_booking.php?id_booking=<?php echo $id;?>'" title="Modifica Prenotazione">
 			<img alt="Modifica Prenotazione" title="Modifica Prenotazione" src="images/icons/edit_booking.png"/>
-			Modifica
+			<span>Modifica</span>
 		</div>
 		
 		<script LANGUAGE="JavaScript">
@@ -60,38 +61,38 @@ function drawClosePage($type=NULL,$id=NULL) {
 		</script>
 		<div id="item_menu" onClick="confirmDeleteBooking(<?php echo $id;?>);" title="Elimina Prenotazione">
 			<img alt="Elimina Prenotazione" title="Elimina Prenotazione" src="images/icons/delete_booking.png"/>
-			Elimina
+			<span>Elimina</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='option_booking.php?id_booking=<?php echo $id;?>'" title="Servizi Stanza">
 			<img alt="Servizi Stanza" title="Servizi Stanza" src="images/icons/services.png"/>
-			Servizi Stanza
+			<span>Servizi Stanza</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='report.php?id_booking=<?php echo $id;?>'" title="Crea notificato">
 			<img alt="Crea notificato" title="Crea notificato" src="images/icons/notify1.png"/>
-			Crea notificato
+			<span>Crea notificato</span>
 		</div>
 	<?php
 	}else{
 		?>
 		<div id="item_menu" onclick="window.location.href='index.php'" title="Mese Corrente">
 			<img alt="Mese Corrente" title="Mese Corrente" src="images/icons/calendar.png"/>
-			Mese Corrente
+			<span>Mese Corrente</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='modific_client.php'" title="Gestione clienti">
 			<img alt="Gestione clienti" title="Gestione clienti" src="images/icons/client.png"/>
-			Clienti
+			<span>Clienti</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='room.php'" title="Gestione Stanze">
 			<img alt="Gestione Stanze" title="Gestione Stanze" src="images/icons/room.png"/>
-			Stanze
+			<span>Stanze</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='product.php?add_product=true'" title="Gestione Servizi">
 			<img alt="Gestione Servizi" title="Gestione Servizi" src="images/icons/services.png"/>
-			Servizi
+			<span>Servizi</span>
 		</div>
 		<div id="item_menu" onclick="window.location.href='option.php'" title="Gestione Notificati">
 			<img alt="Gestione Notificati" title="Gestione Notificati" src="images/icons/notify.png"/>
-			Notificati
+			<span>Notificati</span>
 		</div>
 		<?php
 	}
