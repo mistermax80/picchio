@@ -66,13 +66,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
 		<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
 		
-		<table width="805px">
-		    <tr>
-		        <td>
-		            <div id="gridbox" style="width:107%;height:160px;background-color:white;overflow:hidden"></div>
-		        </td>
-		    </tr>
-		</table>
+		<div id="gridbox" style="width:880px;height:160px;background-color:white;overflow:hidden"></div>
 	<script>
 		mygrid = new dhtmlXGridObject('gridbox');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
@@ -148,7 +142,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 	
 	$reports = getReportIdBooking($id_booking);
 	if(!$reports==0){
-		//stampami quelli già generati
+		//stampami quelli giï¿½ generati
 		?>
 		<br><br><br>
 		<b><?php echo "Notifiche generate"?></b>
@@ -156,7 +150,7 @@ if(isset($_REQUEST['notify']) && isset($_REQUEST['id_booking'])){
 		<table width="805px">
 		    <tr>
 		        <td>
-		            <div id="gridbox2" style="width:68%;height:100px;background-color:white;overflow:hidden"></div>
+		            <div id="gridbox2" style="width:68%;height:200px;background-color:white;overflow:hidden"></div>
 		        </td>
 		    </tr>
 		</table>

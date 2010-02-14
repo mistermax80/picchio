@@ -35,16 +35,10 @@ if(!(isset($_REQUEST['id_client']) && $_REQUEST['id_booking'])){
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgrid.js"></script>        
 	<script  src="include_js/dhtmlxGrid/codebase/dhtmlxgridcell.js"></script>
 	
-		<table width="805px">
-		    <tr>
-		        <td>
-		            <div id="gridbox" style="width:108%;height:350px;background-color:white;overflow:hidden"></div>
-		        </td>
-		    </tr>
-		</table>
-	   
+	<div id="table_visitor"></div>	   
+	
 	<script>
-		mygrid = new dhtmlXGridObject('gridbox');
+		mygrid = new dhtmlXGridObject('table_visitor');
 		mygrid.setImagePath("include_js/dhtmlxGrid/codebase/imgs/");
 		mygrid.setHeader("Cognome,Nome,Tipo Doc.,Num Doc.,Data Nascita,Luogo Nascita,Indirizzo,Citt&agrave;,Telefono,Email,Aggiungi,Modifica");
 		mygrid.setInitWidths("70,70,70,70,70,70,70,70,70,70,80,84,80");

@@ -79,7 +79,7 @@ function getClient($id) {
 	return $client;
 }
 
-function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email){
+function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email,$relative,$relationship){
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -91,10 +91,10 @@ function addClient($name,$surname,$type_document,$number_document,$release_docum
 	}
 
 	$query = "INSERT INTO client 
-				(name,surname,type_document,number_document,release_document_date,release_document_to,nationality,date_birth,city_birth,address,city,telephone,email)
+				(name,surname,type_document,number_document,release_document_date,release_document_to,nationality,date_birth,city_birth,address,city,telephone,email,relative,relationship)
 				VALUES
-				('$name','$surname','$type_document','$number_document','$release_document_date','$release_document_to','$nationality','$date_birth','$city_birth','$address','$city','$telephone','$email')";
-	//echo $query;
+				('$name','$surname','$type_document','$number_document','$release_document_date','$release_document_to','$nationality','$date_birth','$city_birth','$address','$city','$telephone','$email','$relative','$relationship')";
+	echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
