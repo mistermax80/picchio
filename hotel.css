@@ -200,3 +200,60 @@ select.headerCalendar{
 	background-color:white;
 	overflow:hidden
 }
+
+/* Tabelle HTML*/
+#tabella {
+}
+
+#tabella th{
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#333333 none repeat scroll 0 0;
+	color:#FFFFFF;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:9pt;
+	font-weight:bold;
+	padding-left:8px;
+	padding-right:8px;
+	text-align:left;
+}
+
+#tabella input, select, option {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#D5D5D5 none repeat scroll 0 0;
+	color:#000000;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:9pt;
+	padding-left:8px;
+	padding-right:8px;
+	text-align:left;
+}
+
+.celle_tabella_0 {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#E5E5E5 none repeat scroll 0 0;
+	color:#000000;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:9pt;
+	padding-left:8px;
+	padding-right:8px;
+	text-align:left;
+}
+
+.celle_tabella_1 {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#D5D5D5 none repeat scroll 0 0;
+	color:#000000;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:9pt;
+	padding-left:8px;
+	padding-right:8px;
+	text-align:left;
+}

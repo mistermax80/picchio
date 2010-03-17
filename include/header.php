@@ -1,9 +1,12 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/_base.inc.php';
+?>
 <HTML>
 <HEAD>
 
-<link type="image/x-icon" href="images/icons/favicon.ico" rel="shortcut icon"/>
-<link rel="stylesheet" type="text/css" href="hotel.css">
+<link type="image/x-icon" href="<?php echo ICONS_LOCATION?>favicon.ico" rel="shortcut icon"/>
+<link rel="stylesheet" type="text/css" href="<?php echo CSS_LOCATION?>hotel.css">
 
-<TITLE>HOTEL - 2010</TITLE>
+<TITLE><?php echo SITE_TITLE?></TITLE>
 </HEAD>
 <BODY>
