@@ -1,5 +1,7 @@
 <?php
-include_once 'include/costant.php';
+
+include_once '_base.inc.php';
+
 include_once 'function_booking.php';
 
 /*

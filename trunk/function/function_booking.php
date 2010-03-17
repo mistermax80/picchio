@@ -1,5 +1,5 @@
 <?php
-include_once 'include/costant.php';
+include_once 'include/site_config.php';
 
 function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note) {
 

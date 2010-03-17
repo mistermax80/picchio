@@ -20,7 +20,7 @@ $rooms = getRooms();
 <?php 
 $booking = getBooking($date_stamp_in,$id_room);
 
-//Se il cliente ши settato allora mostra info cliente e procedi con la form della stanza
+//Se il cliente ├и settato allora mostra info cliente e procedi con la form della stanza
 if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 	if(isset($_POST['id_client'])){
 		$id_client = $_POST['id_client'];
