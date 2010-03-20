@@ -29,6 +29,7 @@ body {
 	background-image: url(images/background_menu_vertical.png);
 	background-repeat: no-repeat;
 	padding-left: 15px;
+	margin-left: 30px;
 }
 
 #item_menu{
@@ -80,14 +81,43 @@ body {
 	float: right;
 }
 #titoloContenuti{
-	color: white;
-	text-align: right;
+	margin-bottom: 40px;
+	background-color: #D5D5D5;
+	color: #333333;
+	text-align: center;
 	font-size: 22px;
 	font-style: italic;
 	font-weight: bold;
-	padding-right: 60px;
-	padding-top: 15px;
-	margin-bottom: 20px;
+}
+
+#messaggioContenuti{
+	margin-top: 40px;
+	background-color: #D5D5D5;
+	color: black;
+	text-align: center;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#messaggioContenutiCorretto{
+	margin-top: 40px;
+	background-color: #D5D5D5;
+	color: green;
+	text-align: center;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#messaggioContenutiErrore{
+	margin-top: 40px;
+	background-color: #D5D5D5;
+	color: red;
+	text-align: center;
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
 }
 
 /* Intestazione Calendario */
@@ -203,6 +233,13 @@ select.headerCalendar{
 
 /* Tabelle HTML*/
 #tabella {
+	width:750px;
+	overflow:auto;
+}
+
+#tabella table{
+	margin-top: 10px;
+	width: 100%;
 }
 
 #tabella th{
@@ -219,6 +256,7 @@ select.headerCalendar{
 	text-align:left;
 }
 
+/* Se il bottone è disabilitato non viene modificato
 #tabella input, select, option {
 	-moz-background-clip:border;
 	-moz-background-inline-policy:continuous;
@@ -231,7 +269,7 @@ select.headerCalendar{
 	padding-right:8px;
 	text-align:left;
 }
-
+*/
 .celle_tabella_0 {
 	-moz-background-clip:border;
 	-moz-background-inline-policy:continuous;

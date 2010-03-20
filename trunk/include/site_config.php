@@ -16,6 +16,9 @@ define("IMAGES_LOCATION","/images/");
 define("ICONS_LOCATION","/images/icons/");
 define("REPORT_LOCATION","/report/");
 
+define("JS_LOCATION","/include_js/");
+define("JQ_LOCATION","/include_js/jquery-ui-1.7.2.custom/");
+
 define("CONTENT_LOCATION","/content/");
 define("CLIENT_LOCATION",CONTENT_LOCATION."client/");
 define("ROOM_LOCATION",CONTENT_LOCATION."room/");

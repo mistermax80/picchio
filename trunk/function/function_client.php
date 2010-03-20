@@ -78,7 +78,7 @@ function getClient($id) {
 	return $client;
 }
 
-function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email,$relative,$relationship){
+function addClient($name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email,$relative="",$relationship=""){
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -93,7 +93,7 @@ function addClient($name,$surname,$type_document,$number_document,$release_docum
 				(name,surname,type_document,number_document,release_document_date,release_document_to,nationality,date_birth,city_birth,address,city,telephone,email,relative,relationship)
 				VALUES
 				('$name','$surname','$type_document','$number_document','$release_document_date','$release_document_to','$nationality','$date_birth','$city_birth','$address','$city','$telephone','$email','$relative','$relationship')";
-	echo $query;
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
@@ -104,7 +104,7 @@ function addClient($name,$surname,$type_document,$number_document,$release_docum
 }
 
 
-function updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email) {
+function updateClient($id,$name,$surname,$type_document,$number_document,$release_document_date,$release_document_to,$nationality,$date_birth,$city_birth,$address,$city,$telephone,$email,$relative="",$relationship="") {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -129,7 +129,9 @@ function updateClient($id,$name,$surname,$type_document,$number_document,$releas
 				address='".$address."',
 				city='".$city."',
 				telephone='".$telephone."',
-				email='".$email."'
+				email='".$email."',
+				relative='".$relative."',
+				relationship='".$relationship."'
 				WHERE
 				id = ".$id.";";
 	//echo $query;
