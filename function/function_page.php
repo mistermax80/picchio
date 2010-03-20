@@ -1,12 +1,13 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/_base.inc.php';
  
-function drawOpenPage() {
+function drawOpenPage($titolo="") {
 	include INCLUDE_PATH.'header.php';
 	?>
-		<div align="center" style="height: 30px;">HOTEL 2010</div>
+		<div align="center" style="height: 30px;"><?php echo SITE_TITLE?></div>
 			<div class="pagina"><!-- Apertura div pagina -->
 				<div id="contenuti"><!-- Apertura div contenuti -->
+					<div id="titoloContenuti"><?php echo $titolo?></div>
 	<?php
 }
     
