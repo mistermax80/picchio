@@ -10,6 +10,8 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/_base.inc.php';
 include_once FUNCTION_PATH.'function_page.php';
 include_once FUNCTION_PATH.'function_client.php';
+include_once FUNCTION_PATH.'function_booking.php';
+include_once FUNCTION_PATH.'function_date.php';
 
 drawOpenPage("Gestione Clienti");
 // Bottoni delle funzioni, Form di ricerca
@@ -17,6 +19,7 @@ drawOpenPage("Gestione Clienti");
 <script language="JavaScript" type="text/javascript">
 <!--
 function enableButtonOnSelect(form) {
+	<?php if($_SESSION['new_booking']==true) echo "form.select.disabled=false;"?>
 	form.update.disabled=false;
 	form.enabledDelete.disabled=false;
 }
@@ -41,18 +44,56 @@ function enableButtonDelete(form) {
 	<tr>
 		<td><input type="submit" name="insert" value="Aggiungi Nuovo Cliente"></td>
 		<td><input id="text_search" name="text_search" type="text" name="search" value="">
-			<input type="submit" id="search" name="search" value="Cerca"></td>
+			<input type="submit" id="search" name="search" value="Cerca Cliente"></td>
 			
 		<td>
-			<input type="submit" name="select" value="Seleziona" disabled="disabled">
+			<input type="submit" name="select" value="Prenota" disabled="disabled">
 			<input type="submit" name="update" value="Modifica" disabled="disabled">
-			<font style="font-size: 9pt;">Sblocca</font><input type="checkbox" name="enabledDelete" value="enabledDelete" disabled="disabled" onclick="enableButtonDelete(this.form)" value="Elimina">
+			<font style="font-size: 7pt;">Sblocca Elimina</font><input type="checkbox" name="enabledDelete" value="enabledDelete" disabled="disabled" onclick="enableButtonDelete(this.form)" value="Elimina">
 			<input type="submit" name="delete" value="Elimina" disabled="disabled">
 		</td>
 	</tr>
 </table>
 
 <?php
+
+if(isset($_POST['select']) && $_POST['select']!="" ){
+	// Torna al booking per la registrazione della prenotazione
+	//echo BOOKING_LOCATION.'form.php';
+	$_SESSION['id_client'] = $_POST['id_client'];
+	include '../../'.BOOKING_LOCATION.'form.php';
+}
+
+if(isset($_POST['save_booking']) && $_POST['save_booking']!="" ){
+
+	$id_room = $_SESSION['id_room'];
+	$date_in = dateIT2dateEN($_POST['date_in']);
+	$date_out = dateIT2dateEN($_POST['date_out']);
+	echo "in: ".$date_in." out:".$date_out;
+	$number_client = $_POST['number_client'];
+	$note = $_POST['note'];
+	//Controllo che disponibilità della stanza nell'intervallo dei giorni
+	if(checkFreeBooking($date_in,$date_out,$id_room)){
+		if(date2dateStamp($date_in) > date2dateStamp($date_out)){
+			?>
+			<script type="text/javascript">
+				alert("Data di uscita precedente alla data di ingresso!");
+				window.location.href="#";
+			</script>
+			<?php 
+		}else{//Salvo i dati della prenotazione
+			if($number_client==0 || (isset($number_client))){
+				$number_client = 1;	
+			}
+			insertBooking($_SESSION['id_client'],$id_room,$date_in,$date_out,$number_client,$note);
+			unset($_SESSION['id_client']);
+			unset($_SESSION['id_room']);
+			unset($_SESSION['new_booking']);
+			unset($_SESSION['date_stamp_in']);
+		}
+	}
+}
+
 if(isset($_POST['search']) && $_POST['search']!="" ){
 	// Mostra la tabella dei risultati 
 	include 'search.php';

@@ -14,7 +14,7 @@ $month = (empty($month)) ? date("n") : $month;
 //If $year is not present, set it to current year.
 $year = (empty($year)) ? date("Y") : $year;
 
-drawCalendar(CANONICAL_HOST,PATH_BOOKING,$month,$year);
+drawCalendar(CANONICAL_HOST,BOOKING_LOCATION,$month,$year);
 
 drawClosePage();
 ?>
