@@ -1,5 +1,4 @@
 <?php
-include_once 'include/site_config.php';
 
 function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note) {
 
@@ -16,10 +15,11 @@ function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$no
 				(client,room,date_in,date_out,number_client,note) 
 				VALUES 
 				($id_client,$id_room,'$date_in','$date_out',$number_client,'$note')";
-	//echo $query;
+	echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
+		return false;
 	}
 	mysql_close($link);
 	return true;
@@ -115,7 +115,7 @@ function checkFreeBooking($date_in,$date_out,$id_room) {
 				date_in <= '".$date_out."' AND date_out>='".$date_out."'
 				)";
 	
-	//echo "<br>".$query."<br>";
+	echo "<br>".$query."<br>";
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

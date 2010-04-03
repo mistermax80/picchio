@@ -8,6 +8,9 @@ define('SITE_OWNER','La Villa Hotel');
 define('COPYRIGHT_OWNER','Picchio & Picchio');
 define('COPYRIGHT_YEARS','2010');
 
+define("FORMAT_DATE_IT","j-F-Y");
+define("FORMAT_DATE","Y-m-j");
+
 //Definizione dei location importanti per le aree di interesse pubbliche visibili da web
 define("ROOT_LOCATION","/");
 
@@ -22,7 +25,7 @@ define("JQ_LOCATION","/include_js/jquery-ui-1.7.2.custom/");
 define("CONTENT_LOCATION","/content/");
 define("CLIENT_LOCATION",CONTENT_LOCATION."client/");
 define("ROOM_LOCATION",CONTENT_LOCATION."room/");
-define("BOOKING_LOACTION",CONTENT_LOCATION."booking/");
+define("BOOKING_LOCATION",CONTENT_LOCATION."booking/");
 define("PRODUCT_LOCATION",CONTENT_LOCATION."product/");
 
 //Definizione delle costanti di configurazione del database

@@ -1,5 +1,4 @@
 <?php
-include_once 'include/site_config.php';
 
 function getRooms() {
 

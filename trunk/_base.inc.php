@@ -1,9 +1,12 @@
 <?php
+session_start();
 //Definizioni di sistema
 define('DIR_SEPARATOR',"/");
 if(strpos(PHP_OS, "WIN") !== false) {
 	define('DIR_SEPARATOR',"\\");
 }
+
+setlocale(LC_ALL, 'it_IT');
 
 //Definizione dei path importanti per le aree di interesse
 define("ROOT_PATH",dirname(__FILE__).DIR_SEPARATOR);

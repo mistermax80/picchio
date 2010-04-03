@@ -214,7 +214,6 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 			<tr>
 				<td>Camera</td>
 				<td>
-					<?php echo "".$id_room;?>
 					<!--<input type="text" name="id_room" value="<?php echo "".$id_room;?>"/>-->
 				</td>
 			</tr>
@@ -222,7 +221,7 @@ if(isset($_POST['id_client']) || isset($_REQUEST['id_client'])){
 				<td>Data Arrivo</td>
 				<td>
 					<?php //echo date(format_date,$_REQUEST['date_stamp_in']);?>
-					<input type="text" id="date_in" name="date_in" value="<?php echo date(format_date,$_REQUEST['date_stamp_in']);?>"/>
+					<input type="text" id="date_in" name="date_in" value="<?php echo date(FORMAT_DATE_IT,$_REQUEST['date_stamp_in']);?>"/>
 				</td>
 			</tr>
 			<tr>
