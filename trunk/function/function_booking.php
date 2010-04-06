@@ -1,6 +1,6 @@
 <?php
 
-function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client,$note) {
+function insertBooking($id_client,$id_room,$date_in,$date_out,$number_client=1,$note) {
 
 	$link = mysql_connect(DB_ADDRESS,USER,PASS);
 	if (!$link) {
@@ -46,7 +46,7 @@ function updateBooking($id,$id_client,$id_room,$date_in,$date_out,$number_client
 				note='".$note."'
 				WHERE
 				id = ".$id.";";
-	//echo $query;
+	echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());

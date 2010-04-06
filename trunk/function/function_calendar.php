@@ -220,7 +220,7 @@ function drawCellRoom($num_room,$link_booking,$date_stamp){
 			?>
 		<td class="cellaStanza" align="left" bgcolor="#ffa09a" onmouseout="this.bgColor='#ffa09a';"
 			onmouseover="this.bgColor='fdff8f';"
-			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&id_client=".$id_client; ?>'">
+			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&id_client=".$id_client."&mode=update"; ?>'">
 			<?php echo $booking['surname'];?>
 		</td>
 			<?php
@@ -229,7 +229,7 @@ function drawCellRoom($num_room,$link_booking,$date_stamp){
 			?>
 		<td class="cellaStanza" bgcolor="#b6ffb6" onmouseout="this.bgColor='#b6ffb6';"
 			onmouseover="this.bgColor='fdff8f';"
-			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."" ?>'">
+			onclick="window.location.href='<?php echo $link_booking."?id_room=".$num_room."&date_stamp_in=".$date_stamp."&mode=insert" ?>'">
 			<img alt="" src="images/empty.gif" />
 		</td>
 	</tr>

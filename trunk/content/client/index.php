@@ -64,12 +64,12 @@ if(isset($_POST['select']) && $_POST['select']!="" ){
 	include '../../'.BOOKING_LOCATION.'form.php';
 }
 
-if(isset($_POST['save_booking']) && $_POST['save_booking']!="" ){
+if(isset($_POST['insert_booking']) && $_POST['insert_booking']!="" ){
 
 	$id_room = $_SESSION['id_room'];
-	$date_in = dateIT2dateEN($_POST['date_in']);
-	$date_out = dateIT2dateEN($_POST['date_out']);
-	echo "in: ".$date_in." out:".$date_out;
+	$date_in = dateIT2EN($_POST['date_in']);
+	$date_out = dateIT2EN($_POST['date_out']);
+
 	$number_client = $_POST['number_client'];
 	$note = $_POST['note'];
 	//Controllo che disponibilità della stanza nell'intervallo dei giorni
@@ -77,13 +77,27 @@ if(isset($_POST['save_booking']) && $_POST['save_booking']!="" ){
 		if(date2dateStamp($date_in) > date2dateStamp($date_out)){
 			?>
 			<script type="text/javascript">
-				alert("Data di uscita precedente alla data di ingresso!");
-				window.location.href="#";
+				alert("Attenzione: la data di uscita non può essere precedente alla data di ingresso!");
+				window.location.href="index.php";
+			</script>
+			<?php
+		}else if(date2dateStamp($date_in) == date2dateStamp($date_out)){
+			?>
+			<script type="text/javascript">
+				alert("Attenzione: la data di uscita non può coincidere con la data di ingresso!");
+				window.location.href="index.php";
+			</script>
+			<?php 
+		}else if(date2dateStamp($date_in) < date2dateStamp(time()) || date2dateStamp($date_out) < date2dateStamp(time())){
+			?>
+			<script type="text/javascript">
+				alert("Attenzione: Non può essere effettuata una prenotazione per i giorni passati!");
+				window.location.href="index.php";
 			</script>
 			<?php 
 		}else{//Salvo i dati della prenotazione
 			if($number_client==0 || (isset($number_client))){
-				$number_client = 1;	
+					$number_client = 1;	
 			}
 			insertBooking($_SESSION['id_client'],$id_room,$date_in,$date_out,$number_client,$note);
 			unset($_SESSION['id_client']);
@@ -91,6 +105,13 @@ if(isset($_POST['save_booking']) && $_POST['save_booking']!="" ){
 			unset($_SESSION['new_booking']);
 			unset($_SESSION['date_stamp_in']);
 		}
+	}else{
+		?>
+		<script type="text/javascript">
+			alert("Attenzione: si è verificato un errore!");
+			window.location.href="index.php";
+		</script>
+		<?php 
 	}
 }
 
